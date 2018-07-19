@@ -1,16 +1,15 @@
 ﻿@model StudiekollenNew.Models.IndexViewModel
 @{
-    ViewBag.Title = "Manage";
+    ViewBag.Title = "Min profil";
 }
 
-<h2>@ViewBag.Title.</h2>
+<h2>@ViewBag.Title</h2>
 
 <p class="text-success">@ViewBag.StatusMessage</p>
 <div>
-    <h4>Change your account settings</h4>
     <hr />
     <dl class="dl-horizontal">
-        <dt>Password:</dt>
+        <dt>Lösenord:</dt>
         <dd>
             [
             @if (Model.HasPassword)
@@ -30,13 +29,13 @@
         </dd>
         @*
             Phone Numbers can used as a second factor of verification in a two-factor authentication system.
-             
+
              See <a href="https://go.microsoft.com/fwlink/?LinkId=403804">this article</a>
                 for details on setting up this ASP.NET application to support two-factor authentication using SMS.
-             
+
              Uncomment the following block after you have set up two-factor authentication
         *@
-        @*  
+        @*
             <dt>Phone Number:</dt>
             <dd>
                 @(Model.PhoneNumber ?? "None")
@@ -68,7 +67,7 @@
                     {
                         @Html.AntiForgeryToken()
                         <text>Enabled
-                        <input type="submit" value="Disable" class="btn btn-link" />
+                        <input type="submit" value="Disable" class="btn-link" />
                         </text>
                     }
                 }
@@ -78,7 +77,7 @@
                     {
                         @Html.AntiForgeryToken()
                         <text>Disabled
-                        <input type="submit" value="Enable" class="btn btn-link" />
+                        <input type="submit" value="Enable" class="btn-link" />
                         </text>
                     }
                 }*@
