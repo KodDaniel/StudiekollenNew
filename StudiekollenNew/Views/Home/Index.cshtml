@@ -1,0 +1,23 @@
+﻿@{
+    ViewBag.Title = "Studiekollen";
+}
+
+<div>
+    <h1>Startsida</h1>
+
+    <h3>En användare ska kunna:</h3>
+    <ul class="list-group">
+        <li class="list-group-item">Skapa ett prov</li>
+        <li class="list-group-item">Spara ett prov</li>
+        <li class="list-group-item">Redigera ett prov</li>
+        <li class="list-group-item">Ta bort ett prov</li>
+    </ul>
+</div>
+
+<h3>Tabeller som rör prov:</h3>
+<ul class="list-group">
+    <li class="list-group-item"><strong>Test</strong>(TestiD,UserIdº, Name, CreateDate, ChangeData)</li>
+    <li class="list-group-item"><strong>QuestionTable</strong>(QuestionId, TestIdº, Question, Answer)</li>
+    <li class="list-group-item"><strong>ResultTable</strong>(ResultId, UserIdº, TestIdº, QuestionIdº, Result)</li>
+</ul>
+

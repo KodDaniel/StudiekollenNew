@@ -1,0 +1,105 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+.font {
+    font-weight: bold;
+}
+
+
+body {
+    margin-top: 30px;
+    background: url(https://retail.markslojd.com/ProductFiles/thumbcache/105683_800_105683_study.jpg) no-repeat center center fixed;
+    color: black;
+    font-family: Arial;
+}
+
+br {
+    display: block; /* makes it have a width */
+    content: ""; /* clears default height */
+    margin-top: 25px; /* change this to whatever height you want it */
+}
+
+.navbar-collapse {
+    max-height: 280px;
+    overflow-y: auto;
+}
+
+.table, .table tr, .table td {
+    border-top: none;
+    border-bottom: none;
+    border: hidden;
+    border: none;
+}
+
+.textboxBackgroundColor {
+    background-color: lightyellow;
+}
+
+/*.hide-me
+    {
+        display:none;
+        visibility:hidden;
+    }*/
+
+.questions {
+    color: black;
+}
+
+.btn {
+    background-color: black;
+    color: whitesmoke;
+}
+
+
+.faq-question {
+    color: black;
+}
+
+.form-error {
+    color: red;
+}
+
+.form-success {
+    color: green;
+}
+
+.session {
+    color: white;
+}
+
+.input-error {
+    box-shadow: 0 0 5px red;
+}
+
+
+.big-checkbox {
+    font-size: 15px;
+    width: 12px;
+    height: 12px;
+}
+
+.checkBoxText {
+    font-size: 14px;
+}
