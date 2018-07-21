@@ -23,7 +23,7 @@ namespace StudiekollenNew.Models
         public int TestId { get; set; }
 
         [Required()]
-        [StringLength(100, MinimumLength = 2)]
+        [StringLength(50, MinimumLength = 2)]
         // Kan ej ha Result som attibut då klassen heter det. Därför outcome.
         public string Outcome { get; set; }
 
