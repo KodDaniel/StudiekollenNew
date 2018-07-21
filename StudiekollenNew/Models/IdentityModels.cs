@@ -18,6 +18,7 @@ namespace StudiekollenNew.Models
         }
     }
 
+     //Min DbContext. 
     public class ApplicationDbContext : IdentityDbContext<User>
     {
         public ApplicationDbContext()
