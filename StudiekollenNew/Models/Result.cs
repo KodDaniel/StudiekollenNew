@@ -13,8 +13,8 @@ namespace StudiekollenNew.Models
         //Blir automatiskt autoinkrementerd primary key
         public int ResultId { get; set; }
 
-        //Främmande nyckel.
-        public int UserId { get; set; }
+        //Främmande nyckel. String istället för int då ASP.identity använder string-format för UserId
+        public string UserId { get; set; }
        
         //Främmande nyckel.
         public int QuestionId { get; set; }
