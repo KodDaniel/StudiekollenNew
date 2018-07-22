@@ -13,8 +13,10 @@ namespace StudiekollenNew.Models
         [Key]
         public int QuestionId { get; set; }
 
+        [Display(Name = "Fråga")]
         public string Question{ get; set; }
 
+        [Display(Name = "Svar")]
         public string Answer { get; set; }
 
 
