@@ -22,7 +22,7 @@ namespace StudiekollenNew.Models
 
         public System.DateTime? ChangeDate { get; set; }
 
-        public virtual UserTable User { get; set; }
+        public virtual User User { get; set; }
 
     }
 }
