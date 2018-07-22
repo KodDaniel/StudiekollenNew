@@ -1,4 +1,5 @@
 ﻿using System.Data.Entity;
+using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
@@ -33,16 +34,26 @@ namespace StudiekollenNew.Models
         protected override void OnModelCreating(System.Data.Entity.DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+            modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
 
             modelBuilder.Entity<User>().ToTable("User").Property(p => p.Id).HasColumnName("UserId");
             modelBuilder.Entity<IdentityUserRole>().ToTable("UserRole");
             modelBuilder.Entity<IdentityUserLogin>().ToTable("UserLogin");
             modelBuilder.Entity<IdentityUserClaim>().ToTable("UserClaim").Property(p => p.Id).HasColumnName("UserClaimId");
             modelBuilder.Entity<IdentityRole>().ToTable("Role").Property(p => p.Id).HasColumnName("RoleId");
-
+            //MapEntities(modelBuilder);
         }
 
+        //private void MapEntities(DbModelBuilder modelBuilder)
+        //{
+        //    //Test
+        //    modelBuilder.Entity<Test>()
+        //        .HasRequired(c => c.User)
+        //        .WithMany(d => d.Test)
+        //        .HasForeignKey(c => c.UserId);
+        //}
 
+        public DbSet<OstTable> OstTable { get; set; }
 
     }
 }
