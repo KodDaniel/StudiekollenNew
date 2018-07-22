@@ -53,7 +53,6 @@ namespace StudiekollenNew.Models
         //        .HasForeignKey(c => c.UserId);
         //}
 
-        //public DbSet<OstTable> OstTable { get; set; }
 
         public DbSet<QuestionTable> QuestionTable { get; set; }
     }
