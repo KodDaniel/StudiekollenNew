@@ -222,7 +222,7 @@
     <Compile Include="Models\QuestionTable.cs" />
     <Compile Include="Models\Repository.cs" />
     <Compile Include="Models\ResultTable.cs" />
-    <Compile Include="Models\Test.cs" />
+    <Compile Include="Models\TestTable.cs" />
     <Compile Include="Models\UserTable.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />

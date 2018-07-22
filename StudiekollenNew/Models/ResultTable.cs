@@ -6,14 +6,12 @@ using System.Web;
 
 namespace StudiekollenNew.Models
 {
-    //[Table(name:"ResultTable")]
-
     public class ResultTable
     {
         [Key]
         public int ResultId { get; set; }
 
-        //Främmande nyckel. String istället för int då ASP.identity använder string-format för UserId
+        //Främmande nyckel.
         public string UserId { get; set; }
 
         //Främmande nyckel.

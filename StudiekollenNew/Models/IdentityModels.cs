@@ -57,7 +57,7 @@ namespace StudiekollenNew.Models
 
         public DbSet<QuestionTable> QuestionTable { get; set; }
         public DbSet<UserTable> UserTable { get; set; }
-        public DbSet<Test> TestTable { get; set; }
+        public DbSet<TestTable> TestTable { get; set; }
         public DbSet<ResultTable> ResultTable { get; set; }
 
     }
