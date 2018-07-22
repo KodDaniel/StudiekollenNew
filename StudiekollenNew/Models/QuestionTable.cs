@@ -22,5 +22,8 @@ namespace StudiekollenNew.Models
         //Främmande nyckel.
         public int TestId { get; set; }
 
+        public virtual TestTable TestTable { get; set; }
+
+
     }
 }

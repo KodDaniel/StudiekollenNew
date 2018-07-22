@@ -46,13 +46,20 @@ namespace StudiekollenNew.Models
 
         //private void MapEntities(DbModelBuilder modelBuilder)
         //{
-        //    //Test
-        //    modelBuilder.Entity<Test>()
+        //    //Ett test kan tillhöra flera användare.
+        //    modelBuilder.Entity<TestTable>()
         //        .HasRequired(c => c.User)
-        //        .WithMany(d => d.Test)
+        //        .WithMany()
         //        .HasForeignKey(c => c.UserId);
+
+        //    // Fler eller en fråga/frågor kan tillhör ett prov
+        //    modelBuilder.Entity<QuestionTable>()
+        //        .HasRequired(c => c.TestTable)
+        //        .WithMany()
+        //        .HasForeignKey(c => c.TestId);
         //}
 
+        
         //public DbSet<OstTable>
 
         public DbSet<QuestionTable> QuestionTable { get; set; }
