@@ -9,9 +9,8 @@ namespace StudiekollenNew.Models
 {
 
     public class QuestionTable
-    {    
-        [Key]
-        public int QuestionId { get; set; }
+    {   
+        public int Id{ get; set; }
 
         [Display(Name = "Fråga")]
         public string Question{ get; set; }
@@ -19,10 +18,13 @@ namespace StudiekollenNew.Models
         [Display(Name = "Svar")]
         public string Answer { get; set; }
 
+        public string Result { get; set; }
+
         //Främmande nyckel.
         public int TestId { get; set; }
 
         public virtual TestTable TestTable { get; set; }
+
 
 
     }

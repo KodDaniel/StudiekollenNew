@@ -218,12 +218,12 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Marie.cs" />
     <Compile Include="Models\OstTable.cs" />
     <Compile Include="Models\QuestionTable.cs" />
     <Compile Include="Models\Repository.cs" />
-    <Compile Include="Models\ResultTable.cs" />
     <Compile Include="Models\TestTable.cs" />
-    <Compile Include="Models\UserTable.cs" />
+    <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>

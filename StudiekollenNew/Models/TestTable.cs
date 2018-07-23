@@ -8,8 +8,7 @@ namespace StudiekollenNew.Models
 {
     public class TestTable
     {
-        [Key]
-        public int TestId { get; set; }
+        public int Id { get; set; }
 
         public string UserId { get; set; }
 
@@ -22,7 +21,11 @@ namespace StudiekollenNew.Models
 
         public System.DateTime? ChangeDate { get; set; }
 
+        public ICollection<QuestionTable> QuestionTable { get; set; }
         public virtual User User { get; set; }
+
+
+
 
     }
 }
