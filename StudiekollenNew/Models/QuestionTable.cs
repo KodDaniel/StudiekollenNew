@@ -20,7 +20,7 @@ namespace StudiekollenNew.Models
 
         public string Result { get; set; }
 
-        //Främmande nyckel.
+        //Främmande nyckel. Måste döpas om, kommer ej funka annars.
         public int TestId { get; set; }
 
         public virtual TestTable TestTable { get; set; }

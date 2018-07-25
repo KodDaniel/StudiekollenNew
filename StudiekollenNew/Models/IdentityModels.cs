@@ -37,14 +37,15 @@ namespace StudiekollenNew.Models
         private void MapEntities(DbModelBuilder modelBuilder)
         {
             //User
-            modelBuilder.Entity<User>().ToTable("User").Property(p => p.Id).HasColumnName("UserId");
+            modelBuilder.Entity<User>().ToTable("User");
+    
 
             //TestTable
-            modelBuilder.Entity<TestTable>().Property(e => e.Id).HasColumnName("TestId");
             modelBuilder.Entity<TestTable>()
                 .HasRequired(c => c.User)
                 .WithMany()
                 .HasForeignKey(c => c.UserId);
+                
 
             // QuestionTable
             modelBuilder.Entity<QuestionTable>().Property(e => e.Id).HasColumnName("QuestionId");
@@ -52,9 +53,9 @@ namespace StudiekollenNew.Models
                 .HasRequired(c => c.TestTable)
                 .WithMany()
                 .HasForeignKey(c => c.TestId);
+                
         }
 
-        //public DbSet<OstTable>
 
         public DbSet<QuestionTable> QuestionTable { get; set; }
         public DbSet<TestTable> TestTable { get; set; }
