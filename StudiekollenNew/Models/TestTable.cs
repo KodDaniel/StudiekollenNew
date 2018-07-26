@@ -8,6 +8,7 @@ namespace StudiekollenNew.Models
 {
     public class TestTable
     {
+        #region Tabellattribut
         public int Id { get; set; }
 
         public string UserId { get; set; }
@@ -21,10 +22,13 @@ namespace StudiekollenNew.Models
 
         public System.DateTime? ChangeDate { get; set; }
 
+        #endregion
+
+        #region Tabellrelationer
         public ICollection<QuestionTable> QuestionTable { get; set; }
         public virtual User User { get; set; }
 
-
+        #endregion
 
 
     }

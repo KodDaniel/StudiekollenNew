@@ -15,8 +15,7 @@ namespace StudiekollenNew.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-      
-      
+        #region CreateTest
 
         // GET: Test/Create
         public ActionResult Create()
@@ -35,7 +34,7 @@ namespace StudiekollenNew.Controllers
             if (ModelState.IsValid)
             {
                 testTable.UserId = User.Identity.GetUserId();
-           
+
                 db.TestTable.Add(testTable);
                 db.SaveChanges();
                 return RedirectToAction("Create");
@@ -45,7 +44,8 @@ namespace StudiekollenNew.Controllers
             return View(testTable);
         }
 
-       
+        #endregion
+
 
         protected override void Dispose(bool disposing)
         {

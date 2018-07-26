@@ -57,9 +57,11 @@ namespace StudiekollenNew.Models
         }
 
 
+        #region Initierar tabeller
         public DbSet<QuestionTable> QuestionTable { get; set; }
         public DbSet<TestTable> TestTable { get; set; }
-        //public DbSet<User> User { get; set; }
+        //public DbSet<User> User { get; set; } 
+        #endregion
 
     }
 }
