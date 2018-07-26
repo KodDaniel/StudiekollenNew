@@ -37,8 +37,8 @@ namespace StudiekollenNew.Models
         private void MapEntities(DbModelBuilder modelBuilder)
         {
             //User
-            modelBuilder.Entity<User>().ToTable("User");
-    
+            modelBuilder.Entity<User>().ToTable("User").Property(p => p.Id).HasColumnName("UserId");
+
 
             //TestTable
             modelBuilder.Entity<TestTable>()
