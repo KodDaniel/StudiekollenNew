@@ -21,13 +21,11 @@ namespace StudiekollenNew.Models
         public System.DateTime CreateDate { get; set; }
 
         public System.DateTime? ChangeDate { get; set; }
-
         #endregion
-
+        
         #region Tabellrelationer
         public ICollection<QuestionTable> QuestionTable { get; set; }
         public virtual User User { get; set; }
-
         #endregion
 
 

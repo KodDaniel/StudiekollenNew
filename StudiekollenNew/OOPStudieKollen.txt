@@ -1,0 +1,41 @@
+﻿
+Följande är en kartläggning av vilka OOP-tekniker som Studiekollen använder och var någonstans i projektet som koden befinner sig:
+
+- KeyWordet "BASE. Princip: Anropar medlemmar i parent-class genom keywordet base. Förekommer på föjande ställen:
+1. I Dispose-metoden i AccountController.se. Parent-klassen ligger i Controller.cs.
+2. I Dispose-metoden i ManageController.se. Parent-klassen ligger i Controller.cs.
+3. I Dispose-metoden i TestController.se. Parent-klassen ligger i Controller.cs.
+
+- KeyWordet "OVERRIDE". Princip: Method Overriding means having two methods with same name and same signature [parameters],
+one should be in base class and other method should be in derived class [child class]. You can override the functionality...
+...of base class to create a same name method with same signature in derived class.
+You can achieve method overriding using inheritance.  
+Overriding promotes code reuse and separation of concerns in your application.
+Förekommer på följande ställen:
+1.  Används i samband med Dispose-metoderna som nämnts i samband med keywordet base.
+2. Används när vi döper om tabellerna genom att overrida parent-klass-funktionen i DbModelBuilder.
+3. Används i samband med CreateUserIdentityAsync i Identityconfig.
+
+- Keywordet "OVERLOADING". Princip: Method Overloading is a type of polymorphism.   
+It has several names like sometime you say “Compile Time Polymorphism” or “Static Polymorphism” and sometimes it is called “Early Binding”.
+So, all are same with different name. Method Overloading means creating multiple methods in the class having same name but different signatures (Parameters). 
+It permits a class, struct, or interface to declare multiple methods with the same name with unique signatures.
+We add overloaded methods to eliminate complexity and enhance performance. Overloads can differ based on arguments.
+Förekommer på följande ställen:
+
+
+- KeyWordet "CONSTRUCTOR-OVERLOADING". Princip: 
+
+
+- KeyWordet "CONSTRUCTOR-CHAINING MED THIS". Princip: 
+
+
+- KeyWordet "CONSTRUCTOR-CHAINING MED BASE". Princip: Constructor-chaining med Base Keyword används när vi hänvisar till konstruktor mellan olika klasser (arv). 
+Vi behöver denna teknik därför att det är viktigt att tänka på vad som händer bakom kulisserna. 
+Tänk om vi har en Studentklass som ärver från en Personklass. När vi skapar ett objekt av studentklassen så händer också saker i Personklassen.
+Tänk såhär: Om du skriver “Student s = new Student();” skriver samtidigt - utifrån systemets synvinkel - “Person p = new Person();”.
+Förekommer på följande ställen:
+1. Används på rad 38 i IdentityConfig.cs där klassen "UserManager" ärver av klassen "UserManager<User>".
+Barnklassen - "UserManager" har en konstruktor som tar emot parametern "Store", en parameter som skickas vidare...
+...till klassen "UserManager<User>:s konstruktor.
+2. Används på rad 94 i Identityconfig
