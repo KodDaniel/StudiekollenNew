@@ -74,3 +74,12 @@ For example, Visual Studio separates HTML code for the UI and server side code i
 - Keywordet USING. Princip: Keywordet Using säger följande: håll objektet inom det här kodblocket och förstör det sedan.
 Följande exempel finns: 
 1. I våra HTML-dokument.
+
+- Keywordet ENCAPSULATION. Princip: Handlar om att skydda din data - kapsla in den. I Csharp så används properties och get och set för att kapsla in data.
+Det är viktigt att tänka på att för mycket kod ska undvikas i get-blocket. Om kod ska skrivas ska den skrivas i set-blocket. 
+“Value” är default-värdet i set-blocket. Följande exempel finns: 
+1. I metoden SignInManager i filen AccountController.se på rad  31. 
+2. I metoden Usermanager på raderna under.
+3. I de tre inlederna metoderna i ManageController.cs
+
+KeyWordet GENERICS. Princip: 
