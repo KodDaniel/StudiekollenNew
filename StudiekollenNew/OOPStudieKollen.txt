@@ -35,7 +35,15 @@ Vi behöver denna teknik därför att det är viktigt att tänka på vad som hä
 Tänk om vi har en Studentklass som ärver från en Personklass. När vi skapar ett objekt av studentklassen så händer också saker i Personklassen.
 Tänk såhär: Om du skriver “Student s = new Student();” skriver samtidigt - utifrån systemets synvinkel - “Person p = new Person();”.
 Förekommer på följande ställen:
-1. Används på rad 38 i IdentityConfig.cs där klassen "UserManager" ärver av klassen "UserManager<User>".
+1. Används på rad 38 i IdentityConfig.cs där klassen "UserManager" ärver från klassen "UserManager<User>".
 Barnklassen - "UserManager" har en konstruktor som tar emot parametern "Store", en parameter som skickas vidare...
 ...till klassen "UserManager<User>:s konstruktor.
-2. Används på rad 94 i Identityconfig
+2. Används på rad 94 i Identityconfig.cs där klassen "ApplicationSignInManager" ärver från från "SignInManager<User, string>".
+ApplicationSignInManager:s konstruktor skickar vidare värderna "userManager" och "authenticationManager" till pappa-klassen...
+..."SignInManager<User, string>", eftersom "SignInManager<User, string>" har en konstruktor som kräver just dessa värden.
+3. Används på rad 13 i IdentityModel.cs där klassen "ApplicationDbContext" ärver från klassen "IdentityDbContext<User>".
+En connectionstring skickas här till IdentityDbContext<User>:s konstruktor, dvs pappaklassens konstruktur, eftersom det är 
+...just den parametern som IdentityDbContext<User>:s konstruktor kräver. NOTERA något inressant här: klassen IdentityDbContext<User>...
+...använder sig även av Constructor-Overloading med hjälp av keywordet this. Före den konstruktor som används i redan beskriven...
+...Constructor-Chaining så finns en annan (klassens första konstruktur) som tar en "Deafult-Connection"-sträng.
+4. Ytterligare exempel på BASE-konstrukorer finns, men ovanstående 3 exempel ger en bra översikt.
