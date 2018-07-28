@@ -61,3 +61,16 @@ En connectionstring skickas här till IdentityDbContext<User>:s konstruktor, dvs
 ...använder sig även av Constructor-Overloading med hjälp av keywordet this. Före den konstruktor som används i redan beskriven...
 ...Constructor-Chaining så finns en annan (klassens första konstruktur) som tar en "Deafult-Connection"-sträng.
 4. Ytterligare exempel på BASE-konstrukorer finns, men ovanstående 3 exempel ger en bra översikt.
+
+- KeyWordet PARTIAL. Princip: Om du använder dig av nyckelordet Partial kan du ha två olika  delar av samma klass i samma namespace. 
+Dessa klasser slås då nämligen ihop när programmet körs (när jag klickar på F5). Kom ihåg att klasserna ska ha samma namn.
+Följande exempel finns: Exempel finns i Startup.cs tillsammans med Startup.Auth.cs. Klassen är en och samma klass men delas upp...
+...i två nämnda filer. Notera att det funkar eftersom klasserna ligger inom samma namespace - "StudiekollenNew" och att de båda...
+...har nyckelordet "partial".
+2. Partial används också i min HTML-kod och detta speglar en av de stora fördelarna med Partial: When working with automatically...
+generated source, code can be added to the class without having to recreate the source file.
+For example, Visual Studio separates HTML code for the UI and server side code into two separate files: .aspx and .cs files.
+
+- Keywordet USING. Princip: Keywordet Using säger följande: håll objektet inom det här kodblocket och förstör det sedan.
+Följande exempel finns: 
+1. I våra HTML-dokument.
