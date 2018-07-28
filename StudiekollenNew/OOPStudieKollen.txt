@@ -22,12 +22,26 @@ So, all are same with different name. Method Overloading means creating multiple
 It permits a class, struct, or interface to declare multiple methods with the same name with unique signatures.
 We add overloaded methods to eliminate complexity and enhance performance. Overloads can differ based on arguments.
 Förekommer på följande ställen:
+1. TestController.cs - eller vilken autogenerade view som helst utifrån en modell - är ett bra exempel. Kolla till exempel på...
+...create-metoderna. Den första create-metoden är parameterlös medan den andra create-metoden (båda metoderna heter alltså "Create!!!")...
+...tar flera argument när den ska binda värden.
+2. Ett annat exempel är i ManageController.se från rad 104. Två metoder på rad heter "AddPhoneNumber." Men de skiljs åt...
+...genom att de tar olika antal argument och olika typer av argument. 
+3. Ytterligare exempel på BASE-konstrukorer finns, men ovanstående 3 exempel ger en bra översikt.
 
 
-- KeyWordet "CONSTRUCTOR-OVERLOADING". Princip: 
+- KeyWordet "CONSTRUCTOR-OVERLOADING". Princip: Som Overloading men med en constructor. 
+Anledning till att vi använder oss av constructor overloading är att vi vill göra instansieringen av klassen lättare.  
+Se eget OOP-dokument om förtydligande krävs.
+Följande exempel finns:
+1. Inga just nu?
 
-
-- KeyWordet "CONSTRUCTOR-CHAINING MED THIS". Princip: 
+- KeyWordet "CONSTRUCTOR-CHAINING MED THIS". Princip: Vi slipper upprepa fält i våra konstruktor genom att hänvisa till redan...
+..deklarerade konstruktorer. Till skillnad från med "base" och konstruktorer så sker här allt inom en enda klass.
+Följande exempel finns: 
+1. I identityDBContext1.cs finns ett bra exempel. Från rad 26 till rad 45 har vi tre konstruktorer som använder sig av...
+...Constructor-chaining med hjälp av keywordet "this". 
+2. I AccountController.cs finns ytterligare ett exempel inom klassen "ChallengeResult". 
 
 
 - KeyWordet "CONSTRUCTOR-CHAINING MED BASE". Princip: Constructor-chaining med Base Keyword används när vi hänvisar till konstruktor mellan olika klasser (arv). 
