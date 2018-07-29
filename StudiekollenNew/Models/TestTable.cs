@@ -18,11 +18,11 @@ namespace StudiekollenNew.Models
         [Display(Name = "Provnamn")]
         public string Name { get; set; }
 
-        public System.DateTime CreateDate { get; set; }
+        public System.DateTime CreateDate { get; set; } /*= DateTime.UtcNow;*/
 
-        public System.DateTime? ChangeDate { get; set; }
+        public System.DateTime? ChangeDate { get; set; } /*= DateTime.UtcNow;*/
         #endregion
-        
+
         #region Tabellrelationer
         public ICollection<QuestionTable> QuestionTable { get; set; }
         public virtual User User { get; set; }

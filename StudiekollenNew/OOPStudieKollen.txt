@@ -82,4 +82,9 @@ Det är viktigt att tänka på att för mycket kod ska undvikas i get-blocket. O
 2. I metoden Usermanager på raderna under.
 3. I de tre inlederna metoderna i ManageController.cs
 
-KeyWordet GENERICS. Princip: 
+- KeyWordet STATIC. Princip:
+
+
+
+
+- KeyWordet GENERICS. Princip: 
