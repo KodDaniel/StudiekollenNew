@@ -219,6 +219,7 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\QuestionTable.cs" />
     <Compile Include="Models\Repository.cs" />
+    <Compile Include="Models\RoleViewModel.cs" />
     <Compile Include="Models\TestTable.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

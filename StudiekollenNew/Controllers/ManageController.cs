@@ -14,13 +14,7 @@ namespace StudiekollenNew.Controllers
 {
 
     //STEP8.
-    public class RoleViewModel
-    {
-        public string Id{ get; set; }
-
-        [Display(Name = "Rollnamn")]
-        public string Name { get; set; }
-    }
+  
 
     [Authorize]
     public class ManageController : Controller

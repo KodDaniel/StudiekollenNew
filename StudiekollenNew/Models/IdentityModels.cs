@@ -63,6 +63,6 @@ namespace StudiekollenNew.Models
         //public DbSet<User> User { get; set; } 
         #endregion
 
-        public System.Data.Entity.DbSet<StudiekollenNew.Controllers.RoleViewModel> RoleViewModels { get; set; }
+        public System.Data.Entity.DbSet<StudiekollenNew.Models.RoleViewModel> RoleViewModels { get; set; }
     }
 }
