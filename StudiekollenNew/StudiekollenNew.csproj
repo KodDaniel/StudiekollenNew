@@ -289,6 +289,9 @@
     <Content Include="Views\Test\Details.cshtml" />
     <Content Include="Views\Test\Edit.cshtml" />
     <Content Include="Views\Test\Index.cshtml" />
+    <Content Include="Views\Manage\Roles.cshtml" />
+    <Content Include="Views\Manage\CreateRole.cshtml" />
+    <Content Include="Views\Manage\AddRoleToUser.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
