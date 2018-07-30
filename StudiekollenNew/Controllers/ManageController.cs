@@ -14,7 +14,6 @@ namespace StudiekollenNew.Controllers
 {
 
     //STEP8.
-  
 
     [Authorize]
     public class ManageController : Controller

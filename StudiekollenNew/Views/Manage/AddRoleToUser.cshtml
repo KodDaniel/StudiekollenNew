@@ -15,6 +15,8 @@
 
 <h2>Tilldela roll</h2>
 
+<p><strong>Att göra: </strong>I användarfältet vill vi ha en drop-down-list över existerande användaren, inte en textbox.
+</p>
 
 @using (Html.BeginForm()) 
 {
@@ -31,7 +33,13 @@
             </div>
         </div>
         
-    <div class="form-group">
+        
+        
+          
+        
+        
+
+        <div class="form-group">
         @Html.Label("Roll", htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.Editor("Role", new { htmlAttributes = new { @class = "form-control" } })

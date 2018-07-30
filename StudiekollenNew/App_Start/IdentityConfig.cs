@@ -32,10 +32,12 @@ namespace StudiekollenNew
         }
     }
 
-    // We create the Rolemanager instance. STEP1.
-
+    // STEP1: Vi skapar en instans av RoleManager. 
+    // IdentityRole representeras en rolletnitet. En rolletnitet är allt det jag har i min rolltabell. Kan nås via "peek defition"...
+    //...på IdentityRole.
     public class ApplicationRoleManager:RoleManager<IdentityRole>
     {
+        //Konstruktor. Skickar vidare Store till RoleManagers konstruktor.
         public ApplicationRoleManager(IRoleStore<IdentityRole,string> store)
             :base (store)
         {
