@@ -1,15 +1,13 @@
-﻿using System.Data.Entity;
+﻿using Microsoft.AspNet.Identity.EntityFramework;
+using System;
+using System.Collections.Generic;
+using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
-using System.Security.Claims;
-using System.Threading.Tasks;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
+using System.Linq;
+using System.Web;
 
 namespace StudiekollenNew.Models
 {
-
-
-     //Min DbContext. 
     public class ApplicationDbContext : IdentityDbContext<User>
     {
         public ApplicationDbContext()
@@ -26,7 +24,7 @@ namespace StudiekollenNew.Models
             base.OnModelCreating(modelBuilder);
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
 
-            
+
             modelBuilder.Entity<IdentityUserRole>().ToTable("UserRole");
             modelBuilder.Entity<IdentityUserLogin>().ToTable("UserLogin");
             modelBuilder.Entity<IdentityUserClaim>().ToTable("UserClaim").Property(p => p.Id).HasColumnName("UserClaimId");
@@ -45,7 +43,7 @@ namespace StudiekollenNew.Models
             //    .HasRequired(c => c.User)
             //    .WithMany()
             //    .HasForeignKey(c => c.UserId);
-                
+
 
             // QuestionTable
             modelBuilder.Entity<QuestionTable>().Property(e => e.Id).HasColumnName("QuestionId");
@@ -53,7 +51,7 @@ namespace StudiekollenNew.Models
                 .HasRequired(c => c.TestTable)
                 .WithMany()
                 .HasForeignKey(c => c.TestId);
-                
+
         }
 
 

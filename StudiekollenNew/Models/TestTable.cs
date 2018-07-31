@@ -18,9 +18,9 @@ namespace StudiekollenNew.Models
         [Display(Name = "Provnamn")]
         public string Name { get; set; }
 
-        public System.DateTime CreateDate { get; set; } /*= DateTime.UtcNow;*/
+        public System.DateTime CreateDate { get; set; } = DateTime.Now;
 
-        public System.DateTime? ChangeDate { get; set; } /*= DateTime.UtcNow;*/
+        public System.DateTime? ChangeDate { get; set; } /*= DateTime.Now;*/
         #endregion
 
         #region Tabellrelationer
