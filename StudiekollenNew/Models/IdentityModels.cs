@@ -41,10 +41,10 @@ namespace StudiekollenNew.Models
 
 
             //TestTable
-            modelBuilder.Entity<TestTable>()
-                .HasRequired(c => c.User)
-                .WithMany()
-                .HasForeignKey(c => c.UserId);
+            //modelBuilder.Entity<TestTable>()
+            //    .HasRequired(c => c.User)
+            //    .WithMany()
+            //    .HasForeignKey(c => c.UserId);
                 
 
             // QuestionTable
