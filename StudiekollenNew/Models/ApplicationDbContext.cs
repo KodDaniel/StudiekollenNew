@@ -19,18 +19,7 @@ namespace StudiekollenNew.Models
         {
             return new ApplicationDbContext();
         }
-        protected override void OnModelCreating(System.Data.Entity.DbModelBuilder modelBuilder)
-        {
-            base.OnModelCreating(modelBuilder);
-            modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
-
-
-            modelBuilder.Entity<IdentityUserRole>().ToTable("UserRole");
-            modelBuilder.Entity<IdentityUserLogin>().ToTable("UserLogin");
-            modelBuilder.Entity<IdentityUserClaim>().ToTable("UserClaim").Property(p => p.Id).HasColumnName("UserClaimId");
-            modelBuilder.Entity<IdentityRole>().ToTable("Role").Property(p => p.Id).HasColumnName("RoleId");
-            MapEntities(modelBuilder);
-        }
+       
 
         private void MapEntities(DbModelBuilder modelBuilder)
         {
@@ -55,12 +44,23 @@ namespace StudiekollenNew.Models
         }
 
 
-        #region Initierar tabeller
         public DbSet<QuestionTable> QuestionTable { get; set; }
         public DbSet<TestTable> TestTable { get; set; }
-        //public DbSet<User> User { get; set; } 
-        #endregion
-
         public System.Data.Entity.DbSet<StudiekollenNew.Models.RoleViewModel> RoleViewModels { get; set; }
+
+
+        protected override void OnModelCreating(System.Data.Entity.DbModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
+
+
+            modelBuilder.Entity<IdentityUserRole>().ToTable("UserRole");
+            modelBuilder.Entity<IdentityUserLogin>().ToTable("UserLogin");
+            modelBuilder.Entity<IdentityUserClaim>().ToTable("UserClaim").Property(p => p.Id).HasColumnName("UserClaimId");
+            modelBuilder.Entity<IdentityRole>().ToTable("Role").Property(p => p.Id).HasColumnName("RoleId");
+            MapEntities(modelBuilder);
+        }
+
     }
 }

@@ -11,7 +11,7 @@ namespace StudiekollenNew.Models
         #region Tabellattribut
         public int Id { get; set; }
 
-        public string UserId { get; set; }
+        //public string UserId { get; set; }
 
         [Required()]
         [StringLength(100, MinimumLength = 2)]
@@ -25,7 +25,6 @@ namespace StudiekollenNew.Models
 
         #region Tabellrelationer
         public ICollection<QuestionTable> QuestionTable { get; set; }
-        public virtual User User { get; set; }
         #endregion
 
 

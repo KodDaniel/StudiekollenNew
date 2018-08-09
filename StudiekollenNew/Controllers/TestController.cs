@@ -33,14 +33,14 @@ namespace StudiekollenNew.Controllers
         {
             if (ModelState.IsValid)
             {
-                testTable.UserId = User.Identity.GetUserId();
+                //testTable.UserId = User.Identity.GetUserId();
 
                 db.TestTable.Add(testTable);
                 db.SaveChanges();
                 return RedirectToAction("Create");
             }
 
-            ViewBag.UserId = new SelectList(db.Users, "Id", "Email", testTable.UserId);
+            //ViewBag.UserId = new SelectList(db.Users, "Id", "Email", testTable.UserId);
             return View(testTable);
         }
 
