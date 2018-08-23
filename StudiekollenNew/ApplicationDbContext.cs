@@ -22,8 +22,8 @@ namespace StudiekollenNew.Models
             return new ApplicationDbContext();
         }
 
-        public DbSet<Question> QuestionTable { get; set; }
-        public DbSet<Test> TestTable { get; set; }
+        public DbSet<Question> Question { get; set; }
+        public DbSet<Test> Test{ get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {               

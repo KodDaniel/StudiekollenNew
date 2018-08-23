@@ -12,5 +12,11 @@ namespace StudiekollenNew.Controllers
         {
             return View();
         }
+
+        [HttpPost]
+        public ActionResult CreateTest(string tillfälligVaribelSåKompilatornInteblirSur)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
