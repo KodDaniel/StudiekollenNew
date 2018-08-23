@@ -8,26 +8,14 @@ using System.Web;
 namespace StudiekollenNew.Models
 {
 
-    public class QuestionTable
+    public class Question
     {
-        #region Tabellattribut
         public int Id { get; set; }
-
-        [Display(Name = "Fråga")]
-        public string Question { get; set; }
-
-        [Display(Name = "Svar")]
+        public string Query { get; set; }
         public string Answer { get; set; }
-
         public string Result { get; set; }
-
-        //Främmande nyckel. Måste döpas om, kommer ej funka annars.
+        public Test Test { get; set; }
         public int TestId { get; set; }
-        #endregion
-
-        #region Tabellrelationer
-        public virtual TestTable TestTable { get; set; } 
-        #endregion
 
 
 

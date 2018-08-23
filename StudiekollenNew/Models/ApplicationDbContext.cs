@@ -11,56 +11,54 @@ namespace StudiekollenNew.Models
     public class ApplicationDbContext : IdentityDbContext<User>
     {
         public ApplicationDbContext()
-            : base("DefaultConnection", throwIfV1Schema: false)
+            : base("StudieContext", throwIfV1Schema: false)
         {
+            //Disablar Lazy Loading eftersom det bör undvikas i webbapplikation
+            this.Configuration.LazyLoadingEnabled = false;
         }
 
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();
         }
-       
 
-        private void MapEntities(DbModelBuilder modelBuilder)
-        {
-            //User
-            modelBuilder.Entity<User>().ToTable("User").Property(p => p.Id).HasColumnName("UserId");
+        public DbSet<Question> QuestionTable { get; set; }
+        public DbSet<Test> TestTable { get; set; }
 
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {               
+            #region Relations
+            modelBuilder.Entity<Test>()
+                .HasRequired(c => c.User)
+                .WithMany(a => a.Test)
+                .HasForeignKey(c => c.UserId)
+                .WillCascadeOnDelete(true);
 
-            //TestTable
-            //modelBuilder.Entity<TestTable>()
-            //    .HasRequired(c => c.User)
-            //    .WithMany()
-            //    .HasForeignKey(c => c.UserId);
+            modelBuilder.Entity<Question>()
+                .HasRequired(c => c.Test)
+                .WithMany(a => a.Questions)
+                .HasForeignKey(c => c.TestId)
+                .WillCascadeOnDelete(true);
+            #endregion
 
+            modelBuilder.Entity<Test>().Property(t => t.Id).HasColumnName("TestId");
+            modelBuilder.Entity<Test>().Property(t => t.Name).HasMaxLength(100).IsRequired();
+            modelBuilder.Entity<Test>().Property(t => t.CreateDate).IsOptional();
+            modelBuilder.Entity<Test>().Property(t => t.ChangeDate).IsOptional();
 
-            // QuestionTable
-            modelBuilder.Entity<QuestionTable>().Property(e => e.Id).HasColumnName("QuestionId");
-            modelBuilder.Entity<QuestionTable>()
-                .HasRequired(c => c.TestTable)
-                .WithMany()
-                .HasForeignKey(c => c.TestId);
-
-        }
-
-
-        public DbSet<QuestionTable> QuestionTable { get; set; }
-        public DbSet<TestTable> TestTable { get; set; }
-        public System.Data.Entity.DbSet<StudiekollenNew.Models.RoleViewModel> RoleViewModels { get; set; }
-
-
-        protected override void OnModelCreating(System.Data.Entity.DbModelBuilder modelBuilder)
-        {
-            base.OnModelCreating(modelBuilder);
-            modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
-
+            
+            modelBuilder.Entity<Question>().Property(t => t.Id).HasColumnName("QuestionId");
+            modelBuilder.Entity<Question>().Property(t => t.Answer).IsOptional();
+            modelBuilder.Entity<Question>().Property(t => t.Result).HasMaxLength(20).IsOptional();
 
             modelBuilder.Entity<IdentityUserRole>().ToTable("UserRole");
             modelBuilder.Entity<IdentityUserLogin>().ToTable("UserLogin");
             modelBuilder.Entity<IdentityUserClaim>().ToTable("UserClaim").Property(p => p.Id).HasColumnName("UserClaimId");
             modelBuilder.Entity<IdentityRole>().ToTable("Role").Property(p => p.Id).HasColumnName("RoleId");
-            MapEntities(modelBuilder);
+            base.OnModelCreating(modelBuilder);
         }
+
+       
 
     }
 }

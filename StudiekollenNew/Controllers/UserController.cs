@@ -6,9 +6,10 @@ using System.Web.Mvc;
 
 namespace StudiekollenNew.Controllers
 {
-    public class TestController : Controller
+    public class UserController : Controller
     {
-        public ActionResult CreateTest()
+        // GET: User
+        public ActionResult Index()
         {
             return View();
         }

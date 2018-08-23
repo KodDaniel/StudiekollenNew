@@ -6,6 +6,7 @@ using System.Web;
 
 namespace StudiekollenNew.Models
 {
+    
     //STEP8
     public class RoleViewModel
     {
@@ -13,4 +14,5 @@ namespace StudiekollenNew.Models
 
         [Display(Name = "Rollnamn")] public string Name { get; set; }
     }
+    
 }
