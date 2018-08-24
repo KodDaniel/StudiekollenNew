@@ -12,134 +12,48 @@ using StudiekollenNew.Models;
 
 namespace StudiekollenNew.Controllers
 {
-
-    //STEP8.
+    
 
     [Authorize]
-    public class ManageController : Controller
+    public partial class ManageController : Controller
     {
         private ApplicationSignInManager _signInManager;
         private UserManager _userManager;
-        // STEP4.
+      
+     
         private ApplicationRoleManager _roleManager;
 
         public ManageController()
         {
-        }
+            
+        }   
 
-        // STEP6.
         public ManageController(UserManager userManager, ApplicationSignInManager signInManager,ApplicationRoleManager roleManager)
         {
             UserManager = userManager;
             SignInManager = signInManager;
-            // STEP7.
+            
             RoleManager = roleManager;
 
         }
-
-        // STEP7.
-        public ActionResult Roles()
-        {
-            var roles = RoleManager.Roles.ToList();
-            // STEP9.
-            return View(roles.Select(x => new RoleViewModel() {Id = x.Id,Name=x.Name}));
-        }
-
-        public ActionResult CreateRole()
-        {
-            return View();
-        }
-
-        // STEP10.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult CreateRole(RoleViewModel model)
-        {
-            // We werify the model
-            // We verify if the role already exists using the RoleManager
-            if (RoleManager.RoleExists(model.Name))
-            {
-                //We informing the user that the role already exists
-            }
-            var newRole = new IdentityRole(model.Name);
-            var result = RoleManager.Create(newRole);
-
-            if (result.Succeeded)
-            {
-                return RedirectToAction("Roles");
-            }
-            //Here returns the model in sight
-            //
-
-            return View(model);
-        }
-
-        public ActionResult AddRoleToUser()
-        {
-            return View();
-        }
-
-       //STEP 11.
-       [HttpPost]
-        public ActionResult AddRoleToUser(string user, string role)
-        {
-            // Get the User
-            // Get the Role
-
-            var _user = UserManager.FindByEmail(user);
-            var _role = RoleManager.FindByName(role);
-
-            //The user already has the role
-            // Does the role already exists?
-           var result =  UserManager.AddToRole(_user.Id, role);
-            ViewBag.Errores = result.Errors;
-
-
-            if (result.Succeeded)
-            {
-                return RedirectToAction("Roles");
-            }
-
-
-            return View();
-        }
-
-        // STEP5.
+     
         public ApplicationRoleManager RoleManager
-
         {
-            get
-            {
-                return _roleManager?? HttpContext.GetOwinContext().Get<ApplicationRoleManager>();
-            }
-            private set
-            {
-                _roleManager = value;
-            }
+            get {return _roleManager?? HttpContext.GetOwinContext().Get<ApplicationRoleManager>();}
+            private set {_roleManager = value;}
         }
 
         public ApplicationSignInManager SignInManager
         {
-            get
-            {
-                return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
-            }
-            private set 
-            { 
-                _signInManager = value; 
-            }
+            get{return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();}
+            private set{_signInManager = value;}
         }
 
         public UserManager UserManager
         {
-            get
-            {
-                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<UserManager>();
-            }
-            private set
-            {
-                _userManager = value;
-            }
+            get {return _userManager ?? HttpContext.GetOwinContext().GetUserManager<UserManager>(); }
+            private set { _userManager = value;}
+
         }
 
         //

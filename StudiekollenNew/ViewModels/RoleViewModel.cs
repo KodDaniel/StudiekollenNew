@@ -12,7 +12,8 @@ namespace StudiekollenNew.Models
     {
         public string Id { get; set; }
 
-        [Display(Name = "Rollnamn")] public string Name { get; set; }
+        [Display(Name = "Rollnamn")]
+        public string Name { get; set; }
     }
     
 }

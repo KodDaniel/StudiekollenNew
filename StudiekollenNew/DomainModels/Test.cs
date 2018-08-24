@@ -9,9 +9,9 @@ namespace StudiekollenNew.Models
     public class Test
     {
         public int Id { get; set; }
-        [Display(Name = "Provnamn")]
+        [Display(Name = "Domain-Model:Provnamn")]
         public string Name { get; set; }
-        public DateTime? CreateDate { get; set; }
+        public DateTime? CreateDate { get; set; } = DateTime.Now;
         public DateTime? ChangeDate { get; set; }
         public ICollection<Question> Questions { get; set; }
         public string UserId { get; set; }
