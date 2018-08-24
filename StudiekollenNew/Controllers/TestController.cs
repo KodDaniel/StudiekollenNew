@@ -34,7 +34,7 @@ namespace StudiekollenNew.Controllers
 
             _context.SaveChanges();
 
-            return RedirectToAction("CreateTest", "Test", new { testId = testModel.Id });
+            return RedirectToAction("CreateTest", "Test");
         }
 
         public ActionResult CreateTest()
