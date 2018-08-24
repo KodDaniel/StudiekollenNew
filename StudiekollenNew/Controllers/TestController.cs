@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using StudiekollenNew.Models;
+using StudiekollenNew.ViewModels;
 
 namespace StudiekollenNew.Controllers
 {
@@ -12,17 +13,20 @@ namespace StudiekollenNew.Controllers
     {
         //private readonly ApplicationDbContext _context;
 
-        public ActionResult CreateTest()
+        public ActionResult NewTest()
         {
+            var viewModel = new NewTestViewModel();
 
-            return View();
+            return View(viewModel);
+
         }
 
-        // Ändra så jag inte använder mig av Domain-klassen utan av ViewModel-klassen
+        //Ändra så jag inte använder mig av Domain-klassen utan av ViewModel-klassen.Plus refatorisera koden, bland annat Db-connectoin.
         [HttpPost]
-        public ActionResult CreateTest(Test testModel)
+        public ActionResult NewTest(Test testModel)
         {
             testModel.UserId = User.Identity.GetUserId();
+           
 
             var _context = new ApplicationDbContext();
 
@@ -30,7 +34,34 @@ namespace StudiekollenNew.Controllers
 
             _context.SaveChanges();
 
-            return RedirectToAction("CreateTest", "Test");           
-        }    
+            return RedirectToAction("CreateTest", "Test", new { testId = testModel.Id });
+        }
+
+        public ActionResult CreateTest()
+        {
+            var viewModel = new CreateTestViewModel();
+
+            return View(viewModel);
+
+        }
+
+        [HttpPost]
+        public ActionResult CreateTest(Question questionModel)
+        {
+            var currentUserId = User.Identity.GetUserId();
+
+            var _context = new ApplicationDbContext();
+
+            // Substitut för Last-operator.
+            var query = _context.Test.OrderByDescending(c=>c.Id).First(c => c.UserId == currentUserId);
+
+            questionModel.TestId = query.Id;
+
+            _context.Question.Add(questionModel);
+
+            _context.SaveChanges();
+
+            return RedirectToAction("CreateTest", "Test");
+        }
     }
 }

@@ -9,7 +9,6 @@ namespace StudiekollenNew.Models
     public class Test
     {
         public int Id { get; set; }
-        [Display(Name = "Domain-Model:Provnamn")]
         public string Name { get; set; }
         public DateTime? CreateDate { get; set; } = DateTime.Now;
         public DateTime? ChangeDate { get; set; }

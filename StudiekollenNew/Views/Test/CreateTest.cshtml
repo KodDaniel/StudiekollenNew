@@ -1,13 +1,12 @@
-﻿@model StudiekollenNew.Models.Test
+﻿@model StudiekollenNew.ViewModels.CreateTestViewModel
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "CreateTest";
 }
 
-<h2>Skapa nytt prov</h2>
-<h5>Notera att du egentligen inte vill posta ett prov till databasen här. Istället utvidga denna sida så du kan skapa frågor och skapa ett helt prov på denna sida! <b>Göra detta med hjälp av din View Model "CreateTestViewModel".</b></h5>
+<h2>Skapa prov</h2>
 
-@using (Html.BeginForm("CreateTest","Test"))
+@using (Html.BeginForm("CreateTest", "Test"))
 {
     @Html.AntiForgeryToken()
 
@@ -15,9 +14,16 @@
         <hr />
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Query, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.Query, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+        
+        <div class="form-group">
+            @Html.LabelFor(model => model.Answer, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Answer, new { htmlAttributes = new { @class = "form-control" } })
             </div>
         </div>
         <div class="form-group">

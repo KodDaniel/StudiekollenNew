@@ -14,7 +14,7 @@ namespace StudiekollenNew.Controllers
         public ActionResult Roles()
         {
             var roles = RoleManager.Roles.ToList();
-            // STEP9.
+        
             return View(roles.Select(x => new RoleViewModel() { Id = x.Id, Name = x.Name }));
         }
 
