@@ -22,47 +22,58 @@ namespace StudiekollenNew.Controllers
 
         }
 
-        // Tänkvärt: Behöver jag verkligen spara provnamnet i databasen redan i detta skede?! Kan jag inte spara provet i sin HELHET när det är komplett (med alla frågor och svar) ?
         [HttpPost]
         public ActionResult NewTest(Test testModel)
         {
-            testModel.UserId = User.Identity.GetUserId();
-           
+            TempData["testModel"] = testModel;
 
-            var _context = new ApplicationDbContext();
-
-            _context.Test.Add(testModel);
-
-            _context.SaveChanges();
-
-            return RedirectToAction("CreateTest", "Test");
+            return RedirectToAction("CreateTest");
         }
 
         public ActionResult CreateTest()
         {
             var viewModel = new CreateTestViewModel();
 
+            var model = TempData["testModel"] as Test;
+
+            viewModel.Name = model.Name;
+
             return View(viewModel);
 
         }
 
-        [HttpPost]
-        public ActionResult CreateTest(Question questionModel)
-        {
-            var currentUserId = User.Identity.GetUserId();
+        //[HttpPost]
+        //public ActionResult CreateTest(Question questionModel)
+        //{
+         
 
-            var _context = new ApplicationDbContext();
-
-            // Substitut för Last-operator.
-            var getTestId = _context.Test.OrderByDescending(c=>c.Id).First(c => c.UserId == currentUserId);
-
-            questionModel.TestId = getTestId.Id;
-
-            _context.Question.Add(questionModel);
-
-            _context.SaveChanges();
-
-            return RedirectToAction("CreateTest", "Test");
-        }
+        //    return RedirectToAction("CreateTest", "Test");
+        //}
     }
 }
+
+
+
+
+
+
+
+
+//[HttpPost]
+//public ActionResult CreateTest(Question questionModel)
+//{
+//    var currentUserId = User.Identity.GetUserId();
+
+//    var _context = new ApplicationDbContext();
+
+//    // Substitut för Last-operator.
+//    var getTestId = _context.Test.OrderByDescending(c=>c.Id).First(c => c.UserId == currentUserId);
+
+//    questionModel.TestId = getTestId.Id;
+
+//    _context.Question.Add(questionModel);
+
+//    _context.SaveChanges();
+
+//    return RedirectToAction("CreateTest", "Test");
+//}

@@ -16,6 +16,11 @@
     white-space: normal;
 }
 
+.textAreaSize {
+    width: 300px;
+    height: 150px;
+}
+
 /* Set width on the form input elements since they're 100% wide by default */
 input,
 select,

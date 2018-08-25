@@ -4,7 +4,7 @@
     ViewBag.Title = "CreateTest";
 }
 
-<h2>Skapa prov</h2>
+<h2>@Model.Name</h2>
 
 @using (Html.BeginForm("CreateTest", "Test"))
 {
@@ -23,7 +23,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Answer, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Answer, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.TextAreaFor(model => model.Answer,6, 60, new { htmlAttributes = new { @class = "form-control " } })
             </div>
         </div>
         <div class="form-group">
