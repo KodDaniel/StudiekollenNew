@@ -9,6 +9,7 @@ using StudiekollenNew.ViewModels;
 
 namespace StudiekollenNew.Controllers
 {
+  
     public class TestController : Controller
     {
         //private readonly ApplicationDbContext _context;
@@ -21,7 +22,7 @@ namespace StudiekollenNew.Controllers
 
         }
 
-        //Ändra så jag inte använder mig av Domain-klassen utan av ViewModel-klassen.Plus refatorisera koden, bland annat Db-connectoin.
+        // Tänkvärt: Behöver jag verkligen spara provnamnet i databasen redan i detta skede?! Kan jag inte spara provet i sin HELHET när det är komplett (med alla frågor och svar) ?
         [HttpPost]
         public ActionResult NewTest(Test testModel)
         {
