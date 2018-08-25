@@ -10,6 +10,5 @@ namespace StudiekollenNew.ViewModels
     {
         [Display(Name = "Provnamn")]
         public string Name { get; set; }
-
     }
 }

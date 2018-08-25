@@ -14,46 +14,44 @@ namespace StudiekollenNew.Controllers
 {
     
 
-    [Authorize]
-    public partial class ManageController : Controller
+   [Authorize]
+    public class ManageController : Controller
     {
         private ApplicationSignInManager _signInManager;
         private UserManager _userManager;
-      
-     
-        private ApplicationRoleManager _roleManager;
 
         public ManageController()
         {
-            
-        }   
+        }
 
-        public ManageController(UserManager userManager, ApplicationSignInManager signInManager,ApplicationRoleManager roleManager)
+        public ManageController(UserManager userManager, ApplicationSignInManager signInManager)
         {
             UserManager = userManager;
             SignInManager = signInManager;
-            
-            RoleManager = roleManager;
-
-        }
-     
-        public ApplicationRoleManager RoleManager
-        {
-            get {return _roleManager?? HttpContext.GetOwinContext().Get<ApplicationRoleManager>();}
-            private set {_roleManager = value;}
         }
 
         public ApplicationSignInManager SignInManager
         {
-            get{return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();}
-            private set{_signInManager = value;}
+            get
+            {
+                return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
+            }
+            private set 
+            { 
+                _signInManager = value; 
+            }
         }
 
         public UserManager UserManager
         {
-            get {return _userManager ?? HttpContext.GetOwinContext().GetUserManager<UserManager>(); }
-            private set { _userManager = value;}
-
+            get
+            {
+                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<UserManager>();
+            }
+            private set
+            {
+                _userManager = value;
+            }
         }
 
         //

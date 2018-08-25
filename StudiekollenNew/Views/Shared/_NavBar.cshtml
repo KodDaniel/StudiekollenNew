@@ -11,10 +11,7 @@
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
                 <li>@Html.ActionLink("Nytt prov", "NewTest", "Test")</li>
-                <li>@Html.ActionLink("Skapa prov", "CreateTest", "Test")</li>
-                <li>@Html.ActionLink("Tilldela roll", "AddRoleToUser", "Manage")</li>
-                <li>@Html.ActionLink("Existerande roller", "Roles", "Manage")</li>
-                <li>@Html.ActionLink("Skapa ny roll", "CreateRole", "Manage")</li>
+                @*<li>@Html.ActionLink("Skapa prov", "CreateTest", "Test")</li>*@
             </ul>
             @Html.Partial("_LoginPartial")
         </div>

@@ -53,9 +53,9 @@ namespace StudiekollenNew.Controllers
             var _context = new ApplicationDbContext();
 
             // Substitut för Last-operator.
-            var query = _context.Test.OrderByDescending(c=>c.Id).First(c => c.UserId == currentUserId);
+            var getTestId = _context.Test.OrderByDescending(c=>c.Id).First(c => c.UserId == currentUserId);
 
-            questionModel.TestId = query.Id;
+            questionModel.TestId = getTestId.Id;
 
             _context.Question.Add(questionModel);
 
