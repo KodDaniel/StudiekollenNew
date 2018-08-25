@@ -32,28 +32,6 @@ namespace StudiekollenNew
         }
     }
 
-    // STEP1: Vi skapar en instans av RoleManager. 
-    // IdentityRole representeras en rolletnitet. En rolletnitet är allt det jag har i min rolltabell. Kan nås via "peek defition"...
-    //...på IdentityRole.
-    public class ApplicationRoleManager:RoleManager<IdentityRole>
-    {
-        //Konstruktor. Skickar vidare Store till RoleManagers konstruktor.
-        public ApplicationRoleManager(IRoleStore<IdentityRole,string> store)
-            :base (store)
-        {
-            
-        }
-
-        // STEP2.
-        public static ApplicationRoleManager Create(IdentityFactoryOptions<ApplicationRoleManager> options, IOwinContext context)
-        {
-            var manager = new ApplicationRoleManager(new RoleStore<IdentityRole>(context.Get<ApplicationDbContext>()));
-
-            return manager;
-        }
-    }
-
-
     // Configure the application user manager used in this application. UserManager is defined in ASP.NET Identity and is used by the application.
     public class UserManager : UserManager<User>
     {
@@ -62,7 +40,7 @@ namespace StudiekollenNew
         {
         }
 
-        public static UserManager Create(IdentityFactoryOptions<UserManager> options, IOwinContext context) 
+        public static UserManager Create(IdentityFactoryOptions<UserManager> options, IOwinContext context)
         {
             var manager = new UserManager(new UserStore<User>(context.Get<ApplicationDbContext>()));
             // Configure validation logic for usernames
@@ -103,7 +81,7 @@ namespace StudiekollenNew
             var dataProtectionProvider = options.DataProtectionProvider;
             if (dataProtectionProvider != null)
             {
-                manager.UserTokenProvider = 
+                manager.UserTokenProvider =
                     new DataProtectorTokenProvider<User>(dataProtectionProvider.Create("ASP.NET Identity"));
             }
             return manager;
