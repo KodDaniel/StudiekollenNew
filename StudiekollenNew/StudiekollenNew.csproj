@@ -236,6 +236,7 @@
     <Compile Include="ViewModels\NewTestViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="All kod för att autotilldela roller.txt" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
