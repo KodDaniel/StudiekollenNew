@@ -75,10 +75,7 @@ namespace StudiekollenNew.Controllers
 
             _context.Question.Add(questionModel);
             
-            _context.SaveChanges();
-
-            var testName = getTestId.Name;
-            
+            _context.SaveChanges();            
 
             return RedirectToAction("CreateTest", new {testName = getTestId.Name});
         }
