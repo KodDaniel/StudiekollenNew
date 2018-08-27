@@ -39,7 +39,7 @@ namespace StudiekollenNew.Controllers
 
                 return RedirectToAction("CreateTest");
             }
-          
+         
         }
 
         public ActionResult CreateTest()
@@ -76,14 +76,14 @@ namespace StudiekollenNew.Controllers
 
 
 
-//if(nameOfTest is null)
-//{
-//    viewModel.Name = "Hårdkodat provnamn";
-//}
-//else
-//{
-//    viewModel.Name = nameOfTest.Name;
-//}
+////if(nameOfTest is null)
+////{
+////    viewModel.Name = "Hårdkodat provnamn";
+////}
+////else
+////{
+////    viewModel.Name = nameOfTest.Name;
+////}
 
 
 
