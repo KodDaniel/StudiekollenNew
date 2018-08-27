@@ -8,7 +8,8 @@ namespace StudiekollenNew.ViewModels
 {
     public class CreateTestViewModel
     {
-        
+       
+
         public string Name { get; set; }
 
         [Display(Name = "Fråga")]
@@ -16,5 +17,13 @@ namespace StudiekollenNew.ViewModels
 
         [Display(Name = "Svar")]
         public string Answer { get; set; }
+
+
+        public void  AddToDictionary (string question, string answer)
+        {
+           //dictionary.Add(question,answer);
+        }
+
+     
     }
 }

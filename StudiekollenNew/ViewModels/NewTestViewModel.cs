@@ -8,6 +8,7 @@ namespace StudiekollenNew.ViewModels
 {
     public class NewTestViewModel
     {
+        [Required]
         [Display(Name = "Provnamn")]
         public string Name { get; set; }
     }

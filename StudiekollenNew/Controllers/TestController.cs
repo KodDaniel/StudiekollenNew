@@ -12,6 +12,7 @@ namespace StudiekollenNew.Controllers
   
     public class TestController : Controller
     {
+    
         //private readonly ApplicationDbContext _context;
 
         public ActionResult NewTest()
@@ -25,32 +26,78 @@ namespace StudiekollenNew.Controllers
         [HttpPost]
         public ActionResult NewTest(Test testModel)
         {
-            TempData["testModel"] = testModel;
 
-            return RedirectToAction("CreateTest");
+            if (!ModelState.IsValid)
+            {
+                var viewModel = new NewTestViewModel();
+
+                return View(viewModel);
+            }
+            else
+            {
+                TempData["testModel"] = testModel;
+
+                return RedirectToAction("CreateTest");
+            }
+          
         }
 
         public ActionResult CreateTest()
         {
             var viewModel = new CreateTestViewModel();
-
-            var model = TempData["testModel"] as Test;
-
-            viewModel.Name = model.Name;
+            var nameOfTest = TempData["testModel"] as Test;
+            viewModel.Name = nameOfTest.Name;
 
             return View(viewModel);
 
         }
 
-        //[HttpPost]
-        //public ActionResult CreateTest(Question questionModel)
-        //{
-         
+        [HttpPost]
+        public ActionResult CreateTest(Question questionModel)
+        {
+            if (!ModelState.IsValid)
+            {
+                var viewModel = new CreateTestViewModel();
+                return View(viewModel);
+            }
+            else
+            {
+                return RedirectToAction("CreateTest"); 
+            }
 
-        //    return RedirectToAction("CreateTest", "Test");
-        //}
+        }
+
     }
 }
+
+
+
+
+
+
+
+//if(nameOfTest is null)
+//{
+//    viewModel.Name = "Hårdkodat provnamn";
+//}
+//else
+//{
+//    viewModel.Name = nameOfTest.Name;
+//}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -77,3 +124,4 @@ namespace StudiekollenNew.Controllers
 
 //    return RedirectToAction("CreateTest", "Test");
 //}
+
