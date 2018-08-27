@@ -42,11 +42,20 @@ namespace StudiekollenNew.Controllers
           
         }
 
-        public ActionResult CreateTest()
+        public ActionResult CreateTest(string testName)
         {
+           
             var viewModel = new CreateTestViewModel();
             var testModel = TempData["testModel"] as Test;
-            viewModel.Name = testModel.Name;
+
+            if (testModel is null)
+            {
+                viewModel.Name = testName;
+            }
+            else
+            {
+                viewModel.Name = testModel.Name; 
+            }
 
             return View(viewModel);
 
@@ -55,16 +64,23 @@ namespace StudiekollenNew.Controllers
         [HttpPost]
         public ActionResult CreateTest(Question questionModel)
         {
-            if (!ModelState.IsValid)
-            {
-                var viewModel = new CreateTestViewModel();
-                return View(viewModel);
-            }
-            else
-            {
-                return RedirectToAction("CreateTest"); 
-            }
+            var currentUserId = User.Identity.GetUserId();
 
+            var _context = new ApplicationDbContext();
+
+            // Substitut för Last-operator.
+            var getTestId = _context.Test.OrderByDescending(c => c.Id).First(c => c.UserId == currentUserId);
+
+            questionModel.TestId = getTestId.Id;
+
+            _context.Question.Add(questionModel);
+            
+            _context.SaveChanges();
+
+            var testName = getTestId.Name;
+            
+
+            return RedirectToAction("CreateTest", new {testName = getTestId.Name});
         }
 
     }
