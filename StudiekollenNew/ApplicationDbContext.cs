@@ -5,6 +5,7 @@ using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Linq;
 using System.Web;
+using StudiekollenNew.ViewModels;
 
 namespace StudiekollenNew.Models
 {
@@ -40,6 +41,7 @@ namespace StudiekollenNew.Models
                 .HasForeignKey(c => c.TestId)
                 .WillCascadeOnDelete(true);
             #endregion
+
 
             modelBuilder.Entity<Test>().Property(t => t.Id).HasColumnName("TestId");
             modelBuilder.Entity<Test>().Property(t => t.Name).HasMaxLength(100).IsRequired();

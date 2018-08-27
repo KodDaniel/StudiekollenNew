@@ -8,21 +8,16 @@ namespace StudiekollenNew.ViewModels
 {
     public class CreateTestViewModel
     {
-       
-
+        // Logik (Data Annotations) finns här eftersom detta ej har direkt med databas att göra
         public string Name { get; set; }
 
+        [Required]
         [Display(Name = "Fråga")]
         public string Query { get; set; }
 
+        [Required]
         [Display(Name = "Svar")]
         public string Answer { get; set; }
-
-
-        public void  AddToDictionary (string question, string answer)
-        {
-           //dictionary.Add(question,answer);
-        }
 
      
     }

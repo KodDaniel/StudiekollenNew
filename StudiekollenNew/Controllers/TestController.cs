@@ -45,8 +45,8 @@ namespace StudiekollenNew.Controllers
         public ActionResult CreateTest()
         {
             var viewModel = new CreateTestViewModel();
-            var nameOfTest = TempData["testModel"] as Test;
-            viewModel.Name = nameOfTest.Name;
+            var testModel = TempData["testModel"] as Test;
+            viewModel.Name = testModel.Name;
 
             return View(viewModel);
 

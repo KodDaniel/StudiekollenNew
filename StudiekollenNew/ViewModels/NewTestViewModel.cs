@@ -6,6 +6,8 @@ using System.Web;
 
 namespace StudiekollenNew.ViewModels
 {
+    // Logik (Data Annotations) finns här eftersom detta ej har direkt med databas att göra
+
     public class NewTestViewModel
     {
         [Required]
