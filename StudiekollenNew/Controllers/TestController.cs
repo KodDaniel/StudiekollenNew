@@ -12,7 +12,7 @@ namespace StudiekollenNew.Controllers
   
     public class TestController : Controller
     {
-    
+        // Vi vill inte ska skapa en instans av databasklassen i varje metod, lös detta!
         //private readonly ApplicationDbContext _context;
 
         public ActionResult NewTest()
@@ -69,9 +69,6 @@ namespace StudiekollenNew.Controllers
 
     }
 }
-
-
-
 
 
 
