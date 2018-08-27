@@ -44,8 +44,10 @@ namespace StudiekollenNew.Controllers
 
         public ActionResult CreateTest()
         {
+            
             var viewModel = new CreateTestViewModel();
             var testModel = TempData["testModel"] as Test;
+           
             viewModel.Name = testModel.Name;
 
             return View(viewModel);
@@ -60,10 +62,13 @@ namespace StudiekollenNew.Controllers
                 var viewModel = new CreateTestViewModel();
                 return View(viewModel);
             }
-            else
-            {
-                return RedirectToAction("CreateTest"); 
-            }
+
+            var dictionary = new Dictionary<string, string>();
+            dictionary.Add(questionModel.Query, questionModel.Answer);
+
+            var hat = dictionary;
+                return RedirectToAction("CreateTest",new{dictionary = hat }); 
+            
 
         }
 

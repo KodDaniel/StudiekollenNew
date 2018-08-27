@@ -19,6 +19,11 @@ namespace StudiekollenNew.ViewModels
         [Display(Name = "Svar")]
         public string Answer { get; set; }
 
-     
+        public Dictionary<string, string> CreateDictionary()
+        {
+            var newDictionary = new Dictionary<string,string>();
+            return newDictionary;
+        }
+
     }
 }
