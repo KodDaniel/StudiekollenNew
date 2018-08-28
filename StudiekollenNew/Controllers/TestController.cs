@@ -13,7 +13,8 @@ namespace StudiekollenNew.Controllers
   
     public class TestController : Controller
     {
-       
+
+      
         public ActionResult NewTest()
         {
             var viewModel = new NewTestViewModel();
@@ -72,7 +73,7 @@ namespace StudiekollenNew.Controllers
 
             var db = ContextSingelton.GetContext();
 
-            // Substitut för Last-operator.
+            // Substitut för Last-operator. Tänk på att du ej behöver EagerLoda med "Include" eftersom som du ju här rör dig i en och samma tabell.
             var getTestId = db.Test
                 .OrderByDescending(c => c.Id)
                 .First(c => c.UserId == currentUserId);
