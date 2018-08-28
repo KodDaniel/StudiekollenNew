@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using StudiekollenNew.DataBase;
+using StudiekollenNew.Models;
+using StudiekollenNew.Repositories;
 
 namespace StudiekollenNew.Controllers
 {
@@ -11,7 +14,10 @@ namespace StudiekollenNew.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+            var db = new ApplicationDbContext();
+            var testObj = new TestRepository(db);
+            var allTests = testObj.All();
+            return View(allTests);
         }
 
     }

@@ -15,7 +15,6 @@ namespace StudiekollenNew.Controllers
     {
 
        
-    
         //private readonly ApplicationDbContext _context;
 
         public ActionResult NewTest()
