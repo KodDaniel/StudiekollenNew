@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
+using StudiekollenNew.DataBase;
 using StudiekollenNew.Models;
 using StudiekollenNew.ViewModels;
 
@@ -27,7 +28,7 @@ namespace StudiekollenNew.Controllers
         public ActionResult NewTest(Test testModel)
         {
             var viewModel = new NewTestViewModel();
-            var _context = new ApplicationDbContext();           
+            var db = ContextSingelton.GetContext();           
             testModel.UserId = User.Identity.GetUserId();
 
             if (!ModelState.IsValid)
@@ -37,8 +38,8 @@ namespace StudiekollenNew.Controllers
             else
             {
                 testModel.UserId = User.Identity.GetUserId();
-                _context.Test.Add(testModel);
-                _context.SaveChanges();
+                db.Test.Add(testModel);
+                db.SaveChanges();
 
                 TempData["testModel"] = testModel;
 
@@ -49,7 +50,6 @@ namespace StudiekollenNew.Controllers
 
         public ActionResult CreateTest(string testName)
         {
-            var _context = new ApplicationDbContext();
 
             var viewModel = new CreateTestViewModel();
             var testModel = TempData["testModel"] as Test;
@@ -72,16 +72,16 @@ namespace StudiekollenNew.Controllers
         {
             var currentUserId = User.Identity.GetUserId();
 
-            var _context = new ApplicationDbContext();
+            var db = ContextSingelton.GetContext();
 
             // Substitut för Last-operator.
-            var getTestId = _context.Test.OrderByDescending(c => c.Id).First(c => c.UserId == currentUserId);
+            var getTestId = db.Test.OrderByDescending(c => c.Id).First(c => c.UserId == currentUserId);
 
             questionModel.TestId = getTestId.Id;
 
-            _context.Question.Add(questionModel);
+            db.Question.Add(questionModel);
             
-            _context.SaveChanges();            
+            db.SaveChanges();            
 
             return RedirectToAction("CreateTest", new {testName = getTestId.Name});
         }
