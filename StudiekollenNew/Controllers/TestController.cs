@@ -13,7 +13,6 @@ namespace StudiekollenNew.Controllers
   
     public class TestController : Controller
     {
-
        
         //private readonly ApplicationDbContext _context;
 

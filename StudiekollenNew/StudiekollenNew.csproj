@@ -225,7 +225,9 @@
       <DependentUpon>201808231140398_test.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Repositories\RepositoryFactory.cs" />
     <Compile Include="Repositories\TestRepository.cs" />
+    <Compile Include="Services\TestService.cs" />
     <Compile Include="ViewModels\AccountViewModels.cs" />
     <Compile Include="DatabaseContext\ApplicationDbContext.cs" />
     <Compile Include="ViewModels\CreateTestViewModel.cs" />

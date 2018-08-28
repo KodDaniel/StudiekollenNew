@@ -20,5 +20,10 @@ namespace StudiekollenNew.Repositories
             return _context.Test.ToList();
         }
 
+        public void Add(Test testModel)
+        {
+            _context.Test.Add(testModel);
+        }
+
     }
 }

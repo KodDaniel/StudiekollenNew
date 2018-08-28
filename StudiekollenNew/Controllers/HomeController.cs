@@ -14,9 +14,7 @@ namespace StudiekollenNew.Controllers
     {
         public ActionResult Index()
         {
-            var db = new ApplicationDbContext();
-            var testObj = new TestRepository(db);
-            var allTests = testObj.All();
+            var allTests= new RepositoryFactory().GetTestRepository().All(); 
             return View(allTests);
         }
 
