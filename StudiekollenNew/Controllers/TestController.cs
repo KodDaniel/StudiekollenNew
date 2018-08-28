@@ -73,7 +73,9 @@ namespace StudiekollenNew.Controllers
             var db = ContextSingelton.GetContext();
 
             // Substitut för Last-operator.
-            var getTestId = db.Test.OrderByDescending(c => c.Id).First(c => c.UserId == currentUserId);
+            var getTestId = db.Test
+                .OrderByDescending(c => c.Id)
+                .First(c => c.UserId == currentUserId);
 
             questionModel.TestId = getTestId.Id;
 
