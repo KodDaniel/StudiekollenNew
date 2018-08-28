@@ -14,8 +14,9 @@ namespace StudiekollenNew.Controllers
     {
         public ActionResult Index()
         {
-            var allTests= new RepositoryFactory().GetTestRepository().All(); 
-            return View(allTests);
+            //var allTests= new RepositoryFactory().GetTestRepository().All(); 
+
+            return View();
         }
 
     }

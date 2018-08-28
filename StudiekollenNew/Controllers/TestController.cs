@@ -14,8 +14,6 @@ namespace StudiekollenNew.Controllers
     public class TestController : Controller
     {
        
-        //private readonly ApplicationDbContext _context;
-
         public ActionResult NewTest()
         {
             var viewModel = new NewTestViewModel();

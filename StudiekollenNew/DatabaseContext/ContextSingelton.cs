@@ -6,6 +6,7 @@ using StudiekollenNew.Models;
 
 namespace StudiekollenNew.DataBase
 {
+    //ContextSingelton: Klassens uppgift: Skapar en connection till databasen om vi inte har en sådan.
     public class ContextSingelton
     {
         private static ApplicationDbContext _context;
