@@ -26,15 +26,20 @@ namespace StudiekollenNew.Controllers
         [HttpPost]
         public ActionResult NewTest(Test testModel)
         {
+            var viewModel = new NewTestViewModel();
+            var _context = new ApplicationDbContext();           
+            testModel.UserId = User.Identity.GetUserId();
 
             if (!ModelState.IsValid)
-            {
-                var viewModel = new NewTestViewModel();
-
+            {             
                 return View(viewModel);
             }
             else
             {
+                testModel.UserId = User.Identity.GetUserId();
+                _context.Test.Add(testModel);
+                _context.SaveChanges();
+
                 TempData["testModel"] = testModel;
 
                 return RedirectToAction("CreateTest");
@@ -44,7 +49,8 @@ namespace StudiekollenNew.Controllers
 
         public ActionResult CreateTest(string testName)
         {
-           
+            var _context = new ApplicationDbContext();
+
             var viewModel = new CreateTestViewModel();
             var testModel = TempData["testModel"] as Test;
 
@@ -56,7 +62,7 @@ namespace StudiekollenNew.Controllers
             {
                 viewModel.Name = testModel.Name; 
             }
-
+              
             return View(viewModel);
 
         }
