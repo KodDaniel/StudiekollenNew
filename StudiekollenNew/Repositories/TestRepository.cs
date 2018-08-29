@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using StudiekollenNew.Models;
+using NetPipeStyleUriParser = System.NetPipeStyleUriParser;
 
 namespace StudiekollenNew.Repositories
 {
@@ -23,7 +24,7 @@ namespace StudiekollenNew.Repositories
         }
 
         // Lägger till ett test i databasen. 
-        public void Add(Test testModel)
+        public void AddTest(Test testModel)
         {
             _context.Test.Add(testModel);
         }
@@ -43,6 +44,13 @@ namespace StudiekollenNew.Repositories
                 .OrderByDescending(c => c.Id)
                 .First(c => c.UserId == currentUserId).Name;
         }
+
+        public string FindTest()
+        {
+            throw new NotImplementedException();
+        }
+
+
 
 
 

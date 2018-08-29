@@ -39,7 +39,7 @@ namespace StudiekollenNew.Controllers
                 testModel.UserId = User.Identity.GetUserId();
                 var repoFactory = new RepositoryFactory();
                 var testService = new TestService(repoFactory);
-                testService.Add(testModel);
+                testService.AddTest(testModel);
                 ContextSingelton.GetContext().SaveChanges();
 
                 TempData["testModel"] = testModel;
