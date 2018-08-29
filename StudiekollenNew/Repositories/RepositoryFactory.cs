@@ -7,12 +7,14 @@ using StudiekollenNew.Models;
 
 namespace StudiekollenNew.Repositories
 {
-    // This class handles instantiation of the repositories. (UserRepository, TestRepository och QuestionRepository). 
+   // This class handles instantiation of the repositories. (UserRepository, TestRepository och QuestionRepository). 
     public class RepositoryFactory
     {
+        
         // Wrapper property to get a context instance
         private static ApplicationDbContext context
         {
+
             get { return ContextSingelton.GetContext(); }
         }
 

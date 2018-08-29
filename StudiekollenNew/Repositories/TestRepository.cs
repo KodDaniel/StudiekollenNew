@@ -6,12 +6,10 @@ using StudiekollenNew.Models;
 
 namespace StudiekollenNew.Repositories
 {
-    // Sköter all CRUD-operatior för Testtabellen getemot databasen
     public class TestRepository
     {
         private ApplicationDbContext _context;
 
-        // skapar databas connection genom konstruktorn
         public TestRepository(ApplicationDbContext context)
         {
             _context = context;
