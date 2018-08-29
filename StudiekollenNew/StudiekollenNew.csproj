@@ -305,6 +305,8 @@
     <Content Include="Views\Test\NewTest.cshtml" />
     <Content Include="Views\Shared\_NavBar.cshtml" />
     <Content Include="Views\Test\CreateTest.cshtml" />
+    <Content Include="Views\Test\SearchForTest.cshtml" />
+    <Content Include="Views\Test\EditTest.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

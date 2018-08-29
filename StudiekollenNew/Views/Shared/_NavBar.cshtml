@@ -11,7 +11,8 @@
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
                 <li>@Html.ActionLink("Nytt prov", "NewTest", "Test")</li>
-                @*<li>@Html.ActionLink("Skapa prov", "CreateTest", "Test")</li>*@
+                <li>@Html.ActionLink("Sök efter prov", "SearchForTest", "Test")</li>
+                <li>@Html.ActionLink("Redigera prov", "EditTest", "Test")</li>
             </ul>
             @Html.Partial("_LoginPartial")
         </div>

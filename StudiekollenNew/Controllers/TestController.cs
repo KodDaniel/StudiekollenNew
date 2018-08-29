@@ -85,5 +85,17 @@ namespace StudiekollenNew.Controllers
             return RedirectToAction("CreateTest", new {testName = recentTestName});
         }
 
+        public ActionResult SearchForTest()
+        {
+            return View();
+        }
+
+
+
+        public ActionResult EditTest()
+        {
+            return View();
+        }
+
     }
 }
