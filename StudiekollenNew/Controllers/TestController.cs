@@ -27,8 +27,7 @@ namespace StudiekollenNew.Controllers
         [HttpPost]
         public ActionResult NewTest(Test testModel)
         {
-            var viewModel = new NewTestViewModel();
-            var db = ContextSingelton.GetContext();           
+            var viewModel = new NewTestViewModel();         
             testModel.UserId = User.Identity.GetUserId();
 
             if (!ModelState.IsValid)
@@ -41,7 +40,7 @@ namespace StudiekollenNew.Controllers
                 var repoFactory = new RepositoryFactory();
                 var testService = new TestService(repoFactory);
                 testService.Add(testModel);
-                db.SaveChanges();
+                ContextSingelton.GetContext().SaveChanges();
 
                 TempData["testModel"] = testModel;
 
@@ -74,77 +73,17 @@ namespace StudiekollenNew.Controllers
         {
             var currentUserId = User.Identity.GetUserId();
 
-            var db = ContextSingelton.GetContext();
-
             var repoFactory = new RepositoryFactory();
             var testService = new TestService(repoFactory);
             var recentTestId = testService.GetMostRecentTestId(currentUserId);
             var recentTestName = testService.GetMostRecentTestName(currentUserId);
 
-            questionModel.TestId = recentTestId;
-
-            db.Question.Add(questionModel);
-            
-            db.SaveChanges();            
+            var questionService = new QuestionService(repoFactory);
+            questionService.AddQuestionsToTest(recentTestId,questionModel);
+            ContextSingelton.GetContext().SaveChanges();
 
             return RedirectToAction("CreateTest", new {testName = recentTestName});
         }
 
     }
 }
-
-
-
-
-
-
-
-//if(nameOfTest is null)
-//{
-//    viewModel.Name = "Hårdkodat provnamn";
-//}
-//else
-//{
-//    viewModel.Name = nameOfTest.Name;
-//}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//[HttpPost]
-//public ActionResult CreateTest(Question questionModel)
-//{
-//    var currentUserId = User.Identity.GetUserId();
-
-//    var _context = new ApplicationDbContext();
-
-//    // Substitut för Last-operator.
-//    var getTestId = _context.Test.OrderByDescending(c=>c.Id).First(c => c.UserId == currentUserId);
-
-//    questionModel.TestId = getTestId.Id;
-
-//    _context.Question.Add(questionModel);
-
-//    _context.SaveChanges();
-
-//    return RedirectToAction("CreateTest", "Test");
-//}
-
