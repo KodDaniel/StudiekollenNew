@@ -12,11 +12,8 @@ namespace StudiekollenNew.Repositories
     {
         
         // Wrapper property to get a context instance
-        private static ApplicationDbContext context
-        {
+        private static ApplicationDbContext context {get { return ContextSingelton.GetContext(); }}
 
-            get { return ContextSingelton.GetContext(); }
-        }
 
         // Retrieve a TestRepository instance
         public TestRepository GetTestRepository()

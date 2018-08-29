@@ -15,6 +15,7 @@ namespace StudiekollenNew.Repositories
             _context = context;
         }
 
+
         // Hämtar alla test i databasen
         public IEnumerable<Test> All()
         {
@@ -26,6 +27,25 @@ namespace StudiekollenNew.Repositories
         {
             _context.Test.Add(testModel);
         }
+
+        public int GetMostRecentTestId(string currentUserId)
+        {
+            // Substitut för Last-operator. Tänk på att du ej behöver EagerLoda med "Include" eftersom som du ju här rör dig i en och samma tabell.
+            return _context.Test
+                .OrderByDescending(c => c.Id)
+                .First(c => c.UserId == currentUserId).Id;
+        }
+
+        public string GetMostRecentTestName(string currentUserId)
+        {
+            // Substitut för Last-operator. Tänk på att du ej behöver EagerLoda med "Include" eftersom som du ju här rör dig i en och samma tabell.
+            return _context.Test
+                .OrderByDescending(c => c.Id)
+                .First(c => c.UserId == currentUserId).Name;
+        }
+
+
+
 
         //TODO: Implement More Crud-OPERATIONS Here
 

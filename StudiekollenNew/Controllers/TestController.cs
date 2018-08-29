@@ -6,6 +6,8 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using StudiekollenNew.DataBase;
 using StudiekollenNew.Models;
+using StudiekollenNew.Repositories;
+using StudiekollenNew.Services;
 using StudiekollenNew.ViewModels;
 
 namespace StudiekollenNew.Controllers
@@ -18,7 +20,6 @@ namespace StudiekollenNew.Controllers
         public ActionResult NewTest()
         {
             var viewModel = new NewTestViewModel();
-
             return View(viewModel);
 
         }
@@ -37,7 +38,9 @@ namespace StudiekollenNew.Controllers
             else
             {
                 testModel.UserId = User.Identity.GetUserId();
-                db.Test.Add(testModel);
+                var repoFactory = new RepositoryFactory();
+                var testService = new TestService(repoFactory);
+                testService.Add(testModel);
                 db.SaveChanges();
 
                 TempData["testModel"] = testModel;
@@ -73,18 +76,18 @@ namespace StudiekollenNew.Controllers
 
             var db = ContextSingelton.GetContext();
 
-            // Substitut för Last-operator. Tänk på att du ej behöver EagerLoda med "Include" eftersom som du ju här rör dig i en och samma tabell.
-            var getTestId = db.Test
-                .OrderByDescending(c => c.Id)
-                .First(c => c.UserId == currentUserId);
+            var repoFactory = new RepositoryFactory();
+            var testService = new TestService(repoFactory);
+            var recentTestId = testService.GetMostRecentTestId(currentUserId);
+            var recentTestName = testService.GetMostRecentTestName(currentUserId);
 
-            questionModel.TestId = getTestId.Id;
+            questionModel.TestId = recentTestId;
 
             db.Question.Add(questionModel);
             
             db.SaveChanges();            
 
-            return RedirectToAction("CreateTest", new {testName = getTestId.Name});
+            return RedirectToAction("CreateTest", new {testName = recentTestName});
         }
 
     }

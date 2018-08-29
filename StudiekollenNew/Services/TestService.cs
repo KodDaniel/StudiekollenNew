@@ -21,7 +21,22 @@ namespace StudiekollenNew.Services
             return _testRepository.All();
         }
 
-      
+        public void Add(Test testModel)
+        {
+            _testRepository.Add(testModel);
+        }
+
+        public int GetMostRecentTestId(string currentUserId)
+        {
+            return _testRepository.GetMostRecentTestId(currentUserId);
+        }
+
+        public string GetMostRecentTestName(string currentUserId)
+        {
+            return _testRepository.GetMostRecentTestName(currentUserId);
+        }
+
+
 
     }
 }

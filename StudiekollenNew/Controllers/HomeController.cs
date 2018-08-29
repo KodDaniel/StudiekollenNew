@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using StudiekollenNew.DataBase;
 using StudiekollenNew.Models;
 using StudiekollenNew.Repositories;
+using StudiekollenNew.Services;
 
 namespace StudiekollenNew.Controllers
 {
@@ -14,13 +15,10 @@ namespace StudiekollenNew.Controllers
     {
         public ActionResult Index()
         {
-            //var allTests = new RepositoryFactory().GetTestRepository().All();
-
-
-            var factory = new  RepositoryFactory();
-            //var testRepository = factory.GetTestRepository();
-
-            return View();
+           var repoFactory = new RepositoryFactory();
+           var testService =  new TestService(repoFactory);
+           var allTests = testService.All();
+           return View(allTests);
         }
 
     }
