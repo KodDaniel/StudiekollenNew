@@ -233,6 +233,7 @@
     <Compile Include="ViewModels\AccountViewModels.cs" />
     <Compile Include="DatabaseContext\ApplicationDbContext.cs" />
     <Compile Include="ViewModels\CreateTestViewModel.cs" />
+    <Compile Include="ViewModels\FindTestViewModel.cs" />
     <Compile Include="ViewModels\ManageViewModels.cs" />
     <Compile Include="DomainModels\Question.cs" />
     <Compile Include="DomainModels\Test.cs" />

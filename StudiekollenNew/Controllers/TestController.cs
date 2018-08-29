@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -85,9 +86,32 @@ namespace StudiekollenNew.Controllers
             return RedirectToAction("CreateTest", new {testName = recentTestName});
         }
 
-        public ActionResult SearchForTest()
+        public ActionResult SearchForTest(FindTestViewModel allTests)
         {
-            return View();
+            if (allTests is null)
+            {
+                return View();
+            }
+            else
+            {
+                return View(allTests);
+            }
+            
+        }
+
+        [HttpPost]
+        public ActionResult SearchForTest(User user)
+        {
+            var repoFactory = new RepositoryFactory();
+            var testService = new TestService(repoFactory);
+            var result = testService.FindTest(user.UserName);
+            var viewModel = new FindTestViewModel()
+            {
+                Username = user.UserName,
+                AllTests = result
+            };
+
+            return RedirectToAction("SearchForTest", new { allTests = viewModel.AllTests});
         }
 
 
@@ -95,6 +119,7 @@ namespace StudiekollenNew.Controllers
         public ActionResult EditTest()
         {
             return View();
+
         }
 
     }

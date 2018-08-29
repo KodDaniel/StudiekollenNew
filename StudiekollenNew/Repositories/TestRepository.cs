@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using StudiekollenNew.Models;
@@ -45,9 +46,12 @@ namespace StudiekollenNew.Repositories
                 .First(c => c.UserId == currentUserId).Name;
         }
 
-        public string FindTest()
+        public IEnumerable<string> FindTest(string userName)
         {
-            throw new NotImplementedException();
+            return _context.Test
+                .Include(a => a.User)
+                .Where(a => a.User.UserName == userName)
+                .Select(c => c.Name);        
         }
 
 
