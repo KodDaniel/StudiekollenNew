@@ -15,7 +15,7 @@ namespace StudiekollenNew.Controllers
         // Vi vill inte ska skapa en instans av databasklassen i varje metod, lös detta!
         //private readonly ApplicationDbContext _context;
 
-        public ActionResult NewTest()
+        public ViewResult NewTest()
         {
             var viewModel = new NewTestViewModel();
 
@@ -42,7 +42,7 @@ namespace StudiekollenNew.Controllers
          
         }
 
-        public ActionResult CreateTest()
+        public ViewResult CreateTest()
         {
             
             var viewModel = new CreateTestViewModel();
