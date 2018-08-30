@@ -109,7 +109,6 @@ namespace StudiekollenNew.Controllers
         }
                
 
-
         public ActionResult EditTest (string currentUsername)
         {
             var result = TempData["result"] as IEnumerable<Test>;
