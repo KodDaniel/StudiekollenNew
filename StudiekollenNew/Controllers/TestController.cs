@@ -88,8 +88,8 @@ namespace StudiekollenNew.Controllers
 
         public ActionResult SearchForTest()
         {
-            
-            return new EmptyResult();
+
+            return View();
         }
 
         [HttpPost]
