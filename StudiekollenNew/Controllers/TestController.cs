@@ -101,9 +101,8 @@ namespace StudiekollenNew.Controllers
         }
 
         [HttpPost]
-        public ActionResult SearchForTest(User user)
+        public ActionResult SearchForTest(string userName)
         {
-          
 
             return new EmptyResult();
         }
