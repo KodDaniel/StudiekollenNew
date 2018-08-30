@@ -79,56 +79,5 @@ namespace StudiekollenNew.Controllers
 
 
 
-//return RedirectToAction("CreateTest", new{setTestName = questionModel.Test.Name }); 
 
-
-
-////if(nameOfTest is null)
-////{
-////    viewModel.Name = "Hårdkodat provnamn";
-////}
-////else
-////{
-////    viewModel.Name = nameOfTest.Name;
-////}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//[HttpPost]
-//public ActionResult CreateTest(Question questionModel)
-//{
-//    var currentUserId = User.Identity.GetUserId();
-
-//    var _context = new ApplicationDbContext();
-
-//    // Substitut för Last-operator.
-//    var getTestId = _context.Test.OrderByDescending(c=>c.Id).First(c => c.UserId == currentUserId);
-
-//    questionModel.TestId = getTestId.Id;
-
-//    _context.Question.Add(questionModel);
-
-//    _context.SaveChanges();
-
-//    return RedirectToAction("CreateTest", "Test");
-//}
 
