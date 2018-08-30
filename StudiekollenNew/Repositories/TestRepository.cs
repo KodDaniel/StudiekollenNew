@@ -4,6 +4,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using StudiekollenNew.Models;
+using StudiekollenNew.ViewModels;
 using NetPipeStyleUriParser = System.NetPipeStyleUriParser;
 
 namespace StudiekollenNew.Repositories
@@ -46,13 +47,7 @@ namespace StudiekollenNew.Repositories
                 .First(c => c.UserId == currentUserId).Name;
         }
 
-        public IEnumerable<string> FindTest(string userName)
-        {
-            return _context.Test
-                .Include(a => a.User)
-                .Where(a => a.User.UserName == userName)
-                .Select(c => c.Name);        
-        }
+      
 
 
 

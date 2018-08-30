@@ -86,32 +86,18 @@ namespace StudiekollenNew.Controllers
             return RedirectToAction("CreateTest", new {testName = recentTestName});
         }
 
-        public ActionResult SearchForTest(FindTestViewModel allTests)
+        public ActionResult SearchForTest()
         {
-            if (allTests is null)
-            {
-                return View();
-            }
-            else
-            {
-                return View(allTests);
-            }
             
+            return new EmptyResult();
         }
 
         [HttpPost]
         public ActionResult SearchForTest(User user)
         {
-            var repoFactory = new RepositoryFactory();
-            var testService = new TestService(repoFactory);
-            var result = testService.FindTest(user.UserName);
-            var viewModel = new FindTestViewModel()
-            {
-                Username = user.UserName,
-                AllTests = result
-            };
-
-            return RedirectToAction("SearchForTest", new { allTests = viewModel.AllTests});
+            var sumbitedUsername = user.UserName;
+          
+               return new EmptyResult();
         }
 
 
@@ -124,3 +110,5 @@ namespace StudiekollenNew.Controllers
 
     }
 }
+
+
