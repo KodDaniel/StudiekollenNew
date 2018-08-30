@@ -87,14 +87,13 @@ namespace StudiekollenNew.Controllers
         }
 
         public ViewResult SearchForTest()
-        {
+        {      
             var repoFactory = new RepositoryFactory();
-            var testService = new TestService(repoFactory);
             var userService = new UserService(repoFactory);
             var allUsers = userService.All();
             var vievModel = new FindTestViewModel
             {
-                Users = allUsers,
+                Users = allUsers,             
             };
 
             return View(vievModel);
@@ -103,10 +102,11 @@ namespace StudiekollenNew.Controllers
         [HttpPost]
         public ActionResult SearchForTest(string userName)
         {
+            var choosenUserNameFromDropDown = userName;
 
-            return new EmptyResult();
+            return RedirectToAction("SearchForTest");
         }
-
+               
 
 
         public ViewResult EditTest()
