@@ -47,14 +47,22 @@ namespace StudiekollenNew.Repositories
                 .First(c => c.UserId == currentUserId).Name;
         }
 
-      
+        public IEnumerable<Test> GetTestsForThisUserName(string userName)
+        {
+            return _context.Test.
+                Include(a => a.User)
+                .Where(a => a.User.UserName == userName)
+                .ToList();
+        }
 
-
-
-
-
-
-        //TODO: Implement More Crud-OPERATIONS Here
+        //public IEnumerable<string> GetTestsForThisUserName(string userName)
+        //{
+        //return _context.Test.
+        //Include(a => a.User)
+        //.Where(a => a.User.UserName == userName)
+        //.Select(a => a.Name).ToList();
+        //}
 
     }
 }
+

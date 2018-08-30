@@ -102,15 +102,17 @@ namespace StudiekollenNew.Controllers
         [HttpPost]
         public ActionResult SearchForTest(string userName)
         {
-            var choosenUserNameFromDropDown = userName;
-
-            return RedirectToAction("SearchForTest");
+            var repoFactory = new RepositoryFactory();
+            var testService = new TestService(repoFactory);
+            var result = testService.GetTestsForThisUserName(userName);            
+            return new EmptyResult();
         }
                
 
 
         public ViewResult EditTest()
         {
+          
             return View();
 
         }
