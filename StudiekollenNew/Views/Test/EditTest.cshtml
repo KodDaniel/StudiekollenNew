@@ -5,3 +5,10 @@
 
 <h2>Redigera prov</h2>
 
+<ul>
+    <h3>Prov tillhörande @Model.Username</h3>
+    @foreach (var test in Model.AllTests)
+    {
+        <li>@test.Name</li>
+    }
+</ul>

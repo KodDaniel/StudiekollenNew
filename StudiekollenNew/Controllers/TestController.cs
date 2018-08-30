@@ -104,25 +104,31 @@ namespace StudiekollenNew.Controllers
         {
             var repoFactory = new RepositoryFactory();
             var testService = new TestService(repoFactory);
-            var result = testService.GetTestsForThisUserName(userName);            
-            return new EmptyResult();
+            TempData["result"] = testService.GetTestsForThisUserName(userName);            
+            return RedirectToAction("EditTest",new{currentUsername = userName});
         }
                
 
 
-        public ViewResult EditTest()
+        public ActionResult EditTest (string currentUsername)
         {
-          
-            return View();
+            var result = TempData["result"] as IEnumerable<Test>;
+            var viewmodel = new FindTestViewModel
+            {
+                AllTests = result,
+                Username = currentUsername                              
+            };
+
+            return View(viewmodel);
 
         }
 
-        [HttpPost]
-        public ActionResult EditTest(string placeholderVariabel)
-        {
-            return new EmptyResult();
+        //[HttpPost]
+        //public ActionResult EditTest(string placeholderVariabel)
+        //{
+        //    return new EmptyResult();
 
-        }
+        //}
 
     }
 }
