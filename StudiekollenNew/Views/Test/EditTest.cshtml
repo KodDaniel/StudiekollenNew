@@ -1,14 +1,8 @@
-﻿@model StudiekollenNew.ViewModels.FindTestViewModel
+﻿
 @{
     ViewBag.Title = "EditTest";
 }
 
 <h2>Redigera prov</h2>
 
-<ul>
-    <h3><strong>Prov tillhörande @Model.Username:</strong></h3>
-    @foreach (var test in Model.AllTests)
-    {
-        <li>@test.Name</li>
-    }
-</ul>
+

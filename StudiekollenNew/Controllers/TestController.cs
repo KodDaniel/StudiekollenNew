@@ -42,7 +42,7 @@ namespace StudiekollenNew.Controllers
                 var testService = new TestService(repoFactory);
                 testService.AddTest(testModel);
                 ContextSingelton.GetContext().SaveChanges();
-
+                // TempData is useful when you want to transfer non-sensitive data 
                 TempData["testModel"] = testModel;
 
                 return RedirectToAction("CreateTest");
@@ -104,30 +104,35 @@ namespace StudiekollenNew.Controllers
         {
             var repoFactory = new RepositoryFactory();
             var testService = new TestService(repoFactory);
+            // TempData is useful when you want to transfer non-sensitive data 
             TempData["result"] = testService.GetTestsForThisUserName(userName);            
-            return RedirectToAction("EditTest",new{currentUsername = userName});
+            return RedirectToAction("TempView", new{currentUsername = userName});
         }
-               
 
-        public ActionResult EditTest (string currentUsername)
+        //Temporär view. Vill ha testen i viewen "SerachForTest", men det kommer senare.
+        public ViewResult TempView(string currentUsername)
         {
             var result = TempData["result"] as IEnumerable<Test>;
             var viewmodel = new FindTestViewModel
             {
                 AllTests = result,
-                Username = currentUsername                              
+                Username = currentUsername
             };
 
             return View(viewmodel);
-
         }
 
-        //[HttpPost]
-        //public ActionResult EditTest(string placeholderVariabel)
-        //{
-        //    return new EmptyResult();
+        public ViewResult EditTest ()
+        {
+            return View();
+        }
 
-        //}
+        [HttpPost]
+        public ActionResult EditTest(string placeholderVariabel)
+        {
+            return new EmptyResult();
+
+        }
 
     }
 }
