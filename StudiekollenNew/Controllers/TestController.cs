@@ -88,16 +88,24 @@ namespace StudiekollenNew.Controllers
 
         public ViewResult SearchForTest()
         {
+            var repoFactory = new RepositoryFactory();
+            var testService = new TestService(repoFactory);
+            var userService = new UserService(repoFactory);
+            var allUsers = userService.All();
+            var vievModel = new FindTestViewModel
+            {
+                Users = allUsers,
+            };
 
-            return View();
+            return View(vievModel);
         }
 
         [HttpPost]
         public ActionResult SearchForTest(User user)
         {
-            var sumbitedUsername = user.UserName;
           
-               return new EmptyResult();
+
+            return new EmptyResult();
         }
 
 

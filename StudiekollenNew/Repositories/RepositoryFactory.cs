@@ -26,6 +26,10 @@ namespace StudiekollenNew.Repositories
             return new QuestionRepository(context);
         }
 
-        // TODO: Insert UserRepository och QuestionRepository
+        public UserRepository GetUserRepository()
+        {
+            return new UserRepository(context);
+        }
+
     }
 }
