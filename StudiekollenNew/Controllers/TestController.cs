@@ -127,7 +127,7 @@ namespace StudiekollenNew.Controllers
             return View();
         }
 
-        [HttpPost]
+        [HttpPost]  
         public ActionResult EditTest(string placeholderVariabel)
         {
             return new EmptyResult();
