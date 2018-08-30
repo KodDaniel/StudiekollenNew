@@ -18,7 +18,7 @@ namespace StudiekollenNew.Controllers
     {
 
       
-        public ActionResult NewTest()
+        public ViewResult NewTest()
         {
             var viewModel = new NewTestViewModel();
             return View(viewModel);
@@ -86,7 +86,7 @@ namespace StudiekollenNew.Controllers
             return RedirectToAction("CreateTest", new {testName = recentTestName});
         }
 
-        public ActionResult SearchForTest()
+        public ViewResult SearchForTest()
         {
 
             return View();
@@ -102,9 +102,16 @@ namespace StudiekollenNew.Controllers
 
 
 
-        public ActionResult EditTest()
+        public ViewResult EditTest()
         {
             return View();
+
+        }
+
+        [HttpPost]
+        public ActionResult EditTest(string placeholderVariabel)
+        {
+            return new EmptyResult();
 
         }
 
