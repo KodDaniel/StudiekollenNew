@@ -102,7 +102,7 @@ namespace StudiekollenNew.Controllers
         [HttpPost]
         public ActionResult SearchForTest(string userName)
         {
-            if (userName == "")
+            if (string.IsNullOrWhiteSpace(userName))
             {
 
                 return RedirectToAction("SearchForTest");
