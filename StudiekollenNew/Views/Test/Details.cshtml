@@ -1,0 +1,42 @@
+﻿@model StudiekollenNew.ViewModels.FindTestViewModel
+@{
+    ViewBag.Title = "Details";
+}
+
+    <h3>Prov tillhörande @Model.Username:</h3><br/>
+       
+    <table id="customers" class="table table-bordered table-hover">
+
+        <tr>
+            <th>Provnamn</th>
+            <th>Skapades</th>
+            <th>Ändrades senast</th>
+        </tr>
+       
+            @foreach (var test in Model.AllTests)
+            {
+        <tr>
+            <td>@test.Name</td>
+            <td>@test.CreateDate</td>
+
+            @if (test.ChangeDate is null)
+            {
+                <td>Har aldrig ändrats</td>
+            }
+            else
+            {
+                <td>@test.ChangeDate</td>
+            }
+
+        </tr>
+        }
+
+    </table>
+
+
+
+
+
+
+
+    

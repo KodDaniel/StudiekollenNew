@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.WebPages;
 using Microsoft.AspNet.Identity;
 using StudiekollenNew.DataBase;
 using StudiekollenNew.Models;
@@ -87,7 +88,8 @@ namespace StudiekollenNew.Controllers
         }
 
         public ViewResult SearchForTest()
-        {      
+        {
+       
             var repoFactory = new RepositoryFactory();
             var userService = new UserService(repoFactory);
             var allUsers = userService.All();
@@ -95,6 +97,7 @@ namespace StudiekollenNew.Controllers
             {
                 Users = allUsers,             
             };
+         
 
             return View(vievModel);
         }
@@ -102,15 +105,22 @@ namespace StudiekollenNew.Controllers
         [HttpPost]
         public ActionResult SearchForTest(string userName)
         {
-            var repoFactory = new RepositoryFactory();
-            var testService = new TestService(repoFactory);
-            // TempData is useful when you want to transfer non-sensitive data 
-            TempData["result"] = testService.GetTestsForThisUserName(userName);            
-            return RedirectToAction("TempView", new{currentUsername = userName});
+            if (userName == "")
+            {
+                return RedirectToAction("SearchForTest");
+            }
+            else
+            {
+                var repoFactory = new RepositoryFactory();
+                var testService = new TestService(repoFactory);
+                // TempData is useful when you want to transfer non-sensitive data 
+                TempData["result"] = testService.GetTestsForThisUserName(userName);
+                return RedirectToAction("Details", new {currentUsername = userName});
+            }
+           
         }
 
-        //Temporär view. Vill ha testen i viewen "SerachForTest", men det kommer senare.
-        public ViewResult TempView(string currentUsername)
+        public ViewResult Details(string currentUsername)
         {
             var result = TempData["result"] as IEnumerable<Test>;
             var viewmodel = new FindTestViewModel

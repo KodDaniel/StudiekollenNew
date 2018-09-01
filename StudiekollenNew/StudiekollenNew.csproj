@@ -310,7 +310,7 @@
     <Content Include="Views\Test\CreateTest.cshtml" />
     <Content Include="Views\Test\SearchForTest.cshtml" />
     <Content Include="Views\Test\EditTest.cshtml" />
-    <Content Include="Views\Test\TempView.cshtml" />
+    <Content Include="Views\Test\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
