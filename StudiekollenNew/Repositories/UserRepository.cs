@@ -16,11 +16,16 @@ namespace StudiekollenNew.Repositories
             _context = context;
         }
 
-
-        // Hämtar alla test i databasen
+        // Hämtar alla användare i databasen
         public IEnumerable<User> All()
         {
             return _context.Users.ToList();
+        }
+
+        // Get specific User
+        public User GetSingleUser(string id)
+        {
+            return _context.Users.SingleOrDefault(c => c.Id == id);
         }
     }
 }

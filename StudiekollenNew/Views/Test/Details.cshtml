@@ -16,12 +16,14 @@
             @foreach (var test in Model.AllTests)
             {
         <tr>
-            <td>@test.Name</td>
+
+            <td>@Html.ActionLink(test.Name, "EditTest", "Test", new { id = test.Id },null)</td>
+
             <td>@test.CreateDate</td>
 
             @if (test.ChangeDate is null)
             {
-                <td>Har aldrig ändrats</td>
+                <td>-----</td>
             }
             else
             {

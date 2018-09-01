@@ -107,6 +107,7 @@ namespace StudiekollenNew.Controllers
         {
             if (userName == "")
             {
+
                 return RedirectToAction("SearchForTest");
             }
             else
@@ -132,12 +133,16 @@ namespace StudiekollenNew.Controllers
             return View(viewmodel);
         }
 
-        public ViewResult EditTest ()
+
+        public ActionResult EditTest (int id)
         {
-            return View();
+            var repoFactory = new RepositoryFactory();
+            var testService = new TestService(repoFactory);
+            var test = testService.GetSingleTest(id).Name;
+            return Content(test);
         }
 
-        [HttpPost]  
+        [HttpPost]
         public ActionResult EditTest(string placeholderVariabel)
         {
             return new EmptyResult();

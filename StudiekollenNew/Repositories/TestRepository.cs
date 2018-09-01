@@ -55,13 +55,11 @@ namespace StudiekollenNew.Repositories
                 .ToList();
         }
 
-        //public IEnumerable<string> GetTestsForThisUserName(string userName)
-        //{
-        //return _context.Test.
-        //Include(a => a.User)
-        //.Where(a => a.User.UserName == userName)
-        //.Select(a => a.Name).ToList();
-        //}
+        public Test GetSingleTest(int id)
+        {
+            return _context.Test.SingleOrDefault(c => c.Id == id);
+        }
+
 
     }
 }

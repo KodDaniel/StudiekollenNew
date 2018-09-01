@@ -41,12 +41,10 @@ namespace StudiekollenNew.Services
             return _testRepository.GetTestsForThisUserName(userName);
         }
 
-        //public IEnumerable<string> GetTestsForThisUserName(string userName)
-        //{
-        //    return _testRepository.GetTestsForThisUserName(userName);
-        //}
-
-
+        public Test GetSingleTest(int id)
+        {
+           return _testRepository.GetSingleTest(id);
+        }
 
 
 

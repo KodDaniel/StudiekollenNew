@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
+using System.Web.UI.WebControls;
 
 namespace StudiekollenNew
 {
@@ -12,6 +13,13 @@ namespace StudiekollenNew
         public static void RegisterRoutes(RouteCollection routes)
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
+
+
+            //routes.MapRoute(
+            //    name: "EditTest",
+            //    url: "{controller}/{action}/{id}",
+            //    defaults: new { controller = "Test", action = "EditTest", id = I }
+            //);
 
             routes.MapRoute(
                 name: "Default",

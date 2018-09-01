@@ -20,5 +20,10 @@ namespace StudiekollenNew.Services
         {
             return _userRepository.All();
         }
+
+        public User GetUser(string id)
+        {
+            return _userRepository.GetSingleUser(id);
+        }
     }
 }
