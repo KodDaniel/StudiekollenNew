@@ -134,7 +134,7 @@ namespace StudiekollenNew.Controllers
         }
 
 
-        public ViewResult EditTest (int id)
+        public ViewResult HandleTest (int id)
         {
             var repoFactory = new RepositoryFactory();
             var testService = new TestService(repoFactory);
@@ -147,12 +147,10 @@ namespace StudiekollenNew.Controllers
         }
 
         [HttpPost]
-        public ActionResult EditTest()
+        public ActionResult HandleTest()
         {
-            
-
+           
             return new EmptyResult();
-
         }
 
         public ActionResult DeleteTest()

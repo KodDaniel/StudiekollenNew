@@ -15,11 +15,7 @@ namespace StudiekollenNew
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
 
-            //routes.MapRoute(
-            //    name: "EditTest",
-            //    url: "{controller}/{action}/{id}",
-            //    defaults: new { controller = "Test", action = "EditTest", id = I }
-            //);
+            
 
             routes.MapRoute(
                 name: "Default",
