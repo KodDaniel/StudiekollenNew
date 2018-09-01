@@ -46,6 +46,11 @@ namespace StudiekollenNew.Services
            return _testRepository.GetSingleTestByTestId(id);
         }
 
+        public void RemoveTest(Test testModel)
+        {
+            _testRepository.RemoveTest(testModel);
+        }
+
 
 
     }

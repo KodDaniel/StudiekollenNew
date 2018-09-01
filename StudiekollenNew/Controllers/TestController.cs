@@ -42,7 +42,6 @@ namespace StudiekollenNew.Controllers
                 var repoFactory = new RepositoryFactory();
                 var testService = new TestService(repoFactory);
                 testService.AddTest(testModel);
-                ContextSingelton.GetContext().SaveChanges();
                 // TempData is useful when you want to transfer non-sensitive data 
                 TempData["testModel"] = testModel;
 
@@ -82,8 +81,6 @@ namespace StudiekollenNew.Controllers
 
             var questionService = new QuestionService(repoFactory);
             questionService.AddQuestionsToTest(recentTestId,questionModel);
-            ContextSingelton.GetContext().SaveChanges();
-
             return RedirectToAction("CreateTest", new {testName = recentTestName});
         }
 
@@ -136,26 +133,28 @@ namespace StudiekollenNew.Controllers
 
         public ViewResult HandleTest (int id)
         {
+           
             var repoFactory = new RepositoryFactory();
             var testService = new TestService(repoFactory);
-            var testName = testService.GetSingleTestByTestId(id).Name;
-            var testModel = new DeleteTestViewModel()
+            var testModel = testService.GetSingleTestByTestId(id);
+            var deleteTestModel = new DeleteTestViewModel()
             {               
-                Name = testName
+                Name = testModel.Name
             };
-            return View(testModel);
+
+            TempData["testModel"] = testModel;
+
+            return View(deleteTestModel);
         }
 
-        [HttpPost]
-        public ActionResult HandleTest()
-        {
-           
-            return new EmptyResult();
-        }
-
+   
         public ActionResult DeleteTest()
         {
-            return new EmptyResult();
+            var repoFactory = new RepositoryFactory();
+            var testService = new TestService(repoFactory);
+            var testModel = TempData["testModel"] as Test;
+            testService.RemoveTest(testModel);
+            return RedirectToAction("Index","Home");
         }
 
     }

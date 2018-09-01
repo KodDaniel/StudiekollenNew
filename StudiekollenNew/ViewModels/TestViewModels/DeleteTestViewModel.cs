@@ -7,7 +7,6 @@ namespace StudiekollenNew.ViewModels
 {
     public class DeleteTestViewModel
     {
-        public int TestId { get; set; }
         public string Name { get; set; }
     }
 }

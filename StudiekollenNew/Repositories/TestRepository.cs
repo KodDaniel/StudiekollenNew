@@ -18,17 +18,15 @@ namespace StudiekollenNew.Repositories
             _context = context;
         }
 
-
-        // Hämtar alla test i databasen
         public IEnumerable<Test> GetAllTests()
         {
             return _context.Test.ToList();
         }
 
-        // Lägger till ett test i databasen. 
         public void AddTest(Test testModel)
         {
             _context.Test.Add(testModel);
+            _context.SaveChanges();
         }
 
         public int GetMostRecentTestId(string currentUserId)
@@ -58,6 +56,12 @@ namespace StudiekollenNew.Repositories
         public Test GetSingleTestByTestId(int id)
         {
             return _context.Test.SingleOrDefault(c => c.Id == id);
+        }
+
+        public void RemoveTest(Test testModel)
+        {
+            _context.Test.Remove(testModel);
+            _context.SaveChanges();
         }
 
 

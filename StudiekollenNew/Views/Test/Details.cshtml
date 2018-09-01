@@ -17,13 +17,13 @@
             {
         <tr>
 
-            <td>@Html.ActionLink(test.Name, "HandleTest", "Test", new { id = test.Id },null)</td>
+            <td>@Html.ActionLink(test.Name, "HandleTest", "Test", new { id = test.Id }, null)</td>
 
             <td>@test.CreateDate</td>
 
             @if (test.ChangeDate is null)
             {
-                <td>-----</td>
+                <td>Har aldrig ändrats</td>
             }
             else
             {

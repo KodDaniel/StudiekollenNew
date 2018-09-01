@@ -20,6 +20,7 @@ namespace StudiekollenNew.Repositories
         {
             questionModel.TestId = testId;
             _context.Question.Add(questionModel);
+            _context.SaveChanges();
         }
 
 
