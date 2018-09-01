@@ -52,11 +52,6 @@ namespace StudiekollenNew.Models
             modelBuilder.Entity<Question>().Property(t => t.Id).HasColumnName("QuestionId");
             modelBuilder.Entity<Question>().Property(t => t.Answer).IsOptional();
             modelBuilder.Entity<Question>().Property(t => t.Result).HasMaxLength(20).IsOptional();
-
-            modelBuilder.Entity<IdentityUserRole>().ToTable("UserRole");
-            modelBuilder.Entity<IdentityUserLogin>().ToTable("UserLogin");
-            modelBuilder.Entity<IdentityUserClaim>().ToTable("UserClaim").Property(p => p.Id).HasColumnName("UserClaimId");
-            modelBuilder.Entity<IdentityRole>().ToTable("Role").Property(p => p.Id).HasColumnName("RoleId");
             base.OnModelCreating(modelBuilder);
         }
 
