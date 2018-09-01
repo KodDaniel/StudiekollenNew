@@ -1,27 +1,31 @@
-﻿
+﻿@model StudiekollenNew.ViewModels.DeleteTestViewModel
+
 @{
     ViewBag.Title = "EditTest";
 }
 
-<h2>Redigera prov</h2>
+<h2>Hantera prov</h2>
 
+@using (Html.BeginForm("DeleteTest", "Test"))
+{
+    @Html.AntiForgeryToken()
 
+    <div class="form-horizontal">
+        <hr />      
+        <div class="form-group">
+            <div class="col-md-10"> 
+                <input type="submit" value="Radera @Model.Name" class="btn btn-default btn-block"/>
+            </div>
+        </div>
+    </div>
 
+}
 
-
-
-
-
-
-
-
-
-@*<@*h3>Se Moshs video "Edit Form" för detta. Arbeta framåt utifrån det.</h3>
+<h3>Du ska kunna:</h3>
 <ul>
-    <li>Ta bort prov</li>
+    <li>Ändra provnamn</li>
     <li>Ta bort frågor</li>
     <li>Lägga till frågor</li>
-    <li>Ändra provnamn</li>
-</ul>*@
+</ul>
 
 

@@ -92,7 +92,7 @@ namespace StudiekollenNew.Controllers
        
             var repoFactory = new RepositoryFactory();
             var userService = new UserService(repoFactory);
-            var allUsers = userService.All();
+            var allUsers = userService.GetAllUsers();
             var vievModel = new FindTestViewModel
             {
                 Users = allUsers,             
@@ -134,19 +134,30 @@ namespace StudiekollenNew.Controllers
         }
 
 
-        public ActionResult EditTest (int id)
+        public ViewResult EditTest (int id)
         {
             var repoFactory = new RepositoryFactory();
             var testService = new TestService(repoFactory);
-            var test = testService.GetSingleTest(id).Name;
-            return Content(test);
+            var testName = testService.GetSingleTestByTestId(id).Name;
+            var testModel = new DeleteTestViewModel()
+            {               
+                Name = testName
+            };
+            return View(testModel);
         }
 
         [HttpPost]
-        public ActionResult EditTest(string placeholderVariabel)
+        public ActionResult EditTest()
         {
+            
+
             return new EmptyResult();
 
+        }
+
+        public ActionResult DeleteTest()
+        {
+            return new EmptyResult();
         }
 
     }

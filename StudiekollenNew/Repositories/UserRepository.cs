@@ -17,13 +17,13 @@ namespace StudiekollenNew.Repositories
         }
 
         // Hämtar alla användare i databasen
-        public IEnumerable<User> All()
+        public IEnumerable<User> GetAllUsers()
         {
             return _context.Users.ToList();
         }
 
         // Get specific User
-        public User GetSingleUser(string id)
+        public User GetSingleUserByUserId(string id)
         {
             return _context.Users.SingleOrDefault(c => c.Id == id);
         }

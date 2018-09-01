@@ -16,14 +16,14 @@ namespace StudiekollenNew.Services
             _userRepository = repoFactory.GetUserRepository();
         }
 
-        public IEnumerable<User> All()
+        public IEnumerable<User> GetAllUsers()
         {
-            return _userRepository.All();
+            return _userRepository.GetAllUsers();
         }
 
-        public User GetUser(string id)
+        public User GetSingleUserByUserId(string id)
         {
-            return _userRepository.GetSingleUser(id);
+            return _userRepository.GetSingleUserByUserId(id);
         }
     }
 }

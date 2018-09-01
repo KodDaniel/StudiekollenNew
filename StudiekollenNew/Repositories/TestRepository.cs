@@ -20,7 +20,7 @@ namespace StudiekollenNew.Repositories
 
 
         // Hämtar alla test i databasen
-        public IEnumerable<Test> All()
+        public IEnumerable<Test> GetAllTests()
         {
             return _context.Test.ToList();
         }
@@ -55,7 +55,7 @@ namespace StudiekollenNew.Repositories
                 .ToList();
         }
 
-        public Test GetSingleTest(int id)
+        public Test GetSingleTestByTestId(int id)
         {
             return _context.Test.SingleOrDefault(c => c.Id == id);
         }

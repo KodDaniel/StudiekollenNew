@@ -12,8 +12,6 @@ namespace StudiekollenNew.ViewModels
         public string Username{ get; set; }
         public IEnumerable<Test> AllTests { get; set; }
 
-        //public IEnumerable<string> Type { get; set; }
-
     }
 
 }

@@ -16,9 +16,9 @@ namespace StudiekollenNew.Services
             _testRepository = repoFactory.GetTestRepository();
         }
 
-        public IEnumerable<Test> All()
+        public IEnumerable<Test> GetAllTests()
         {
-            return _testRepository.All();
+            return _testRepository.GetAllTests();
         }
 
         public void AddTest(Test testModel)
@@ -41,9 +41,9 @@ namespace StudiekollenNew.Services
             return _testRepository.GetTestsForThisUserName(userName);
         }
 
-        public Test GetSingleTest(int id)
+        public Test GetSingleTestByTestId(int id)
         {
-           return _testRepository.GetSingleTest(id);
+           return _testRepository.GetSingleTestByTestId(id);
         }
 
 
