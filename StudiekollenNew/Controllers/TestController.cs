@@ -132,8 +132,7 @@ namespace StudiekollenNew.Controllers
 
 
         public ViewResult HandleTest (int id)
-        {
-           
+        {           
             var repoFactory = new RepositoryFactory();
             var testService = new TestService(repoFactory);
             var testModel = testService.GetSingleTestByTestId(id);
@@ -155,6 +154,12 @@ namespace StudiekollenNew.Controllers
             var testModel = TempData["testModel"] as Test;
             testService.RemoveTest(testModel);
             return RedirectToAction("Index","Home");
+        }
+
+        public ActionResult EditTest()
+        {
+            return Content("Ändra provnamn, Ta bort frågor, Lägga till frågor");
+
         }
 
     }

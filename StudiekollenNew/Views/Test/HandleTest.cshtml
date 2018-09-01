@@ -11,24 +11,37 @@
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <hr />      
+        <hr />
         <div class="form-group">
-            <div class="col-md-10"> 
-                <input type="submit" value="Radera @Model.Name" class="btn btn-default btn-block"/>
+            <div class="col-md-10">
+                <input type="submit" value="Radera @Model.Name" class="btn btn-default btn-block" />
             </div>
         </div>
     </div>
+}
 
+@using (Html.BeginForm("EditTest", "Test"))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <div class="form-group">
+            <div class="col-md-10">
+                <input type="submit" value="Redigera @Model.Name" class="btn btn-default btn-block" />
+            </div>
+        </div>
+    </div>
 }
 
 
 
 
+
 @*<@*h3>Du ska kunna:</h3>
-<ul>
-    <li>Ändra provnamn</li>
-    <li>Ta bort frågor</li>
-    <li>Lägga till frågor</li>
-</ul>*@
+    <ul>
+        <li>Ändra provnamn</li>
+        <li>Ta bort frågor</li>
+        <li>Lägga till frågor</li>
+    </ul>*@
 
 
