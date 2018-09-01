@@ -158,8 +158,7 @@ namespace StudiekollenNew.Controllers
 
         public ActionResult EditTest()
         {
-            return Content("Ändra provnamn, Ta bort frågor, Lägga till frågor");
-
+            return View();
         }
 
     }
