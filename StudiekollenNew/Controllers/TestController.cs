@@ -15,25 +15,23 @@ using StudiekollenNew.ViewModels.TestViewModels;
 
 namespace StudiekollenNew.Controllers
 {
-  
+
     public class TestController : Controller
     {
-     
         public ViewResult NewTest()
         {
             var viewModel = new NewTestViewModel();
             return View(viewModel);
-
         }
 
         [HttpPost]
         public ActionResult NewTest(Test testModel)
         {
-            var viewModel = new NewTestViewModel();         
+            var viewModel = new NewTestViewModel();
             testModel.UserId = User.Identity.GetUserId();
 
             if (!ModelState.IsValid)
-            {             
+            {
                 return View(viewModel);
             }
             else
@@ -42,13 +40,11 @@ namespace StudiekollenNew.Controllers
                 var repoFactory = new RepositoryFactory();
                 var testService = new TestService(repoFactory);
                 testService.AddTest(testModel);
-                // TempData is useful when you want to transfer non-sensitive data 
                 TempData["testModel"] = testModel;
 
                 return RedirectToAction("CreateTest");
             }
-          
-        }
+       }
 
         public ActionResult CreateTest(string testName)
         {
@@ -61,9 +57,9 @@ namespace StudiekollenNew.Controllers
             }
             else
             {
-                viewModel.Name = testModel.Name; 
+                viewModel.Name = testModel.Name;
             }
-              
+
             return View(viewModel);
 
         }
@@ -77,22 +73,22 @@ namespace StudiekollenNew.Controllers
             var recentTestId = testService.GetMostRecentTestId(currentUserId);
             var recentTestName = testService.GetMostRecentTestName(currentUserId);
             var questionService = new QuestionService(repoFactory);
-            questionService.AddQuestionsToTest(recentTestId,questionModel);
+            questionService.AddQuestionsToTest(recentTestId, questionModel);
 
             return RedirectToAction("CreateTest", new {testName = recentTestName});
         }
 
         public ViewResult SearchForTest()
         {
-       
+
             var repoFactory = new RepositoryFactory();
             var userService = new UserService(repoFactory);
             var allUsers = userService.GetAllUsers();
             var vievModel = new FindTestViewModel
             {
-                Users = allUsers,             
+                Users = allUsers,
             };
-         
+
             return View(vievModel);
         }
 
@@ -112,7 +108,7 @@ namespace StudiekollenNew.Controllers
 
                 return RedirectToAction("Details", new {currentUsername = userName});
             }
-           
+
         }
 
         public ViewResult Details(string currentUsername)
@@ -134,43 +130,33 @@ namespace StudiekollenNew.Controllers
             var testService = new TestService(repoFactory);
             var testModel = testService.GetSingleTestByTestId(id);
             var userService = new UserService(repoFactory);
-            var userName =  userService.GetSingleUserByUserId(User.Identity.GetUserId()).UserName;
+            var userName = userService.GetSingleUserByUserId(User.Identity.GetUserId()).UserName;
             testService.RemoveTest(testModel);
             TempData["result"] = testService.GetTestsForThisUserName(userName);
 
             return RedirectToAction("Details", new {currentUsername = userName});
         }
 
-        public ActionResult EditTest(int id)
+        public ViewResult EditTest(int id)
         {
             var repoFactory = new RepositoryFactory();
             var questionService = new QuestionService(repoFactory);
             var testService = new TestService(repoFactory);
             var testName = testService.GetSingleTestByTestId(id).Name;
             var questionModels = questionService.AllQuestionsModelsByTestId(id);
-            var toDictionary = ViewModels.TestViewModels.EditTestViewModel.ToDictionary(questionModels);
 
             var viewModel = new EditTestViewModel
             {
                 TestName = testName,
-                QuestionsModels = toDictionary
+                QuestionsModels = questionModels
             };
-
-            TempData["dictionary"] = toDictionary;
-
 
             return View(viewModel);
         }
 
-        public ActionResult DeleteQuestion( string key)
-        {
-            var toDictionary = TempData["dictionary"] as Dictionary<string, string>;
-            var repoFactory = new RepositoryFactory();
-            var questionService = new QuestionService(repoFactory);
-            questionService.RemoveQuestionFromTest(toDictionary, key);
-            return RedirectToAction("Index", "Home");
-        }
+        
     }
 }
+
 
 

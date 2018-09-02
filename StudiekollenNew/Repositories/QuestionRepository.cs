@@ -25,10 +25,12 @@ namespace StudiekollenNew.Repositories
             _context.SaveChanges();
         }
 
-        public void RemoveQuestionFromTest(Dictionary<string, string> dictionary, string key)
+        public void RemoveQuestionFromTest(int id)
         {
-            dictionary.Remove(key);
+            var questionModel = _context.Question.Single(a => a.Id == id);
+            _context.Question.Remove(questionModel);
             _context.SaveChanges();
+
 
         }
 

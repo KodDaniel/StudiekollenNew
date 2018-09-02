@@ -10,7 +10,14 @@ namespace StudiekollenNew.Controllers
 {
     public class QuestionController : Controller
     {
-        
-       
+        public ActionResult DeleteQuestion(int questionId,int testId)
+        {
+            var repoFactory = new RepositoryFactory();
+            var questionService = new QuestionService(repoFactory);
+            questionService.RemoveQuestionFromTest(questionId);
+
+            return RedirectToAction("EditTest", "Test", new {id = testId});
+        }
     }
+
 }
