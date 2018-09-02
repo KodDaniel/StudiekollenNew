@@ -17,8 +17,7 @@ namespace StudiekollenNew.Controllers
   
     public class TestController : Controller
     {
-
-      
+     
         public ViewResult NewTest()
         {
             var viewModel = new NewTestViewModel();
@@ -132,29 +131,32 @@ namespace StudiekollenNew.Controllers
         }
 
 
-        public ViewResult HandleTest (int id)
-        {           
-            var repoFactory = new RepositoryFactory();
-            var testService = new TestService(repoFactory);
-            var testModel = testService.GetSingleTestByTestId(id);
-            var deleteTestModel = new DeleteTestViewModel()
-            {               
-                Name = testModel.Name
-            };
+        //public ViewResult HandleTest (int id)
+        //{           
+        //    var repoFactory = new RepositoryFactory();
+        //    var testService = new TestService(repoFactory);
+        //    var testModel = testService.GetSingleTestByTestId(id);
+        //    var deleteTestModel = new DeleteTestViewModel()
+        //    {               
+        //        Name = testModel.Name
+        //    };
 
-            TempData["testModel"] = testModel;
+            
 
-            return View(deleteTestModel);
-        }
+        //    return View(deleteTestModel);
+        //}
 
    
-        public ActionResult DeleteTest()
+        public ActionResult DeleteTest(int id)
         {
             var repoFactory = new RepositoryFactory();
             var testService = new TestService(repoFactory);
-            var testModel = TempData["testModel"] as Test;
+            var testModel = testService.GetSingleTestByTestId(id);
+            var userService = new UserService(repoFactory);
+            var userName =  userService.GetSingleUserByUserId(User.Identity.GetUserId()).UserName;
             testService.RemoveTest(testModel);
-            return RedirectToAction("Index","Home");
+            TempData["result"] = testService.GetTestsForThisUserName(userName);
+            return RedirectToAction("Details", new {currentUsername = userName});
         }
 
         public ActionResult EditTest()

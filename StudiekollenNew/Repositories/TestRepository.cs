@@ -29,7 +29,13 @@ namespace StudiekollenNew.Repositories
             _context.SaveChanges();
         }
 
-        public int GetMostRecentTestId(string currentUserId)
+        public void RemoveTest(Test testModel)
+        {
+            _context.Test.Remove(testModel);
+            _context.SaveChanges();
+        }
+
+        public int GetMostRecentTestIdFromThisUser(string currentUserId)
         {
             // Substitut för Last-operator. Tänk på att du ej behöver EagerLoda med "Include" eftersom som du ju här rör dig i en och samma tabell.
             return _context.Test
@@ -37,7 +43,7 @@ namespace StudiekollenNew.Repositories
                 .First(c => c.UserId == currentUserId).Id;
         }
 
-        public string GetMostRecentTestName(string currentUserId)
+        public string GetMostRecentTestNameFromThisUser(string currentUserId)
         {
             // Substitut för Last-operator. Tänk på att du ej behöver EagerLoda med "Include" eftersom som du ju här rör dig i en och samma tabell.
             return _context.Test
@@ -45,7 +51,7 @@ namespace StudiekollenNew.Repositories
                 .First(c => c.UserId == currentUserId).Name;
         }
 
-        public IEnumerable<Test> GetTestsForThisUserName(string userName)
+        public IEnumerable<Test> GetAllTestsForThisUserName(string userName)
         {
             return _context.Test.
                 Include(a => a.User)
@@ -58,11 +64,7 @@ namespace StudiekollenNew.Repositories
             return _context.Test.SingleOrDefault(c => c.Id == id);
         }
 
-        public void RemoveTest(Test testModel)
-        {
-            _context.Test.Remove(testModel);
-            _context.SaveChanges();
-        }
+       
 
 
     }

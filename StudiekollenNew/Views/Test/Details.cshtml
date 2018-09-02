@@ -11,12 +11,13 @@
             <th>Provnamn</th>
             <th>Skapades</th>
             <th>Ändrades senast</th>
+            <th></th>
         </tr>
        
             @foreach (var test in Model.AllTests)
             {
                 <tr>                 
-                    <td>@Html.ActionLink(test.Name, "HandleTest", "Test", new {id = test.Id}, null)</td>
+                    <td>@Html.ActionLink(test.Name, "EditTest", "Test", new {id = test.Id}, null)</td>
 
                     <td>@test.CreateDate</td>
 
@@ -28,6 +29,8 @@
                     {
                         <td>@test.ChangeDate</td>
                     }
+                    <td>@Html.ActionLink("Radera prov", "DeleteTest", "Test", new {id = test.Id}, null)</td>
+
 
                 </tr>
         }

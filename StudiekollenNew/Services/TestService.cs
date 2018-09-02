@@ -28,17 +28,17 @@ namespace StudiekollenNew.Services
 
         public int GetMostRecentTestId(string currentUserId)
         {
-            return _testRepository.GetMostRecentTestId(currentUserId);
+            return _testRepository.GetMostRecentTestIdFromThisUser(currentUserId);
         }
 
         public string GetMostRecentTestName(string currentUserId)
         {
-            return _testRepository.GetMostRecentTestName(currentUserId);
+            return _testRepository.GetMostRecentTestNameFromThisUser(currentUserId);
         }
 
         public IEnumerable<Test> GetTestsForThisUserName(string userName)
         {
-            return _testRepository.GetTestsForThisUserName(userName);
+            return _testRepository.GetAllTestsForThisUserName(userName);
         }
 
         public Test GetSingleTestByTestId(int id)
