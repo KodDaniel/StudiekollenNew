@@ -11,6 +11,7 @@ using StudiekollenNew.Models;
 using StudiekollenNew.Repositories;
 using StudiekollenNew.Services;
 using StudiekollenNew.ViewModels;
+using StudiekollenNew.ViewModels.TestViewModels;
 
 namespace StudiekollenNew.Controllers
 {
@@ -51,7 +52,6 @@ namespace StudiekollenNew.Controllers
 
         public ActionResult CreateTest(string testName)
         {
-
             var viewModel = new CreateTestViewModel();
             var testModel = TempData["testModel"] as Test;
 
@@ -72,14 +72,13 @@ namespace StudiekollenNew.Controllers
         public ActionResult CreateTest(Question questionModel)
         {
             var currentUserId = User.Identity.GetUserId();
-
             var repoFactory = new RepositoryFactory();
             var testService = new TestService(repoFactory);
             var recentTestId = testService.GetMostRecentTestId(currentUserId);
             var recentTestName = testService.GetMostRecentTestName(currentUserId);
-
             var questionService = new QuestionService(repoFactory);
             questionService.AddQuestionsToTest(recentTestId,questionModel);
+
             return RedirectToAction("CreateTest", new {testName = recentTestName});
         }
 
@@ -94,7 +93,6 @@ namespace StudiekollenNew.Controllers
                 Users = allUsers,             
             };
          
-
             return View(vievModel);
         }
 
@@ -104,15 +102,14 @@ namespace StudiekollenNew.Controllers
             // Inget fel på if-satsen, men: sidan laddar om till skillnad från om du använder "Modelstate.Isvalid". Kan vara värt att byta till det med andra ord.
             if (string.IsNullOrWhiteSpace(userName))
             {
-
                 return RedirectToAction("SearchForTest");
             }
             else
             {
                 var repoFactory = new RepositoryFactory();
                 var testService = new TestService(repoFactory);
-                // TempData is useful when you want to transfer non-sensitive data 
                 TempData["result"] = testService.GetTestsForThisUserName(userName);
+
                 return RedirectToAction("Details", new {currentUsername = userName});
             }
            
@@ -131,22 +128,6 @@ namespace StudiekollenNew.Controllers
         }
 
 
-        //public ViewResult HandleTest (int id)
-        //{           
-        //    var repoFactory = new RepositoryFactory();
-        //    var testService = new TestService(repoFactory);
-        //    var testModel = testService.GetSingleTestByTestId(id);
-        //    var deleteTestModel = new DeleteTestViewModel()
-        //    {               
-        //        Name = testModel.Name
-        //    };
-
-            
-
-        //    return View(deleteTestModel);
-        //}
-
-   
         public ActionResult DeleteTest(int id)
         {
             var repoFactory = new RepositoryFactory();
@@ -156,12 +137,26 @@ namespace StudiekollenNew.Controllers
             var userName =  userService.GetSingleUserByUserId(User.Identity.GetUserId()).UserName;
             testService.RemoveTest(testModel);
             TempData["result"] = testService.GetTestsForThisUserName(userName);
+
             return RedirectToAction("Details", new {currentUsername = userName});
         }
 
-        public ActionResult EditTest()
+        public ActionResult EditTest(int id)
         {
-            return View();
+            var repoFactory = new RepositoryFactory();
+            var questionService = new QuestionService(repoFactory);
+            var testService = new TestService(repoFactory);
+            var testName = testService.GetSingleTestByTestId(id).Name;
+            var questionModels = questionService.AllQuestionsModelsByTestId(id);
+            var toDictionary = ViewModels.TestViewModels.EditTestViewModel.ToDictionary(questionModels);
+
+            var viewModel = new EditTestViewModel
+            {
+                TestName = testName,
+                QuestionsModels = toDictionary
+            };
+
+            return View(viewModel);
         }
 
     }

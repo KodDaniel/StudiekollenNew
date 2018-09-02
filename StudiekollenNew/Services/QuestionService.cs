@@ -21,5 +21,16 @@ namespace StudiekollenNew.Services
         {
             _questionRepository.AddQuestionsToTest(testId,questionModel);
         }
+
+        public List<Question> AllQuestionsModelsByTestId (int id)
+        {
+            return _questionRepository.AllQuestionModelsByTestId(id);
+        }
+        public void RemoveQuestionFromTest(Question questionModel)
+        {
+            _questionRepository.RemoveQuestionFromTest(questionModel);
+        }
+
+
     }
 }

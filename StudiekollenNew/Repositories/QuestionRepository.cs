@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using StudiekollenNew.Models;
-
+using StudiekollenNew.ViewModels;
+using NetPipeStyleUriParser = System.NetPipeStyleUriParser;
 namespace StudiekollenNew.Repositories
 {
     public class QuestionRepository
@@ -23,6 +25,18 @@ namespace StudiekollenNew.Repositories
             _context.SaveChanges();
         }
 
+        public void RemoveQuestionFromTest(Question questionModel)
+        {
+            _context.Question.Remove(questionModel);
+            _context.SaveChanges();
+        }
+
+
+        public List<Question> AllQuestionModelsByTestId(int id)
+        {
+            return _context.Question.Include(a => a.Test)
+                .Where(a => a.TestId == id).ToList();
+        }
 
     }
 }

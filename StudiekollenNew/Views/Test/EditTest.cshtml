@@ -1,14 +1,29 @@
-﻿
+﻿@model StudiekollenNew.ViewModels.TestViewModels.EditTestViewModel
 @{
     ViewBag.Title = "EditTest";
 }
 
-<h2>EditTest</h2>
+<h2>Redigera test</h2>
+
+<h2>@Model.TestName</h2>
 
 
-<h3>Detta ska implementeras med en <strong>Profesionell design</strong></h3>
-    <ul>
-        <li>Ändra provnamn</li>
-        <li>Ta bort frågor</li>
-        <li>Lägga till frågor</li>
-    </ul>
+<table id="customers" class="table table-bordered table-hover">
+
+    <tr>
+        <th>Fråga</th>
+        <th>Svar</th>
+        @*<th></th>*@
+    </tr>
+       
+    @foreach (var item in Model.QuestionsModels)
+    {
+        <tr>                 
+            <td>@item.Key</td>
+            <td>@item.Value</td>
+          
+            @*<td>@Html.ActionLink("Radera prov", "DeleteTest", "Test", new {id = test.Id}, null)</td>*@
+        </tr>
+    }
+
+</table>
