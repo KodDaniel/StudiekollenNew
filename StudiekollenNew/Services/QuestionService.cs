@@ -22,14 +22,17 @@ namespace StudiekollenNew.Services
             _questionRepository.AddQuestionsToTest(testId,questionModel);
         }
 
+        public void RemoveQuestionFromTest(Dictionary<string, string> dictionary, string key)
+        {
+            _questionRepository.RemoveQuestionFromTest(dictionary,key);
+        }
+
+
         public List<Question> AllQuestionsModelsByTestId (int id)
         {
             return _questionRepository.AllQuestionModelsByTestId(id);
         }
-        public void RemoveQuestionFromTest(Question questionModel)
-        {
-            _questionRepository.RemoveQuestionFromTest(questionModel);
-        }
+       
 
 
     }

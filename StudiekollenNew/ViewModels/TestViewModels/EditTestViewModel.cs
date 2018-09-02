@@ -13,14 +13,14 @@ namespace StudiekollenNew.ViewModels.TestViewModels
 
         public static Dictionary<string, string> ToDictionary(List<Question> questionModelsList)
         {
-            var newDictionary = new Dictionary<string, string>();
+            var dictionary = new Dictionary<string, string>();
 
             foreach (var item in questionModelsList)
             {
-                newDictionary.Add(item.Query,item.Answer);
+                dictionary.Add(item.Query,item.Answer);
             }
 
-            return newDictionary;
+            return dictionary;
         }
     
 

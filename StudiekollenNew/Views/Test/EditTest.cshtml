@@ -13,16 +13,15 @@
     <tr>
         <th>Fråga</th>
         <th>Svar</th>
-        @*<th></th>*@
+        <th></th>
     </tr>
        
     @foreach (var item in Model.QuestionsModels)
     {
         <tr>                 
             <td>@item.Key</td>
-            <td>@item.Value</td>
-          
-            @*<td>@Html.ActionLink("Radera prov", "DeleteTest", "Test", new {id = test.Id}, null)</td>*@
+            <td>@item.Value</td>         
+            <td>@Html.ActionLink("Radera fråga", "DeleteQuestion", "Test", new {key = item.Key}, null)</td>
         </tr>
     }
 

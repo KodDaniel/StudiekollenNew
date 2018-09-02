@@ -156,9 +156,20 @@ namespace StudiekollenNew.Controllers
                 QuestionsModels = toDictionary
             };
 
+            TempData["dictionary"] = toDictionary;
+
+
             return View(viewModel);
         }
 
+        public ActionResult DeleteQuestion( string key)
+        {
+            var toDictionary = TempData["dictionary"] as Dictionary<string, string>;
+            var repoFactory = new RepositoryFactory();
+            var questionService = new QuestionService(repoFactory);
+            questionService.RemoveQuestionFromTest(toDictionary, key);
+            return RedirectToAction("Index", "Home");
+        }
     }
 }
 
