@@ -104,7 +104,7 @@ namespace StudiekollenNew.Controllers
             {
                 var repoFactory = new RepositoryFactory();
                 var testService = new TestService(repoFactory);
-                TempData["result"] = testService.GetTestsForThisUserName(userName);
+                TempData["result"] = testService.GetAllTestsForThisUserName(userName);
 
                 return RedirectToAction("Details", new {currentUsername = userName});
             }
@@ -113,16 +113,16 @@ namespace StudiekollenNew.Controllers
 
         public ViewResult Details(string currentUsername)
         {
-            var result = TempData["result"] as IEnumerable<Test>;
+            var result = TempData["result"] as IEnumerable<Test>;           
             var viewmodel = new FindTestViewModel
             {
                 AllTests = result,
-                Username = currentUsername
+                Username = currentUsername,
+                
             };
 
             return View(viewmodel);
         }
-
 
         public ActionResult DeleteTest(int id)
         {
@@ -130,9 +130,9 @@ namespace StudiekollenNew.Controllers
             var testService = new TestService(repoFactory);
             var testModel = testService.GetSingleTestByTestId(id);
             var userService = new UserService(repoFactory);
-            var userName = userService.GetSingleUserByUserId(User.Identity.GetUserId()).UserName;
+            var userName = userService.GetUserByUserId(User.Identity.GetUserId()).UserName;
             testService.RemoveTest(testModel);
-            TempData["result"] = testService.GetTestsForThisUserName(userName);
+            TempData["result"] = testService.GetAllTestsForThisUserName(userName);
 
             return RedirectToAction("Details", new {currentUsername = userName});
         }

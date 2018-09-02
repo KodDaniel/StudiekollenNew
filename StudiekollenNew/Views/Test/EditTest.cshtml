@@ -14,14 +14,17 @@
         <th>Fråga</th>
         <th>Svar</th>
         <th></th>
+        <th></th>
     </tr>
        
     @foreach (var item in Model.QuestionsModels)
     {
         <tr>                 
             <td>@item.Query</td>
-            <td>@item.Answer</td>         
+            <td>@item.Answer</td> 
+            <td>@Html.ActionLink("Redigera fråga", "EditQuestion", "Question", new {}, null)
             <td>@Html.ActionLink("Radera fråga", "DeleteQuestion", "Question", new {questionId = item.Id, testId = item.TestId}, null)</td>
+
         </tr>
     }
 

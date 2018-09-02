@@ -25,7 +25,7 @@ namespace StudiekollenNew.Repositories
         // Get specific User
         public User GetSingleUserByUserId(string id)
         {
-            return _context.Users.SingleOrDefault(c => c.Id == id);
+            return _context.Users.Find(id);
         }
 
        

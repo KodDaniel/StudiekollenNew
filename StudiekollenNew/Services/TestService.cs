@@ -36,7 +36,7 @@ namespace StudiekollenNew.Services
             return _testRepository.GetMostRecentTestNameFromThisUser(currentUserId);
         }
 
-        public IEnumerable<Test> GetTestsForThisUserName(string userName)
+        public IEnumerable<Test> GetAllTestsForThisUserName(string userName)
         {
             return _testRepository.GetAllTestsForThisUserName(userName);
         }

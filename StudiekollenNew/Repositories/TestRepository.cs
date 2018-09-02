@@ -54,8 +54,8 @@ namespace StudiekollenNew.Repositories
         public IEnumerable<Test> GetAllTestsForThisUserName(string userName)
         {
             return _context.Test.
-                Include(a => a.User)
-                .Where(a => a.User.UserName == userName)
+                Include(a => a.User).Include(a=>a.Questions)
+                .Where(a => a.User.UserName == userName).OrderByDescending(c=>c.CreateDate).ThenByDescending(c=>c.ChangeDate)
                 .ToList();
         }
 

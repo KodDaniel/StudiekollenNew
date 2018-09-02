@@ -32,7 +32,14 @@ namespace StudiekollenNew.Services
         {
             return _questionRepository.AllQuestionModelsByTestId(id);
         }
-       
+
+        //public int GetNumberOfQuestionsOfaTestByTestId(int id)
+        //{
+        //   return _questionRepository.GetNumberOfQuestionsOfaTestByTestId(id);
+        //}
+
+
+
 
 
     }

@@ -9,6 +9,7 @@
 
         <tr>
             <th>Provnamn</th>
+            @*<th>Antal frågor</th>*@
             <th>Skapades</th>
             <th>Ändrades senast</th>
             <th></th>
@@ -18,7 +19,7 @@
             {
                 <tr>                 
                     <td>@Html.ActionLink(test.Name, "EditTest", "Test", new {id = test.Id}, null)</td>
-
+                    
                     <td>@test.CreateDate</td>
 
                     @if (test.ChangeDate is null)

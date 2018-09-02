@@ -18,6 +18,11 @@ namespace StudiekollenNew.Controllers
 
             return RedirectToAction("EditTest", "Test", new {id = testId});
         }
+
+        public ActionResult EditQuestion()
+        {
+            return new EmptyResult();
+        }
     }
 
 }

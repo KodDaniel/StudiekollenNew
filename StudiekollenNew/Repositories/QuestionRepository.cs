@@ -37,8 +37,13 @@ namespace StudiekollenNew.Repositories
         public List<Question> AllQuestionModelsByTestId(int id)
         {
             return _context.Question.Include(a => a.Test)
-                .Where(a => a.TestId == id).ToList();
+                .Where(a => a.TestId == id).OrderByDescending(c=>c.Id).ToList();
         }
+
+        //public int GetNumberOfQuestionsOfaTestByTestId(int id)
+        //{
+        //    return _context.Question.Where(a => a.TestId == id).Select(a => a.Id).Count();
+        //}
 
     }
 }
