@@ -3,7 +3,7 @@
     ViewBag.Title = "EditTest";
 }
 
-<h2>Redigera test</h2>
+@*<h2>Redigera test</h2>*@
 
 <h2>@Model.TestName</h2>
 
@@ -22,7 +22,7 @@
         <tr>                 
             <td>@item.Query</td>
             <td>@item.Answer</td> 
-            <td>@Html.ActionLink("Redigera fråga", "EditQuestion", "Question", new {questionId = item.Id,testName = item.Test.Name,testId = item.TestId}, null)
+            <td>@Html.ActionLink("Redigera fråga", "EditQuestion", "Question", new {questionId = item.Id,testName = item.Test.Name,testId = item.TestId} ,null )
             <td>@Html.ActionLink("Radera fråga", "DeleteQuestion", "Question", new {questionId = item.Id, testId = item.TestId}, null)</td>
 
         </tr>
