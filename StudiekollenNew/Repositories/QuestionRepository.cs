@@ -27,6 +27,7 @@ namespace StudiekollenNew.Repositories
             var currentQuestionModel = GetSingleQuestionModelByQuestionId(questionId);
             currentQuestionModel.Query = questionModel.Query;
             currentQuestionModel.Answer = questionModel.Answer;
+            currentQuestionModel.Test.ChangeDate = DateTime.Now;;
             _context.SaveChanges();
 
         }
