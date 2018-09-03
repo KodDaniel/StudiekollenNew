@@ -41,9 +41,9 @@ namespace StudiekollenNew.Services
             return _testRepository.GetAllTestsForThisUserName(userName);
         }
 
-        public Test GetSingleTestByTestId(int id)
+        public Test GetSingleTestModelByTestId(int id)
         {
-           return _testRepository.GetSingleTestByTestId(id);
+           return _testRepository.GetSingleTestModelByTestId(id);
         }
 
         public void RemoveTest(Test testModel)

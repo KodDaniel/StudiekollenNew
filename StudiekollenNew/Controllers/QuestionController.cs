@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using StudiekollenNew.Repositories;
 using StudiekollenNew.Services;
+using StudiekollenNew.ViewModels;
 
 namespace StudiekollenNew.Controllers
 {
@@ -19,9 +20,18 @@ namespace StudiekollenNew.Controllers
             return RedirectToAction("EditTest", "Test", new {id = testId});
         }
 
-        public ActionResult EditQuestion()
+        public ViewResult EditQuestion(int questionId, string testName)
         {
-            return new EmptyResult();
+            var repoFactory = new RepositoryFactory();
+            var questionService = new QuestionService(repoFactory);
+            var questionModel = questionService.GetSingleQuestionModelByQuestionId(questionId);
+            var viewmodel = new EditQuestionViewModel
+            {
+                Name = testName,
+                Query = questionModel.Query,
+                Answer = questionModel.Answer
+            };
+            return View(viewmodel);
         }
     }
 

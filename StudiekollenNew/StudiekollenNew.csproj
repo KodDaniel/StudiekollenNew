@@ -241,6 +241,7 @@
     <Compile Include="Services\UserService.cs" />
     <Compile Include="ViewModels\AccountViewModels.cs" />
     <Compile Include="DatabaseContext\ApplicationDbContext.cs" />
+    <Compile Include="ViewModels\EditQuestionViewModel.cs" />
     <Compile Include="ViewModels\TestViewModels\CreateTestViewModel.cs" />
     <Compile Include="ViewModels\TestViewModels\DeleteTestViewModel.cs" />
     <Compile Include="ViewModels\TestViewModels\EditTestViewModel.cs" />
@@ -320,12 +321,12 @@
     <Content Include="Views\Test\SearchForTest.cshtml" />
     <Content Include="Views\Test\Details.cshtml" />
     <Content Include="Views\Test\EditTest.cshtml" />
+    <Content Include="Views\Question\EditQuestion.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="ViewModels\QuestionsViewModels\" />
     <Folder Include="ViewModels\UserViewModels\" />
-    <Folder Include="Views\Question\" />
     <Folder Include="Views\User\" />
   </ItemGroup>
   <ItemGroup>

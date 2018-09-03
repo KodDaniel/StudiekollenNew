@@ -17,6 +17,11 @@ namespace StudiekollenNew.Repositories
             _context = context;
         }
 
+        public Question GetSingleQuestionModelByQuestionId(int id)
+        {
+            return _context.Question.Find(id);
+        }
+
         // Lägger till ett Question i databasen. 
         public void AddQuestionsToTest(int testId, Question questionModel)
         {
@@ -39,6 +44,9 @@ namespace StudiekollenNew.Repositories
             return _context.Question.Include(a => a.Test)
                 .Where(a => a.TestId == id).OrderByDescending(c=>c.Id).ToList();
         }
+
+
+     
 
         //public int GetNumberOfQuestionsOfaTestByTestId(int id)
         //{

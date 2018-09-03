@@ -128,7 +128,7 @@ namespace StudiekollenNew.Controllers
         {
             var repoFactory = new RepositoryFactory();
             var testService = new TestService(repoFactory);
-            var testModel = testService.GetSingleTestByTestId(id);
+            var testModel = testService.GetSingleTestModelByTestId(id);
             var userService = new UserService(repoFactory);
             var userName = userService.GetUserByUserId(User.Identity.GetUserId()).UserName;
             testService.RemoveTest(testModel);
@@ -142,7 +142,7 @@ namespace StudiekollenNew.Controllers
             var repoFactory = new RepositoryFactory();
             var questionService = new QuestionService(repoFactory);
             var testService = new TestService(repoFactory);
-            var testName = testService.GetSingleTestByTestId(id).Name;
+            var testName = testService.GetSingleTestModelByTestId(id).Name;
             var questionModels = questionService.AllQuestionsModelsByTestId(id);
 
             var viewModel = new EditTestViewModel

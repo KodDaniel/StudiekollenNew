@@ -59,9 +59,9 @@ namespace StudiekollenNew.Repositories
                 .ToList();
         }
 
-        public Test GetSingleTestByTestId(int id)
+        public Test GetSingleTestModelByTestId(int id)
         {
-            return _context.Test.SingleOrDefault(c => c.Id == id);
+            return _context.Test.Find(id);
         }
 
        
