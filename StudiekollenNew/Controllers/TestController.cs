@@ -67,6 +67,7 @@ namespace StudiekollenNew.Controllers
         [HttpPost]
         public ActionResult CreateTest(Question questionModel)
         {
+
             var currentUserId = User.Identity.GetUserId();
             var repoFactory = new RepositoryFactory();
             var testService = new TestService(repoFactory);
@@ -144,9 +145,8 @@ namespace StudiekollenNew.Controllers
             var testService = new TestService(repoFactory);
             var testName = testService.GetSingleTestModelByTestId(id).Name;
             var questionModels = questionService.AllQuestionsModelsByTestId(id);
-
             var viewModel = new EditTestViewModel
-            {
+            {             
                 TestName = testName,
                 QuestionsModels = questionModels
             };

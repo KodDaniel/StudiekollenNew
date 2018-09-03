@@ -42,10 +42,13 @@ namespace StudiekollenNew.Repositories
 
         public void RemoveQuestionFromTest(int id)
         {
+            // Viss logik implementerad för att jag inte vill sätta att provet ändrats innan jag är säker på att delete-raden exekeveras. 
+            // Försöka effektivisera detta.
             var questionModel = _context.Question.Single(a => a.Id == id);
+            var belongsToTest = _context.Test.Single(a => a.Id == questionModel.TestId);
             _context.Question.Remove(questionModel);
+            belongsToTest.ChangeDate = DateTime.Now;
             _context.SaveChanges();
-
 
         }
 
@@ -54,14 +57,6 @@ namespace StudiekollenNew.Repositories
             return _context.Question.Include(a => a.Test)
                 .Where(a => a.TestId == id).OrderByDescending(c=>c.Id).ToList();
         }
-
-
-     
-
-        //public int GetNumberOfQuestionsOfaTestByTestId(int id)
-        //{
-        //    return _context.Question.Where(a => a.TestId == id).Select(a => a.Id).Count();
-        //}
 
     }
 }

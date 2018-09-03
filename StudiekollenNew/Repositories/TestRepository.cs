@@ -64,6 +64,11 @@ namespace StudiekollenNew.Repositories
             return _context.Test.Find(id);
         }
 
+        public int GetTestIdByTestName(string testName)
+        {
+            return _context.Test.Single(a => a.Name == testName).Id;
+        }
+
        
 
 
