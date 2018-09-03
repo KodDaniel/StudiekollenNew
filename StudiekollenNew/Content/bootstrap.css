@@ -2630,6 +2630,7 @@ input[type="search"] {
 }
 .form-group {
   margin-bottom: 15px;
+
 }
 .radio,
 .checkbox {
@@ -2742,11 +2743,13 @@ select[multiple].input-sm {
   line-height: 1.5;
 }
 .input-lg {
-  height: 46px;
-  padding: 10px 16px;
-  font-size: 18px;
-  line-height: 1.3333333;
-  border-radius: 6px;
+    height: 46px;
+    padding: 10px 16px;
+    font-size: 18px;
+    line-height: 1.3333333;
+    border-radius: 6px;
+    max-width: 500px !important;
+    width :500px !important;
 }
 select.input-lg {
   height: 46px;
@@ -2755,6 +2758,7 @@ select.input-lg {
 textarea.input-lg,
 select[multiple].input-lg {
   height: auto;
+    
 }
 .form-group-lg .form-control {
   height: 46px;
@@ -2762,6 +2766,7 @@ select[multiple].input-lg {
   font-size: 18px;
   line-height: 1.3333333;
   border-radius: 6px;
+
 }
 .form-group-lg select.form-control {
   height: 46px;

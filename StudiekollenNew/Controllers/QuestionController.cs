@@ -51,6 +51,10 @@ namespace StudiekollenNew.Controllers
             return RedirectToAction("EditTest", "Test", new {id = viewModel.TestId});
         }
 
+        //public ViewResult AddQuestionToExistingTest()
+        //{
+        //    return View();
+        //}
       
 
 

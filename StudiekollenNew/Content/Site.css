@@ -16,25 +16,20 @@
     white-space: normal;
 }
 
-input, select, textarea {
-    max-width: 500px;
-}
-
-.textAreaSize {
-    width: 300px;
-    height: 150px;
-}
-
 /* Set width on the form input elements since they're 100% wide by default */
-input,
-select,
-textarea {
+input, select, textarea {
     max-width: 280px;
 }
+
+
+
+
+
 
 .font {
     font-weight: bold;
 }
+
 
 
 body {
@@ -112,3 +107,5 @@ br {
 .checkBoxText {
     font-size: 14px;
 }
+
+
