@@ -17,6 +17,10 @@ namespace StudiekollenNew.Services
             _questionRepository = repoFactory.GetQuestionRepository();
         }
 
+        public void UpdateQuestion(Question questionModel, int questionId)
+        {
+            _questionRepository.UpdateQuestion(questionModel,questionId);
+        }
         public Question GetSingleQuestionModelByQuestionId(int id)
         {
             return _questionRepository.GetSingleQuestionModelByQuestionId(id);

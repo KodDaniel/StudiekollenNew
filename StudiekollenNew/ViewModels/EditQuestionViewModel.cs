@@ -10,6 +10,8 @@ namespace StudiekollenNew.ViewModels
     public class EditQuestionViewModel
     {
         // Logik (Data Annotations) finns här eftersom detta ej har direkt med databas att göra
+
+        public int Id { get; set; }
         public string Name { get; set; }
 
         [Required]
@@ -19,6 +21,6 @@ namespace StudiekollenNew.ViewModels
         [Display(Name = "Svar")]
         public string Answer { get; set; }
 
-        //public Question QuestionModel{ get; set; }
+        public int TestId { get; set; }
     }
 }

@@ -22,6 +22,15 @@ namespace StudiekollenNew.Repositories
             return _context.Question.Find(id);
         }
 
+        public void UpdateQuestion(Question questionModel, int questionId)
+        {
+            var currentQuestionModel = GetSingleQuestionModelByQuestionId(questionId);
+            currentQuestionModel.Query = questionModel.Query;
+            currentQuestionModel.Answer = questionModel.Answer;
+            _context.SaveChanges();
+
+        }
+
         // Lägger till ett Question i databasen. 
         public void AddQuestionsToTest(int testId, Question questionModel)
         {
