@@ -20,14 +20,14 @@ namespace StudiekollenNew.Controllers
     {
         public ViewResult NewTest()
         {
-            var viewModel = new NewTestViewModel();
+            var viewModel = new CreateTestViewModel();
             return View(viewModel);
         }
 
         [HttpPost]
         public ActionResult NewTest(Test testModel)
         {
-            var viewModel = new NewTestViewModel();
+            var viewModel = new CreateTestViewModel();
             testModel.UserId = User.Identity.GetUserId();
 
             if (!ModelState.IsValid)
@@ -114,7 +114,7 @@ namespace StudiekollenNew.Controllers
 
         public ViewResult Details(string currentUsername)
         {
-            var result = TempData["result"] as IEnumerable<Test>;           
+            var result = TempData["result"] as IEnumerable<Test>;  
             var viewmodel = new FindTestViewModel
             {
                 AllTests = result,

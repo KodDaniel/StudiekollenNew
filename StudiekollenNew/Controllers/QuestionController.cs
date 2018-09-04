@@ -20,8 +20,7 @@ namespace StudiekollenNew.Controllers
 
             return RedirectToAction("EditTest", "Test", new {id = testId});
         }
-
-      
+     
         public ViewResult EditQuestion(int questionId, string testName,int testId)
         {
             var repoFactory = new RepositoryFactory();

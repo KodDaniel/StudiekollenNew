@@ -243,7 +243,6 @@
     <Compile Include="DatabaseContext\ApplicationDbContext.cs" />
     <Compile Include="ViewModels\EditQuestionViewModel.cs" />
     <Compile Include="ViewModels\TestViewModels\CreateTestViewModel.cs" />
-    <Compile Include="ViewModels\TestViewModels\DeleteTestViewModel.cs" />
     <Compile Include="ViewModels\TestViewModels\EditTestViewModel.cs" />
     <Compile Include="ViewModels\TestViewModels\FindTestViewModel.cs" />
     <Compile Include="ViewModels\ManageViewModels.cs" />
@@ -252,7 +251,6 @@
     <Compile Include="DomainModels\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
-    <Compile Include="ViewModels\TestViewModels\NewTestViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="All kod för att autotilldela roller.txt" />

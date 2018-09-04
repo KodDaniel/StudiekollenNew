@@ -17,23 +17,23 @@
        
             @foreach (var test in Model.AllTests)
             {
-                <tr>                 
-                    <td>@Html.ActionLink(test.Name, "EditTest", "Test", new {id = test.Id}, null)</td>
-                    
-                    <td>@test.CreateDate</td>
+        <tr>
+            <td>@Html.ActionLink(test.Name, "EditTest", "Test", new { id = test.Id }, null)</td>
 
-                    @if (test.ChangeDate is null)
-                    {
-                        <td>Har aldrig ändrats</td>
-                    }
-                    else
-                    {
-                        <td>@test.ChangeDate</td>
-                    }
-                    <td>@Html.ActionLink("Radera prov", "DeleteTest", "Test", new {id = test.Id}, null)</td>
+            <td>@test.CreateDate</td>
+
+            @if (test.ChangeDate is null)
+            {
+                <td>Har aldrig ändrats</td>
+            }
+            else
+            {
+                <td>@test.ChangeDate</td>
+            }
+            <td>@Html.ActionLink("Radera prov", "DeleteTest", "Test", new { id = test.Id }, null)</td>
 
 
-                </tr>
+        </tr>
         }
 
     </table>
