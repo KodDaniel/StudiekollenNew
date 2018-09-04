@@ -9,9 +9,10 @@ namespace StudiekollenNew.ViewModels
     public class FindTestViewModel
     {
         public IEnumerable<User> Users { get; set; }
-        public string Username{ get; set; }
         public IEnumerable<Test> AllTests { get; set; }
-        //public int QuestionId { get; set; }
+        public string Username{ get; set; }
+       
+      
 
     }
 
