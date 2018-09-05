@@ -54,6 +54,7 @@ namespace StudiekollenNew.Controllers
 
         public ActionResult CreateTest(string testName)
         {
+
             var viewModel = new CreateTestViewModel();
 
             var testModel = TempData["testModel"] as Test;
@@ -73,17 +74,14 @@ namespace StudiekollenNew.Controllers
 
         [HttpPost]
         public ActionResult CreateTest(Question questionModel)
-        {
-
-            var currentUserId = User.Identity.GetUserId();
-
+        {               
             var repoFactory = new RepositoryFactory();
 
             var testService = new TestService(repoFactory);
 
-            var recentTestId = testService.GetMostRecentTestId(currentUserId);
+            var recentTestId = testService.GetMostRecentTestId(User.Identity.GetUserId());
 
-            var recentTestName = testService.GetMostRecentTestName(currentUserId);
+            var recentTestName = testService.GetMostRecentTestName(User.Identity.GetUserId());
 
             var questionService = new QuestionService(repoFactory);
 
@@ -175,7 +173,8 @@ namespace StudiekollenNew.Controllers
             var questionModels = questionService.AllQuestionsModelsByTestId(id);
 
             var viewModel = new EditTestViewModel
-            {   TestId = id,
+            {
+                TestId = id,
                 TestName = testName,
                 QuestionsModels = questionModels
             };
