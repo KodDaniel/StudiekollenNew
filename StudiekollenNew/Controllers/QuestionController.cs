@@ -15,7 +15,9 @@ namespace StudiekollenNew.Controllers
         public ActionResult DeleteQuestion(int questionId,int testId)
         {
             var repoFactory = new RepositoryFactory();
+
             var questionService = new QuestionService(repoFactory);
+
             questionService.RemoveQuestionFromTest(questionId);
 
             return RedirectToAction("EditTest", "Test", new {id = testId});
@@ -24,8 +26,11 @@ namespace StudiekollenNew.Controllers
         public ViewResult EditQuestion(int questionId, string testName,int testId)
         {
             var repoFactory = new RepositoryFactory();
+
             var questionService = new QuestionService(repoFactory);
+
             var questionModel = questionService.GetSingleQuestionModelByQuestionId(questionId);
+
             var viewModel = new EditQuestionViewModel
             {
                 Id = questionId,
@@ -34,7 +39,9 @@ namespace StudiekollenNew.Controllers
                 Answer = questionModel.Answer,
                 TestId = testId
             };
+
             TempData["viewModel"] = viewModel;
+
             return View(viewModel);
         }
 
@@ -42,9 +49,13 @@ namespace StudiekollenNew.Controllers
         public ActionResult EditQuestion(Question updatedQuestionModel)
         {
             var viewModel = TempData["viewModel"] as EditQuestionViewModel;
+
             var questionId = viewModel.Id;
+
             var repoFactory = new RepositoryFactory();
+
             var questionService = new QuestionService(repoFactory);
+
             questionService.UpdateQuestion(updatedQuestionModel,questionId);
 
             return RedirectToAction("EditTest", "Test", new {id = viewModel.TestId});
@@ -56,10 +67,9 @@ namespace StudiekollenNew.Controllers
             {
                 Name = testName,
                 Id = testId
-
             };
-            TempData["viewModel"] = vievModel;
 
+            TempData["viewModel"] = vievModel;
 
             return View(vievModel);
         }
@@ -69,11 +79,17 @@ namespace StudiekollenNew.Controllers
         {
 
             var viewModel = TempData["viewModel"] as CreateTestViewModel;
+
             var testId = viewModel.Id;
+
             questionModel.TestId = testId;
+
             var repoFactory = new RepositoryFactory();
+
             var questionService = new QuestionService(repoFactory);
+
             questionService.AddQuestionsToTest(testId, questionModel);
+
             return RedirectToAction("EditTest", "Test", new { id = testId });
         
         }

@@ -26,12 +26,14 @@ namespace StudiekollenNew.Repositories
         public void AddTest(Test testModel)
         {
             _context.Test.Add(testModel);
+
             _context.SaveChanges();
         }
 
         public void RemoveTest(Test testModel)
         {
             _context.Test.Remove(testModel);
+
             _context.SaveChanges();
         }
 

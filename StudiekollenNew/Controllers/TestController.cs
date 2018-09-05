@@ -21,6 +21,7 @@ namespace StudiekollenNew.Controllers
         public ViewResult NewTest()
         {
             var viewModel = new CreateTestViewModel();
+
             return View(viewModel);
         }
 
@@ -28,6 +29,7 @@ namespace StudiekollenNew.Controllers
         public ActionResult NewTest(Test testModel)
         {
             var viewModel = new CreateTestViewModel();
+
             testModel.UserId = User.Identity.GetUserId();
 
             if (!ModelState.IsValid)
@@ -37,9 +39,13 @@ namespace StudiekollenNew.Controllers
             else
             {
                 testModel.UserId = User.Identity.GetUserId();
+
                 var repoFactory = new RepositoryFactory();
+
                 var testService = new TestService(repoFactory);
+
                 testService.AddTest(testModel);
+
                 TempData["testModel"] = testModel;
 
                 return RedirectToAction("CreateTest");
@@ -49,6 +55,7 @@ namespace StudiekollenNew.Controllers
         public ActionResult CreateTest(string testName)
         {
             var viewModel = new CreateTestViewModel();
+
             var testModel = TempData["testModel"] as Test;
 
             if (testModel is null)
@@ -69,11 +76,17 @@ namespace StudiekollenNew.Controllers
         {
 
             var currentUserId = User.Identity.GetUserId();
+
             var repoFactory = new RepositoryFactory();
+
             var testService = new TestService(repoFactory);
+
             var recentTestId = testService.GetMostRecentTestId(currentUserId);
+
             var recentTestName = testService.GetMostRecentTestName(currentUserId);
+
             var questionService = new QuestionService(repoFactory);
+
             questionService.AddQuestionsToTest(recentTestId, questionModel);
 
             return RedirectToAction("CreateTest", new {testName = recentTestName});
@@ -83,8 +96,11 @@ namespace StudiekollenNew.Controllers
         {
 
             var repoFactory = new RepositoryFactory();
+
             var userService = new UserService(repoFactory);
+
             var allUsers = userService.GetAllUsers();
+
             var vievModel = new FindTestViewModel
             {
                 Users = allUsers,
@@ -97,6 +113,7 @@ namespace StudiekollenNew.Controllers
         public ActionResult SearchForTest(string userName)
         {
             // Inget fel på if-satsen, men: sidan laddar om till skillnad från om du använder "Modelstate.Isvalid". Kan vara värt att byta till det med andra ord.
+
             if (string.IsNullOrWhiteSpace(userName))
             {
                 return RedirectToAction("SearchForTest");
@@ -104,10 +121,11 @@ namespace StudiekollenNew.Controllers
             else
             {
                 var repoFactory = new RepositoryFactory();
+
                 var testService = new TestService(repoFactory);
+
                 TempData["result"] = testService.GetAllTestsForThisUserName(userName);
                 
-
                 return RedirectToAction("Details", new {currentUsername = userName});
             }
 
@@ -115,7 +133,8 @@ namespace StudiekollenNew.Controllers
 
         public ViewResult Details(string currentUsername)
         {
-            var result = TempData["result"] as IEnumerable<Test>;    
+            var result = TempData["result"] as IEnumerable<Test>;
+
             var viewmodel = new FindTestViewModel
             {
                 AllTests = result,
@@ -128,11 +147,17 @@ namespace StudiekollenNew.Controllers
         public ActionResult DeleteTest(int id)
         {
             var repoFactory = new RepositoryFactory();
+
             var testService = new TestService(repoFactory);
+
             var testModel = testService.GetSingleTestModelByTestId(id);
+
             var userService = new UserService(repoFactory);
+
             var userName = userService.GetUserByUserId(User.Identity.GetUserId()).UserName;
+
             testService.RemoveTest(testModel);
+
             TempData["result"] = testService.GetAllTestsForThisUserName(userName);
 
             return RedirectToAction("Details", new {currentUsername = userName});
@@ -140,11 +165,17 @@ namespace StudiekollenNew.Controllers
 
         public ViewResult EditTest(int id)
         {
+
             var repoFactory = new RepositoryFactory();
+
             var questionService = new QuestionService(repoFactory);
+
             var testService = new TestService(repoFactory);
+
             var testName = testService.GetSingleTestModelByTestId(id).Name;
+
             var questionModels = questionService.AllQuestionsModelsByTestId(id);
+
             var viewModel = new EditTestViewModel
             {   TestId = id,
                 TestName = testName,

@@ -24,10 +24,13 @@ namespace StudiekollenNew.Repositories
         public void UpdateQuestion(Question questionModel, int questionId)
         {
             var currentQuestionModel = GetSingleQuestionModelByQuestionId(questionId);
+
             currentQuestionModel.Query = questionModel.Query;
+
             currentQuestionModel.Answer = questionModel.Answer;
+
             currentQuestionModel.Test.ChangeDate = DateTime.Now;
-            ;
+            
             _context.SaveChanges();
 
         }
@@ -36,7 +39,9 @@ namespace StudiekollenNew.Repositories
         public void AddQuestionsToTest(int testId, Question questionModel)
         {
             questionModel.TestId = testId;
+
             _context.Question.Add(questionModel);
+
             _context.SaveChanges();
         }
 
@@ -51,7 +56,9 @@ namespace StudiekollenNew.Repositories
                 .Single(a => a.Id == questionModel.TestId);
 
             _context.Question.Remove(questionModel);
+
             belongsToTest.ChangeDate = DateTime.Now;
+
             _context.SaveChanges();
 
         }
