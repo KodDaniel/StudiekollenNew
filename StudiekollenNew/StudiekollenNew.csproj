@@ -320,6 +320,7 @@
     <Content Include="Views\Test\Details.cshtml" />
     <Content Include="Views\Test\EditTest.cshtml" />
     <Content Include="Views\Question\EditQuestion.cshtml" />
+    <Content Include="Views\Question\AddQuestionToExistingTest.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

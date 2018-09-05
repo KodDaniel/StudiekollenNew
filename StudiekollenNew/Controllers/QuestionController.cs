@@ -50,11 +50,34 @@ namespace StudiekollenNew.Controllers
             return RedirectToAction("EditTest", "Test", new {id = viewModel.TestId});
         }
 
-        //public ViewResult AddQuestionToExistingTest()
-        //{
-        //    return View();
-        //}
-      
+        public ActionResult AddQuestionToExistingTest(string testName, int testId)
+        {
+            var vievModel = new CreateTestViewModel()
+            {
+                Name = testName,
+                Id = testId
+
+            };
+            TempData["viewModel"] = vievModel;
+
+
+            return View(vievModel);
+        }
+
+        [HttpPost]
+        public ActionResult AddQuestionToExistingTest(Question questionModel)
+        {
+
+            var viewModel = TempData["viewModel"] as CreateTestViewModel;
+            var testId = viewModel.Id;
+            questionModel.TestId = testId;
+            var repoFactory = new RepositoryFactory();
+            var questionService = new QuestionService(repoFactory);
+            questionService.AddQuestionsToTest(testId, questionModel);
+            return RedirectToAction("EditTest", "Test", new { id = testId });
+        
+        }
+
 
 
     }

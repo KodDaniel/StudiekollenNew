@@ -146,7 +146,7 @@ namespace StudiekollenNew.Controllers
             var testName = testService.GetSingleTestModelByTestId(id).Name;
             var questionModels = questionService.AllQuestionsModelsByTestId(id);
             var viewModel = new EditTestViewModel
-            {             
+            {   TestId = id,
                 TestName = testName,
                 QuestionsModels = questionModels
             };

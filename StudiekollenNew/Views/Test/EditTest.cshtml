@@ -8,8 +8,7 @@
 <h2>@Model.TestName</h2><br />
 
 
-   @* TODO: Implementera raden nedan *@
-   @Html.ActionLink("Lägg till ny fråga", "", "", new { Model}, new { @class = "btn btn-default" })<br/>
+@Html.ActionLink("Lägg till ny fråga", "AddQuestionToExistingTest", "Question", new { testName = Model.TestName, testId = Model.TestId}, new { @class = "btn btn-default" })<br/>
 
 <table id="customers" class="table table-bordered table-hover">
 
