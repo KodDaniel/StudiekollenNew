@@ -5,49 +5,58 @@
 
     <h3>Prov tillhörande @Model.Username:</h3><br/>
        
-    <table id="customers" class="table table-bordered table-hover">
+  @if (!Model.AllTests.Any())
+  {
+      <h5><strong>Denna användare har inga prov sparade</strong>.</h5>
+  }
+  else
+  {
+      <table id="customers" class="table table-bordered table-hover">
 
-        <tr>
-            <th>Provnamn</th>
-            <th>Antal frågor</th>
-            <th>Skapades</th>
-            <th>Ändrades senast</th>
-            <th></th>
-        </tr>
+          <tr>
+              <th>Provnamn</th>
+              <th>Antal frågor</th>
+              <th>Skapades</th>
+              <th>Ändrades senast</th>
+              <th></th>
+          </tr>
                
 
-        @foreach (var test in Model.AllTests)
-            {
-                <tr>
+          @foreach (var test in Model.AllTests)
+          {
+              <tr>
 
-                    <td>@Html.ActionLink(test.Name, "EditTest", "Test", new {id = test.Id}, null)</td>
+                  <td>@Html.ActionLink(test.Name, "EditTest", "Test", new {id = test.Id}, null)</td>
                     
-                    @if (!test.Questions.Any())
-                    {
-                        <td>0</td>
-                    }
-                    else
-                    {
-                        <td>@test.Questions.Count()</td>
-                    }
+                  @if (!test.Questions.Any())
+                  {
+                      <td>0</td>
+                  }
+                  else
+                  {
+                      <td>@test.Questions.Count()</td>
+                  }
                     
-                    <td>@test.CreateDate</td>
+                  <td>@test.CreateDate</td>
 
-                    @if (test.ChangeDate is null)
-                    {
-                        <td>Har aldrig ändrats</td>
-                    }
-                    else
-                    {
-                        <td>@test.ChangeDate</td>
-                    }
-                    <td>@Html.ActionLink("Radera prov", "DeleteTest", "Test", new {id = test.Id}, null)</td>
+                  @if (test.ChangeDate is null)
+                  {
+                      <td>Har aldrig ändrats</td>
+                  }
+                  else
+                  {
+                      <td>@test.ChangeDate</td>
+                  }
+                  <td>@Html.ActionLink("Radera prov", "DeleteTest", "Test", new {id = test.Id}, null)</td>
 
 
-                </tr>
-        }
+              </tr>
+          }
 
-    </table>
+      </table>
+  }
+
+
 
 
 
