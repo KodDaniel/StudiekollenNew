@@ -22,13 +22,17 @@ input, select, textarea {
 }
 
 
+    textarea.input-lg {
+        max-width: 600px;
+        width: 600px;
+       
+    }
 
 
 
-
-.font {
-    font-weight: bold;
-}
+    .font {
+        font-weight: bold;
+    }
 
 
 
