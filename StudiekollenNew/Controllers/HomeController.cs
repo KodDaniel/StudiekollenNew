@@ -13,7 +13,12 @@ namespace StudiekollenNew.Controllers
     [AllowAnonymous]
     public class HomeController : Controller
     {
-        public ActionResult Index()
+        public ViewResult Index()
+        {
+            return View();
+        }
+
+        public ViewResult ToDo()
         {
             return View();
         }
