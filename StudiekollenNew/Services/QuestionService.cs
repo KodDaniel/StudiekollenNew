@@ -41,11 +41,10 @@ namespace StudiekollenNew.Services
             return _questionRepository.AllQuestionModelsByTestId(id);
         }
 
-        //public int GetNumberOfQuestionsOfaTestByTestId(int id)
+        //public int NumberOfQuestionsForThisTest(int testId)
         //{
-        //   return _questionRepository.GetNumberOfQuestionsOfaTestByTestId(id);
+        //    return _questionRepository.NumberOfQuestionsForThisTest(testId);
         //}
-
 
 
 

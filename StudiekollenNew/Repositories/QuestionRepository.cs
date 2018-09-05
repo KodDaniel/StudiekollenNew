@@ -27,7 +27,8 @@ namespace StudiekollenNew.Repositories
             var currentQuestionModel = GetSingleQuestionModelByQuestionId(questionId);
             currentQuestionModel.Query = questionModel.Query;
             currentQuestionModel.Answer = questionModel.Answer;
-            currentQuestionModel.Test.ChangeDate = DateTime.Now;;
+            currentQuestionModel.Test.ChangeDate = DateTime.Now;
+            ;
             _context.SaveChanges();
 
         }
@@ -55,8 +56,13 @@ namespace StudiekollenNew.Repositories
         public List<Question> AllQuestionModelsByTestId(int id)
         {
             return _context.Question.Include(a => a.Test)
-                .Where(a => a.TestId == id).OrderByDescending(c=>c.Id).ToList();
+                .Where(a => a.TestId == id).OrderBy(c => c.Id).ToList();
         }
 
+        //public int NumberOfQuestionsForThisTest(int testId)
+        //{
+        //    return _context.Question.Where(a => a.TestId == testId).Select(a => a.Id).Count();
+
+        //}
     }
 }

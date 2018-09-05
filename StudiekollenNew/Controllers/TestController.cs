@@ -106,6 +106,7 @@ namespace StudiekollenNew.Controllers
                 var repoFactory = new RepositoryFactory();
                 var testService = new TestService(repoFactory);
                 TempData["result"] = testService.GetAllTestsForThisUserName(userName);
+                
 
                 return RedirectToAction("Details", new {currentUsername = userName});
             }
@@ -114,14 +115,13 @@ namespace StudiekollenNew.Controllers
 
         public ViewResult Details(string currentUsername)
         {
-            var result = TempData["result"] as IEnumerable<Test>;  
+            var result = TempData["result"] as IEnumerable<Test>;    
             var viewmodel = new FindTestViewModel
             {
                 AllTests = result,
-                Username = currentUsername,
-                
+                Username = currentUsername,                     
             };
-
+            
             return View(viewmodel);
         }
 
