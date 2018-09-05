@@ -231,6 +231,10 @@
     <Compile Include="Migrations\201809011033108_hej.Designer.cs">
       <DependentUpon>201809011033108_hej.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201809051345060_currentState.cs" />
+    <Compile Include="Migrations\201809051345060_currentState.Designer.cs">
+      <DependentUpon>201809051345060_currentState.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Repositories\QuestionRepository.cs" />
     <Compile Include="Repositories\RepositoryFactory.cs" />
@@ -350,6 +354,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201809011033108_hej.resx">
       <DependentUpon>201809011033108_hej.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201809051345060_currentState.resx">
+      <DependentUpon>201809051345060_currentState.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
