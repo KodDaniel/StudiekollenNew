@@ -55,7 +55,9 @@ namespace StudiekollenNew.Repositories
         {
             return _context.Test.
                 Include(a => a.User).Include(a=>a.Questions)
-                .Where(a => a.User.UserName == userName).OrderByDescending(c=>c.CreateDate).ThenByDescending(c=>c.ChangeDate)
+                .Where(a => a.User.UserName == userName)
+                .OrderByDescending(c=>c.CreateDate)
+                .ThenByDescending(c=>c.ChangeDate)
                 .ToList();
         }
 

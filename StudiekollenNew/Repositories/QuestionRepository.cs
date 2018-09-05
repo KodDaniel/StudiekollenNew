@@ -5,7 +5,6 @@ using System.Linq;
 using System.Web;
 using StudiekollenNew.Models;
 using StudiekollenNew.ViewModels;
-using NetPipeStyleUriParser = System.NetPipeStyleUriParser;
 namespace StudiekollenNew.Repositories
 {
     public class QuestionRepository
@@ -45,8 +44,12 @@ namespace StudiekollenNew.Repositories
         {
             // Viss logik implementerad för att jag inte vill sätta att provet ändrats innan jag är säker på att delete-raden exekeveras. 
             // Försöka effektivisera detta.
-            var questionModel = _context.Question.Single(a => a.Id == id);
-            var belongsToTest = _context.Test.Single(a => a.Id == questionModel.TestId);
+            var questionModel = _context.Question
+                .Single(a => a.Id == id);
+
+            var belongsToTest = _context.Test
+                .Single(a => a.Id == questionModel.TestId);
+
             _context.Question.Remove(questionModel);
             belongsToTest.ChangeDate = DateTime.Now;
             _context.SaveChanges();
@@ -56,7 +59,8 @@ namespace StudiekollenNew.Repositories
         public List<Question> AllQuestionModelsByTestId(int id)
         {
             return _context.Question.Include(a => a.Test)
-                .Where(a => a.TestId == id).OrderBy(c => c.Id).ToList();
+                .Where(a => a.TestId == id)
+                .OrderBy(c => c.Id).ToList();
         }
 
         //public int NumberOfQuestionsForThisTest(int testId)
