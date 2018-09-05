@@ -112,8 +112,6 @@ namespace StudiekollenNew.Controllers
         [HttpPost]
         public ActionResult SearchForTest(string userName)
         {
-            // Inget fel på if-satsen, men: sidan laddar om till skillnad från om du använder "Modelstate.Isvalid". Kan vara värt att byta till det med andra ord.
-
             if (string.IsNullOrWhiteSpace(userName))
             {
                 return RedirectToAction("SearchForTest");
