@@ -20,17 +20,14 @@ namespace StudiekollenNew.Controllers
     {
         public ViewResult NewTest()
         {
-            var viewModel = new CreateTestViewModel();
+            var viewModel = new NewTestViewModel();
 
             return View(viewModel);
         }
 
         [HttpPost]
-        public ActionResult NewTest(Test testModel)
+        public ActionResult NewTest(NewTestViewModel viewModel)
         {
-            var viewModel = new CreateTestViewModel();
-
-            testModel.UserId = User.Identity.GetUserId();
 
             if (!ModelState.IsValid)
             {
@@ -38,54 +35,52 @@ namespace StudiekollenNew.Controllers
             }
             else
             {
-                testModel.UserId = User.Identity.GetUserId();
+                var userId = User.Identity.GetUserId();
 
-                var repoFactory = new RepositoryFactory();
+                var testService = new TestService(new RepositoryFactory());
 
-                var testService = new TestService(repoFactory);
+                testService.AddTest(viewModel,userId);
 
-                testService.AddTest(testModel);
-
-                TempData["testModel"] = testModel;
-
-                return RedirectToAction("CreateTest");
+                return RedirectToAction("CreateTest", new {testName = viewModel.Name});
             }
        }
 
         public ActionResult CreateTest(string testName)
         {
 
-            var viewModel = new CreateTestViewModel();
-
-            var testModel = TempData["testModel"] as Test;
-
-            if (testModel is null)
+            var viewModel = new CreateTestViewModel
             {
-                viewModel.Name = testName;
-            }
-            else
-            {
-                viewModel.Name = testModel.Name;
-            }
-
+                Name = testName
+            };
+      
             return View(viewModel);
 
         }
 
         [HttpPost]
-        public ActionResult CreateTest(Question questionModel)
-        {               
+        public ActionResult CreateTest(CreateTestViewModel viewModel)
+        {
+
             var repoFactory = new RepositoryFactory();
 
             var testService = new TestService(repoFactory);
 
-            var recentTestId = testService.GetMostRecentTestId(User.Identity.GetUserId());
+            var userId = User.Identity.GetUserId();
 
-            var recentTestName = testService.GetMostRecentTestName(User.Identity.GetUserId());
+            var recentTestName = testService.GetMostRecentTestName(userId);
+
+            if (!ModelState.IsValid)
+            {
+                viewModel.Name = recentTestName;
+
+                return View(viewModel);
+            }
 
             var questionService = new QuestionService(repoFactory);
+         
+            viewModel.Id = testService.GetMostRecentTestId(userId);
 
-            questionService.AddQuestionsToTest(recentTestId, questionModel);
+            questionService.AddQuestionsToTest(viewModel);
 
             return RedirectToAction("CreateTest", new {testName = recentTestName});
         }
@@ -93,9 +88,7 @@ namespace StudiekollenNew.Controllers
         public ViewResult SearchForTest()
         {
 
-            var repoFactory = new RepositoryFactory();
-
-            var userService = new UserService(repoFactory);
+            var userService = new UserService(new RepositoryFactory());
 
             var allUsers = userService.GetAllUsers();
 
@@ -115,26 +108,22 @@ namespace StudiekollenNew.Controllers
                 return RedirectToAction("SearchForTest");
             }
             else
-            {
-                var repoFactory = new RepositoryFactory();
-
-                var testService = new TestService(repoFactory);
-
-                TempData["result"] = testService.GetAllTestsForThisUserName(userName);
-                
-                return RedirectToAction("Details", new {currentUsername = userName});
+            {                 
+                return RedirectToAction("Details", new { userNameSelected = userName});
             }
 
         }
 
-        public ViewResult Details(string currentUsername)
+        public ViewResult Details(string userNameSelected)
         {
-            var result = TempData["result"] as IEnumerable<Test>;
+            var testService = new TestService(new RepositoryFactory());
+
+            var allTests = testService.GetAllTestsForThisUserName(userNameSelected);
 
             var viewmodel = new FindTestViewModel
             {
-                AllTests = result,
-                Username = currentUsername,                     
+                AllTests = allTests,
+                Username = userNameSelected,                     
             };
             
             return View(viewmodel);
@@ -150,18 +139,17 @@ namespace StudiekollenNew.Controllers
 
             var userService = new UserService(repoFactory);
 
-            var userName = userService.GetUserByUserId(User.Identity.GetUserId()).UserName;
+            var userId = User.Identity.GetUserId();
+
+            var userName = userService.GetUserByUserId(userId).UserName;
 
             testService.RemoveTest(testModel);
 
-            TempData["result"] = testService.GetAllTestsForThisUserName(userName);
-
-            return RedirectToAction("Details", new {currentUsername = userName});
+            return RedirectToAction("Details", new {userNameSelected = userName});
         }
 
         public ViewResult EditTest(int id)
         {
-
             var repoFactory = new RepositoryFactory();
 
             var questionService = new QuestionService(repoFactory);

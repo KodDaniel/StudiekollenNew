@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using StudiekollenNew.Models;
 using StudiekollenNew.Repositories;
+using StudiekollenNew.ViewModels;
 
 namespace StudiekollenNew.Services
 {
@@ -17,17 +18,17 @@ namespace StudiekollenNew.Services
             _questionRepository = repoFactory.GetQuestionRepository();
         }
 
-        public void UpdateQuestion(Question questionModel, int questionId)
+        public void UpdateQuestion(EditQuestionViewModel viewModel, int questionId)
         {
-            _questionRepository.UpdateQuestion(questionModel,questionId);
+            _questionRepository.UpdateQuestion(viewModel,questionId);
         }
         public Question GetSingleQuestionModelByQuestionId(int id)
         {
             return _questionRepository.GetSingleQuestionModelByQuestionId(id);
         }
-        public void AddQuestionsToTest(int testId,Question questionModel)
+        public void AddQuestionsToTest(CreateTestViewModel viewModel)
         {
-            _questionRepository.AddQuestionsToTest(testId,questionModel);
+            _questionRepository.AddQuestionsToTest(viewModel);
         }
 
         public void RemoveQuestionFromTest(int id)

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using StudiekollenNew.Models;
 using StudiekollenNew.ViewModels;
+using StudiekollenNew.ViewModels.TestViewModels;
 using NetPipeStyleUriParser = System.NetPipeStyleUriParser;
 
 namespace StudiekollenNew.Repositories
@@ -23,8 +24,15 @@ namespace StudiekollenNew.Repositories
             return _context.Test.ToList();
         }
 
-        public void AddTest(Test testModel)
+        public void AddTest(NewTestViewModel viewModel, string userId)
         {
+            var testModel = new Test
+            {
+                Id = viewModel.TestId,
+                Name = viewModel.Name,               
+                UserId = userId
+            };
+
             _context.Test.Add(testModel);
 
             _context.SaveChanges();
@@ -60,6 +68,15 @@ namespace StudiekollenNew.Repositories
                 .Where(a => a.User.UserName == userName)
                 .OrderByDescending(c=>c.CreateDate)
                 .ThenByDescending(c=>c.ChangeDate)
+                .ToList();
+        }
+
+        public IEnumerable<Test> GetAllTestsForThisUserId(string userId)
+        {
+            return _context.Test.
+                Include(a => a.User).Where(a=>a.UserId == userId).Include(a => a.Questions)             
+                .OrderByDescending(c => c.CreateDate)
+                .ThenByDescending(c => c.ChangeDate)
                 .ToList();
         }
 

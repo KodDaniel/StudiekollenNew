@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using StudiekollenNew.Models;
 using StudiekollenNew.Repositories;
+using StudiekollenNew.ViewModels;
+using StudiekollenNew.ViewModels.TestViewModels;
 
 namespace StudiekollenNew.Services
 {
@@ -21,9 +23,9 @@ namespace StudiekollenNew.Services
             return _testRepository.GetAllTests();
         }
 
-        public void AddTest(Test testModel)
+        public void AddTest(NewTestViewModel viewModel, string userId)
         {
-            _testRepository.AddTest(testModel);
+            _testRepository.AddTest(viewModel,userId);
         }
 
         public int GetMostRecentTestId(string currentUserId)
@@ -40,6 +42,12 @@ namespace StudiekollenNew.Services
         {
             return _testRepository.GetAllTestsForThisUserName(userName);
         }
+
+        public IEnumerable<Test> GetAllTestsForThisUserId(string userId)
+        {
+            return _testRepository.GetAllTestsForThisUserId(userId);
+        }
+
 
         public Test GetSingleTestModelByTestId(int id)
         {

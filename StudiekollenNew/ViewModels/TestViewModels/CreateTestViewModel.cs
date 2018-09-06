@@ -10,15 +10,12 @@ namespace StudiekollenNew.ViewModels
     {
         public int Id { get; set; }
 
-        [Required]
-        [Display(Name = "Provnamn")]
         public string Name { get; set; }
 
         [Required]
         [Display(Name = "Fråga")]
         public string Query { get; set; }
 
-        [Required]
         [Display(Name = "Svar")]
         public string Answer { get; set; }
 
