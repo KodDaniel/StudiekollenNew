@@ -1,9 +1,6 @@
 ﻿@model StudiekollenNew.ViewModels.FindTestViewModel
-@{
-    ViewBag.Title = "Details";
-}
 
-    <h3>Prov tillhörande @Model.Username:</h3><br/>
+<h3>Prov tillhörande @Model.Username:</h3><br/>
        
   @if (!Model.AllTests.Any())
   {
@@ -21,7 +18,6 @@
               <th></th>
           </tr>
                
-
           @foreach (var test in Model.AllTests)
           {
               <tr>
@@ -48,8 +44,6 @@
                       <td>@test.ChangeDate</td>
                   }
                   <td>@Html.ActionLink("Radera prov", "DeleteTest", "Test", new {id = test.Id}, null)</td>
-
-
               </tr>
           }
 

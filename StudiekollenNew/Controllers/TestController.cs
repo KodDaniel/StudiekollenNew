@@ -26,6 +26,7 @@ namespace StudiekollenNew.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult NewTest(Test testModel)
         {
 
@@ -62,6 +63,7 @@ namespace StudiekollenNew.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult CreateTest(Question questionModel)
         {
             var repoFactory = new RepositoryFactory();
@@ -108,6 +110,7 @@ namespace StudiekollenNew.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult SearchForTest(string userName)
         {
             // If-satsen kan ta bort helt om du listar ut hur du kan göra alternativet "välj användare" unselectable via koden i din view.

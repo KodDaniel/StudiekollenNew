@@ -45,6 +45,7 @@ namespace StudiekollenNew.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult EditQuestion(Question questionModel)
         {
             var tempModel = TempData["viewModel"] as EditQuestionViewModel;
@@ -88,6 +89,7 @@ namespace StudiekollenNew.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult AddQuestionToTest(Question questionModel)
         {
             var tempModel = TempData["viewModel"] as CreateTestViewModel;

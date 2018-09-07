@@ -1,23 +1,19 @@
 ﻿@model StudiekollenNew.ViewModels.TestViewModels.EditTestViewModel
-@{
-    ViewBag.Title = "EditTest";
-}
 
 
 @if (!Model.QuestionsModels.Any())
 {
     <h2>@Model.TestName</h2><br />
 
-    <h4>Provet har inga frågor.</h4><br/>
+    <h4>Provet har inga frågor.</h4><br />
 
     @Html.ActionLink("Lägg till ny fråga", "AddQuestionToTest", "Question", new { testName = Model.TestName, testId = Model.TestId }, new { @class = "btn btn-default" })<br />
 
-}
+ }
 
-else
-{
+ else
+ {
     <h2>@Model.TestName</h2><br />
-
 
     @Html.ActionLink("Lägg till ny fråga", "AddQuestionToTest", "Question", new { testName = Model.TestName, testId = Model.TestId }, new { @class = "btn btn-default" })<br />
 
@@ -44,7 +40,6 @@ else
                     <td>@item.Answer</td>
                 }
 
-
                 <td>@Html.ActionLink("Redigera fråga", "EditQuestion", "Question", new { questionId = item.Id, testName = item.Test.Name, testId = item.TestId }, null)
                 <td>@Html.ActionLink("Radera fråga", "DeleteQuestion", "Question", new { questionId = item.Id, testId = item.TestId }, null)</td>
 
@@ -52,4 +47,10 @@ else
         }
 
     </table>
+ }
+
+@*Klientvalidering*@
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
 }
+

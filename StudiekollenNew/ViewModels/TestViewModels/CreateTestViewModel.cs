@@ -12,7 +12,7 @@ namespace StudiekollenNew.ViewModels
 
         public string Name { get; set; }
 
-        [Required]
+        [Required (ErrorMessage = "Du måste fylla i en fråga.")]
         [Display(Name = "Fråga")]
         public string Query { get; set; }
 

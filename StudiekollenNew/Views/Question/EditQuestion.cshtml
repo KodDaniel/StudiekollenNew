@@ -1,15 +1,9 @@
 ﻿@model StudiekollenNew.ViewModels.EditQuestionViewModel
 
-@{
-    ViewBag.Title = "EditQuestion";
-}
-
 <h2>@Model.Name</h2>
 
 @using (Html.BeginForm("EditQuestion", "Question"))
 {
-    @Html.AntiForgeryToken()
-
     <div class="form-horizontal">
         <hr />
 
@@ -27,11 +21,16 @@
             </div>
         </div>
         <div class="form-group">
+            @Html.AntiForgeryToken()
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Uppdatera fråga" class="btn btn-default btn-block" /><br/>
-                @Html.ValidationMessageFor(model=>model.Query)
+                <input type="submit" value="Uppdatera fråga" class="btn btn-default btn-block"/><br/>
+                @Html.ValidationMessageFor(model => model.Query)
 
             </div>
         </div>
     </div>
+}
+@*Klientvalidering*@
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
 }
