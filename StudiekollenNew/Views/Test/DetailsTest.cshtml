@@ -1,4 +1,4 @@
-﻿@model StudiekollenNew.ViewModels.FindTestViewModel
+﻿@model StudiekollenNew.ViewModels.SearchTestViewModel
 
 <h3>Prov tillhörande @Model.Username:</h3><br/>
        
@@ -23,7 +23,7 @@
           {
               <tr>
 
-                  <td>@Html.ActionLink(test.Name, "EditTest", "Test", new {id = test.Id}, null)</td>
+                  <td>@Html.ActionLink(test.Name, "HandleTest", "Test", new {id = test.Id}, null)</td>
                     
                   @if (!test.Questions.Any())
                   {

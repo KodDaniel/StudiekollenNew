@@ -137,7 +137,7 @@ namespace StudiekollenNew.Controllers
 
             testService.UpdateTest(test, tempModel.TestId);
 
-            return RedirectToAction("EditTest", "Test", new { id = tempModel.TestId });
+            return RedirectToAction("HandleTest", "Test", new { id = tempModel.TestId });
         }
 
 
@@ -147,7 +147,7 @@ namespace StudiekollenNew.Controllers
 
             var allUsers = userService.GetAllUsers();
 
-            var vievModel = new FindTestViewModel
+            var vievModel = new SearchTestViewModel
             {
                 Users = allUsers,
             };
@@ -165,17 +165,17 @@ namespace StudiekollenNew.Controllers
                 return RedirectToAction("SearchForTest");
             }
 
-            return RedirectToAction("Details", new { userNameSelected = userName});
+            return RedirectToAction("DetailsTest", new { userNameSelected = userName});
             
         }
 
-        public ViewResult Details(string userNameSelected)
+        public ViewResult DetailsTest(string userNameSelected)
         {
             var testService = new TestService(new RepositoryFactory());
 
             var allTests = testService.GetAllTestsForThisUserName(userNameSelected);
 
-            var viewmodel = new FindTestViewModel
+            var viewmodel = new SearchTestViewModel
             {
                 AllTests = allTests,
                 Username = userNameSelected,                     
@@ -200,10 +200,10 @@ namespace StudiekollenNew.Controllers
 
             testService.RemoveTest(testModel);
 
-            return RedirectToAction("Details", new {userNameSelected = userName});
+            return RedirectToAction("DetailsTest", new {userNameSelected = userName});
         }
 
-        public ViewResult EditTest(int id)
+        public ViewResult HandleTest(int id)
         {
             var repoFactory = new RepositoryFactory();
 
@@ -215,7 +215,7 @@ namespace StudiekollenNew.Controllers
 
             var questionModels = questionService.GetAllQuestions(id);
 
-            var viewModel = new EditTestViewModel
+            var viewModel = new HandleTestViewModel
             {
                 TestId = id,
                 TestName = testName,

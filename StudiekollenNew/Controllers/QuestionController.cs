@@ -18,11 +18,11 @@ namespace StudiekollenNew.Controllers
 
             questionService.RemoveQuestion(questionId);
 
-            return RedirectToAction("EditTest", "Test", new { id = testId });
+            return RedirectToAction("HandleTest", "Test", new { id = testId });
         }
 
 
-        public ViewResult EditQuestion(int questionId, string testName, int testId)
+        public ViewResult UpdateQuestion(int questionId, string testName, int testId)
         {
          
             var questionService = new QuestionService(new RepositoryFactory());
@@ -46,7 +46,7 @@ namespace StudiekollenNew.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult EditQuestion(Question questionModel)
+        public ActionResult UpdateQuestion(Question questionModel)
         {
             var tempModel = TempData["viewModel"] as EditQuestionViewModel;
 
@@ -70,7 +70,7 @@ namespace StudiekollenNew.Controllers
 
             questionService.UpdateQuestion(questionModel,tempModel.QuestionId);
 
-            return RedirectToAction("EditTest", "Test", new { id = tempModel.TestId});
+            return RedirectToAction("HandleTest", "Test", new { id = tempModel.TestId});
         }
 
         public ActionResult AddQuestionToTest(string testName, int testId)
@@ -116,7 +116,7 @@ namespace StudiekollenNew.Controllers
 
             questionService.AddQuestionsToTest(testId, questionModel);
 
-            return RedirectToAction("EditTest", "Test", new { id = testId });
+            return RedirectToAction("HandleTest", "Test", new { id = testId });
 
         }
 

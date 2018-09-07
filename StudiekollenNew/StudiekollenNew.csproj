@@ -260,10 +260,10 @@
     <Compile Include="Services\UserService.cs" />
     <Compile Include="ViewModels\AccountViewModels.cs" />
     <Compile Include="DatabaseContext\ApplicationDbContext.cs" />
-    <Compile Include="ViewModels\QuestionsViewModels\EditQuestionViewModel.cs" />
+    <Compile Include="ViewModels\QuestionsViewModels\UpdateQuestionViewModel.cs" />
     <Compile Include="ViewModels\TestViewModels\CreateTestViewModel.cs" />
-    <Compile Include="ViewModels\TestViewModels\EditTestViewModel.cs" />
-    <Compile Include="ViewModels\TestViewModels\FindTestViewModel.cs" />
+    <Compile Include="ViewModels\TestViewModels\HandleTestViewModel.cs" />
+    <Compile Include="ViewModels\TestViewModels\SearchTestViewModel.cs" />
     <Compile Include="ViewModels\ManageViewModels.cs" />
     <Compile Include="DomainModels\Question.cs" />
     <Compile Include="DomainModels\Test.cs" />
@@ -338,13 +338,13 @@
     <Content Include="Views\Shared\_NavBar.cshtml" />
     <Content Include="Views\Test\CreateTest.cshtml" />
     <Content Include="Views\Test\SearchForTest.cshtml" />
-    <Content Include="Views\Test\Details.cshtml" />
-    <Content Include="Views\Test\EditTest.cshtml" />
-    <Content Include="Views\Question\EditQuestion.cshtml" />
+    <Content Include="Views\Test\DetailsTest.cshtml" />
+    <Content Include="Views\Test\HandleTest.cshtml" />
+    <Content Include="Views\Question\UpdateQuestion.cshtml" />
     <Content Include="Views\Question\AddQuestionToTest.cshtml" />
     <Content Include="Views\Home\ToDo.cshtml" />
     <Content Include="Views\Test\UpdateTest.cshtml" />
-    <Content Include="Views\Test\_partialEditTest.cshtml" />
+    <Content Include="Views\Test\_partialHandleTest.cshtml" />
     <Content Include="Views\Test\_partialDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>

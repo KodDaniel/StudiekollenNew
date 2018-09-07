@@ -1,10 +1,8 @@
-﻿@model StudiekollenNew.ViewModels.TestViewModels.EditTestViewModel
-
+﻿@model StudiekollenNew.ViewModels.TestViewModels.HandleTestViewModel
 
 @if (!Model.QuestionsModels.Any())
 {
-    @Html.Partial("_partialEditTest")
-
+    @Html.Partial("_partialHandleTest")
 }
 
 else
@@ -39,7 +37,7 @@ else
                     <td>@item.Answer</td>
                 }
 
-                <td>@Html.ActionLink("Redigera fråga", "EditQuestion", "Question", new { questionId = item.Id, testName = item.Test.Name, testId = item.TestId }, null)
+                <td>@Html.ActionLink("Redigera fråga", "UpdateQuestion", "Question", new { questionId = item.Id, testName = item.Test.Name, testId = item.TestId }, null)
                 <td>@Html.ActionLink("Radera fråga", "DeleteQuestion", "Question", new { questionId = item.Id, testId = item.TestId }, null)</td>
 
             </tr>
