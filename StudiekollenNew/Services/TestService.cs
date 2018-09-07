@@ -23,11 +23,6 @@ namespace StudiekollenNew.Services
             return _testRepository.GetAllTests();
         }
 
-        public void AddTest(Test testModel, string userId)
-        {
-            _testRepository.AddTest(testModel, userId);
-        }
-
         public Test GetMostRecentTest(string currentUserId)
         {
             return _testRepository.GetMostRecentTest(currentUserId);
@@ -44,12 +39,17 @@ namespace StudiekollenNew.Services
             return _testRepository.GetAllTestsForThisUserId(userId);
         }
 
-
-        public Test GetSingleTestModelByTestId(int id)
+        public Test GetTest(int id)
         {
-           return _testRepository.GetTest(id);
+            return _testRepository.GetTest(id);
         }
 
+        public void AddTest(Test testModel, string userId)
+        {
+            _testRepository.AddTest(testModel, userId);
+        }
+
+    
         public void RemoveTest(Test testModel)
         {
             _testRepository.RemoveTest(testModel);

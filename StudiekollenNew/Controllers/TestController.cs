@@ -144,7 +144,7 @@ namespace StudiekollenNew.Controllers
 
             var testService = new TestService(repoFactory);
 
-            var testModel = testService.GetSingleTestModelByTestId(id);
+            var testModel = testService.GetTest(id);
 
             var userService = new UserService(repoFactory);
 
@@ -165,7 +165,7 @@ namespace StudiekollenNew.Controllers
 
             var testService = new TestService(repoFactory);
 
-            var testName = testService.GetSingleTestModelByTestId(id).Name;
+            var testName = testService.GetTest(id).Name;
 
             var questionModels = questionService.GetAllQuestions(id);
 

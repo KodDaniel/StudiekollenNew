@@ -25,8 +25,14 @@ namespace StudiekollenNew.Controllers.Api
         {
             var testService = new TestService(new RepositoryFactory());
 
-            return testService.GetSingleTestModelByTestId(id);
+            var test = testService.GetTest(id);
 
+            if (test is null)
+            {
+                throw new HttpResponseException(HttpStatusCode.NotFound);
+            }
+
+            return test;
         }
 
 
