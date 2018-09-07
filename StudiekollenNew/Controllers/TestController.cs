@@ -95,6 +95,52 @@ namespace StudiekollenNew.Controllers
             return RedirectToAction("CreateTest", new {testName = recentTestName});
         }
 
+        public ViewResult UpdateTest(int testId)
+        {
+            var testService = new TestService(new RepositoryFactory());
+
+            var test = testService.GetTest(testId);
+
+            testService.UpdateTest(test,testId);
+
+            var viewModel = new UpdateTestViewModel
+            {
+                Name = test.Name,
+                TestId = testId
+                
+            };
+
+            TempData["viewModel"] = viewModel;
+
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult UpdateTest(Test test)
+        {
+            var tempModel = TempData["viewModel"] as UpdateTestViewModel;
+
+            TempData.Keep();
+
+            if (!ModelState.IsValid)
+            {
+                var viewModel = new UpdateTestViewModel
+                {
+                    Name = tempModel.Name,
+                };
+
+                return View(viewModel);
+            }
+
+            var testService = new TestService(new RepositoryFactory());
+
+            testService.UpdateTest(test, tempModel.TestId);
+
+            return RedirectToAction("EditTest", "Test", new { id = tempModel.TestId });
+        }
+
+
         public ViewResult SearchForTest()
         {
             var userService = new UserService(new RepositoryFactory());

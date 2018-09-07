@@ -74,12 +74,23 @@ namespace StudiekollenNew.Repositories
             _context.SaveChanges();
         }
 
-      
-      
+        public void UpdateTest(Test test, int testId)
+        {
+            var currentTest = GetTest(testId);
 
-        
+            currentTest.Name = test.Name;
 
-       
+            currentTest.ChangeDate = DateTime.Now;
+           
+            _context.SaveChanges();
+        }
+
+
+
+
+
+
+
 
 
     }

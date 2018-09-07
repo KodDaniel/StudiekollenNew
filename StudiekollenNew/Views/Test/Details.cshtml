@@ -4,7 +4,8 @@
        
   @if (!Model.AllTests.Any())
   {
-      <h5><strong>Denna användare har inga prov sparade</strong>.</h5>
+      @Html.Partial("_partialDetails")
+
   }
   else
   {
