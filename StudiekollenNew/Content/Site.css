@@ -22,16 +22,9 @@ input, select, textarea {
     /*max-width: 680px;*/
 }
 
-
-  
-
-
-
-    .font {
+ .font {
         font-weight: bold;
     }
-
-
 
 body {
     margin-top: 30px;
@@ -43,34 +36,9 @@ body {
 br {
     display: block; /* makes it have a width */
     content: ""; /* clears default height */
-    margin-top: 25px; /* change this to whatever height you want it */
+    margin-top: 20px; /* change this to whatever height you want it */
 }
 
-.navbar-collapse {
-    max-height: 280px;
-    overflow-y: auto;
-}
-
-.table, .table tr, .table td {
-    border-top: none;
-    border-bottom: none;
-    border: hidden;
-    border: none;
-}
-
-.textboxBackgroundColor {
-    background-color: lightyellow;
-}
-
-/*.hide-me
-    {
-        display:none;
-        visibility:hidden;
-    }*/
-
-.questions {
-    color: black;
-}
 
 .btn {
     background-color: black;
@@ -78,35 +46,16 @@ br {
 }
 
 
-.faq-question {
-    color: black;
+.field-validation-error {
+    color: darkred;
+    font-weight: bold;
 }
 
-.form-error {
-    color: red;
+.input-validation-error {
+    border: 2px solid darkred;
 }
 
-.form-success {
-    color: green;
-}
-
-.session {
-    color: white;
-}
-
-.input-error {
-    box-shadow: 0 0 5px red;
-}
-
-
-.big-checkbox {
-    font-size: 15px;
-    width: 12px;
-    height: 12px;
-}
-
-.checkBoxText {
-    font-size: 14px;
-}
-
-
+/*br {
+    display: block;
+    margin: 10px 0;
+}*/

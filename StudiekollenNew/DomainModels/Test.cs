@@ -9,6 +9,9 @@ namespace StudiekollenNew.Models
     public class Test
     {
         public int Id { get; set; }
+
+        [Required(ErrorMessage = "Du måste fylla i ett provnamn.")]
+        [Display(Name = "Provnamn")]
         public string Name { get; set; }
         public DateTime? CreateDate { get; set; } = DateTime.Now;
         public DateTime? ChangeDate { get; set; }

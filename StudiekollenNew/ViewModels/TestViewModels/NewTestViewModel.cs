@@ -8,10 +8,10 @@ namespace StudiekollenNew.ViewModels.TestViewModels
 {
     public class NewTestViewModel
     {
-        [Required]
+        [Required(ErrorMessage = "Du måste fylla i ett provnamn.")]
         [Display(Name = "Provnamn")]
         public string Name { get; set; }
 
-       
+
     }
 }

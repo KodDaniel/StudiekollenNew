@@ -95,7 +95,6 @@ namespace StudiekollenNew.Controllers
 
         public ViewResult SearchForTest()
         {
-
             var userService = new UserService(new RepositoryFactory());
 
             var allUsers = userService.GetAllUsers();

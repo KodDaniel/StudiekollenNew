@@ -28,7 +28,9 @@
         </div>
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Uppdatera fråga" class="btn btn-default btn-block" />
+                <input type="submit" value="Uppdatera fråga" class="btn btn-default btn-block" /><br/>
+                @Html.ValidationMessageFor(model=>model.Query)
+
             </div>
         </div>
     </div>
