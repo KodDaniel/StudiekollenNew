@@ -10,18 +10,17 @@ using StudiekollenNew.ViewModels;
 
 namespace StudiekollenNew.Controllers
 {
-    // Finns ingen validering i klassen 
     public class QuestionController : Controller
     {
         public ActionResult DeleteQuestion(int questionId, int testId)
         {
-
             var questionService = new QuestionService(new RepositoryFactory());
 
             questionService.RemoveQuestionFromTest(questionId);
 
             return RedirectToAction("EditTest", "Test", new { id = testId });
         }
+
 
         public ViewResult EditQuestion(int questionId, string testName, int testId)
         {
@@ -48,27 +47,28 @@ namespace StudiekollenNew.Controllers
         [HttpPost]
         public ActionResult EditQuestion(Question questionModel)
         {
-            var viewmodel = TempData["viewModel"] as EditQuestionViewModel;
+            var tempModel = TempData["viewModel"] as EditQuestionViewModel;
+            TempData.Keep();
 
             if (!ModelState.IsValid)
             {
                 var viewModel = new EditQuestionViewModel
                 {
-                    Name = viewmodel.Name,
-                    Query = viewmodel.Query,
-                    Answer = viewmodel.Answer
+                    Name = tempModel.Name,
+                    Query = tempModel.Query,
+                    Answer = tempModel.Answer
                 };
 
                 return View(viewModel);
             }
-                
+
             var repoFactory = new RepositoryFactory();
 
             var questionService = new QuestionService(repoFactory);
 
-            questionService.UpdateQuestion(questionModel,viewmodel.QuestionId);
+            questionService.UpdateQuestion(questionModel,tempModel.QuestionId);
 
-            return RedirectToAction("EditTest", "Test", new { id = viewmodel.TestId});
+            return RedirectToAction("EditTest", "Test", new { id = tempModel.TestId});
         }
 
         public ActionResult AddQuestionToTest(string testName, int testId)
@@ -79,6 +79,7 @@ namespace StudiekollenNew.Controllers
                 TestId = testId
 
             };
+
             TempData["viewModel"] = vievModel;
 
 
@@ -88,12 +89,23 @@ namespace StudiekollenNew.Controllers
         [HttpPost]
         public ActionResult AddQuestionToTest(Question questionModel)
         {
+            var tempModel = TempData["viewModel"] as CreateTestViewModel;
 
-            var viewModel = TempData["viewModel"] as CreateTestViewModel;
+            TempData.Keep();
 
-            var testId = viewModel.TestId;
+            if (!ModelState.IsValid)
+            {
+                var viewModel = new CreateTestViewModel
+                {
+                    Name = tempModel.Name,
+                    Query = questionModel.Query,
+                    Answer = questionModel.Answer
+                };
 
-            questionModel.TestId = testId;
+                return View(viewModel);
+             }
+
+            var testId = tempModel.TestId;
 
             var repoFactory = new RepositoryFactory();
 
