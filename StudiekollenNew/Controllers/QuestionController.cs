@@ -10,6 +10,7 @@ using StudiekollenNew.ViewModels;
 
 namespace StudiekollenNew.Controllers
 {
+    // Finns ingen validering i klassen 
     public class QuestionController : Controller
     {
         public ActionResult DeleteQuestion(int questionId, int testId)
@@ -24,42 +25,50 @@ namespace StudiekollenNew.Controllers
 
         public ViewResult EditQuestion(int questionId, string testName, int testId)
         {
+         
             var questionService = new QuestionService(new RepositoryFactory());
 
             var questionModel = questionService.GetSingleQuestionModelByQuestionId(questionId);
-
-            TempData["idList"] = new List<int> {questionId, testId};
-
+         
             var viewModel = new EditQuestionViewModel
             {     
+                TestId = testId,
                 Name = testName,
                 Query = questionModel.Query,
                 Answer = questionModel.Answer,
+                QuestionId = questionId
         
             };
 
-           
+            TempData["viewModel"] = viewModel;
 
             return View(viewModel);
         }
 
         [HttpPost]
-        public ActionResult EditQuestion(EditQuestionViewModel viewModel)
+        public ActionResult EditQuestion(Question questionModel)
         {
+            var viewmodel = TempData["viewModel"] as EditQuestionViewModel;
+
             if (!ModelState.IsValid)
             {
+                var viewModel = new EditQuestionViewModel
+                {
+                    Name = viewmodel.Name,
+                    Query = viewmodel.Query,
+                    Answer = viewmodel.Answer
+                };
+
                 return View(viewModel);
             }
-
-            var idList = TempData["idList"] as List<int>;        
-
+                
             var repoFactory = new RepositoryFactory();
 
             var questionService = new QuestionService(repoFactory);
 
-            questionService.UpdateQuestion(viewModel, idList[0]);
+            questionService.UpdateQuestion(questionModel,viewmodel.QuestionId);
 
-            return RedirectToAction("EditTest", "Test", new { id = idList[1]});
+            return RedirectToAction("EditTest", "Test", new { id = viewmodel.TestId});
         }
 
         public ActionResult AddQuestionToTest(string testName, int testId)
@@ -67,26 +76,34 @@ namespace StudiekollenNew.Controllers
             var vievModel = new CreateTestViewModel()
             {
                 Name = testName,
-                Id = testId
+                TestId = testId
+
             };
+            TempData["viewModel"] = vievModel;
+
 
             return View(vievModel);
         }
 
         [HttpPost]
-        public ActionResult AddQuestionToTest(CreateTestViewModel viewModel)
+        public ActionResult AddQuestionToTest(Question questionModel)
         {
 
-            var testId = viewModel.Id;
+            var viewModel = TempData["viewModel"] as CreateTestViewModel;
 
-            var questionService = new QuestionService(new RepositoryFactory());
+            var testId = viewModel.TestId;
 
-            questionService.AddQuestionsToTest(viewModel);
+            questionModel.TestId = testId;
+
+            var repoFactory = new RepositoryFactory();
+
+            var questionService = new QuestionService(repoFactory);
+
+            questionService.AddQuestionsToTest(testId, questionModel);
 
             return RedirectToAction("EditTest", "Test", new { id = testId });
 
         }
-
 
 
     }

@@ -15,7 +15,7 @@
         <div class="form-group">
             @Html.Label("Användare", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">             
-                @Html.DropDownListFor(model => model.Username , new SelectList(Model.Users,"Username","UserName"),"Välj användare", new { @class = "form-control" })
+                @Html.DropDownListFor(model => model.Username , new SelectList(Model.Users,"Username","UserName","Välj användare"),"Välj användare" ,  new { @class = "form-control" })
             </div>
         </div>
         <div class="form-group">

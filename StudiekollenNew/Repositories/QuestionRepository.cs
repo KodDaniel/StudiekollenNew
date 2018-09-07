@@ -17,17 +17,10 @@ namespace StudiekollenNew.Repositories
             _context = context;
         }
 
-        // Lägger till ett Question i databasen. 
-        public void AddQuestionsToTest(CreateTestViewModel viewModel)
+        public void AddQuestionsToTest(int testId, Question questionModel)
         {
-           
-            var questionModel = new Question
-            {
-                TestId = viewModel.Id,
-                Query = viewModel.Query,
-                Answer = viewModel.Answer
+            questionModel.TestId = testId;
 
-            };
             _context.Question.Add(questionModel);
 
             _context.SaveChanges();
@@ -38,21 +31,20 @@ namespace StudiekollenNew.Repositories
             return _context.Question.Find(id);
         }
 
-        public void UpdateQuestion(EditQuestionViewModel viewModel, int questionId)
+        public void UpdateQuestion(Question questionModel, int questionId)
         {
             var currentQuestionModel = GetSingleQuestionModelByQuestionId(questionId);
 
-            currentQuestionModel.Query = viewModel.Query;
+            currentQuestionModel.Query = questionModel.Query;
 
-            currentQuestionModel.Answer = viewModel.Answer;
+            currentQuestionModel.Answer = questionModel.Answer;
 
             currentQuestionModel.Test.ChangeDate = DateTime.Now;
             
             _context.SaveChanges();
-
         }
 
-        
+
 
         public void RemoveQuestionFromTest(int id)
         {

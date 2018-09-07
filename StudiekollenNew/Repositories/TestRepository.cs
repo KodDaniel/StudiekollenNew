@@ -24,14 +24,9 @@ namespace StudiekollenNew.Repositories
             return _context.Test.ToList();
         }
 
-        public void AddTest(NewTestViewModel viewModel, string userId)
+        public void AddTest(Test testModel,string userId)
         {
-            var testModel = new Test
-            {
-                Id = viewModel.TestId,
-                Name = viewModel.Name,               
-                UserId = userId
-            };
+            testModel.UserId = userId;
 
             _context.Test.Add(testModel);
 

@@ -8,7 +8,7 @@ namespace StudiekollenNew.ViewModels
 {
     public class CreateTestViewModel
     {
-        public int Id { get; set; }
+        public int TestId { get; set; }
 
         public string Name { get; set; }
 

@@ -9,6 +9,7 @@ namespace StudiekollenNew.ViewModels
 {
     public class EditQuestionViewModel
     {
+        public int TestId { get; set; }
 
         public string Name { get; set; }
 
@@ -18,6 +19,9 @@ namespace StudiekollenNew.ViewModels
 
         [Display(Name = "Svar")]
         public string Answer { get; set; }
+
+        public int QuestionId { get; set; }
+
 
     }
 }

@@ -26,23 +26,27 @@ namespace StudiekollenNew.Controllers
         }
 
         [HttpPost]
-        public ActionResult NewTest(NewTestViewModel viewModel)
+        public ActionResult NewTest(Test testModel)
         {
 
             if (!ModelState.IsValid)
             {
+                var viewModel = new NewTestViewModel
+                {
+                    Name = testModel.Name
+                };
+
                 return View(viewModel);
             }
-            else
-            {
-                var userId = User.Identity.GetUserId();
 
-                var testService = new TestService(new RepositoryFactory());
+            var userId = User.Identity.GetUserId();
 
-                testService.AddTest(viewModel,userId);
+            var testService = new TestService(new RepositoryFactory());
 
-                return RedirectToAction("CreateTest", new {testName = viewModel.Name});
-            }
+            testService.AddTest(testModel, userId);
+
+            return RedirectToAction("CreateTest", new {testName = testModel.Name});
+        
        }
 
         public ActionResult CreateTest(string testName)
@@ -58,29 +62,33 @@ namespace StudiekollenNew.Controllers
         }
 
         [HttpPost]
-        public ActionResult CreateTest(CreateTestViewModel viewModel)
+        public ActionResult CreateTest(Question questionModel)
         {
-
             var repoFactory = new RepositoryFactory();
 
             var testService = new TestService(repoFactory);
-
+            
             var userId = User.Identity.GetUserId();
 
             var recentTestName = testService.GetMostRecentTestName(userId);
 
             if (!ModelState.IsValid)
             {
-                viewModel.Name = recentTestName;
+                var viewModel = new CreateTestViewModel
+                {
+                    Name = recentTestName,
+                    Query = questionModel.Query,
+                    Answer = questionModel.Answer
+                };
 
                 return View(viewModel);
             }
+         
+            var testId = testService.GetMostRecentTestId(userId);
 
             var questionService = new QuestionService(repoFactory);
-         
-            viewModel.Id = testService.GetMostRecentTestId(userId);
 
-            questionService.AddQuestionsToTest(viewModel);
+            questionService.AddQuestionsToTest(testId,questionModel);
 
             return RedirectToAction("CreateTest", new {testName = recentTestName});
         }
@@ -103,15 +111,14 @@ namespace StudiekollenNew.Controllers
         [HttpPost]
         public ActionResult SearchForTest(string userName)
         {
+            // If-satsen kan ta bort helt om du listar ut hur du kan göra alternativet "välj användare" unselectable via koden i din view.
             if (string.IsNullOrWhiteSpace(userName))
             {
                 return RedirectToAction("SearchForTest");
             }
-            else
-            {                 
-                return RedirectToAction("Details", new { userNameSelected = userName});
-            }
 
+            return RedirectToAction("Details", new { userNameSelected = userName});
+            
         }
 
         public ViewResult Details(string userNameSelected)
