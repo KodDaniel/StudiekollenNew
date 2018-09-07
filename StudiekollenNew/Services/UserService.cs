@@ -21,9 +21,9 @@ namespace StudiekollenNew.Services
             return _userRepository.GetAllUsers();
         }
 
-        public User GetUserByUserId(string id)
+        public User GetUser(string id)
         {
-            return _userRepository.GetSingleUserByUserId(id);
+            return _userRepository.GetUser(id);
         }
     }
 }

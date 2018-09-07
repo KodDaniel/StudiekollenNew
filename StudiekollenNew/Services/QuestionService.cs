@@ -18,6 +18,16 @@ namespace StudiekollenNew.Services
             _questionRepository = repoFactory.GetQuestionRepository();
         }
 
+        public Question GetQuestion(int id)
+        {
+            return _questionRepository.GetQuestion(id);
+        }
+
+        public List<Question> GetAllQuestions(int id)
+        {
+            return _questionRepository.GetAllQuestions(id);
+        }
+
         public void AddQuestionsToTest(int testId, Question questionModel)
         {
             _questionRepository.AddQuestionsToTest(testId, questionModel);
@@ -28,22 +38,15 @@ namespace StudiekollenNew.Services
             _questionRepository.UpdateQuestion(questionModel, questionId);
         }
 
-        public Question GetSingleQuestionModelByQuestionId(int id)
-        {
-            return _questionRepository.GetSingleQuestionModelByQuestionId(id);
-        }
-      
+       
 
-        public void RemoveQuestionFromTest(int id)
+        public void RemoveQuestion(int id)
         {
-            _questionRepository.RemoveQuestionFromTest(id);
+            _questionRepository.RemoveQuestion(id);
         }
 
 
-        public List<Question> AllQuestionsModelsByTestId (int id)
-        {
-            return _questionRepository.AllQuestionModelsByTestId(id);
-        }
+        
 
         //public int NumberOfQuestionsForThisTest(int testId)
         //{

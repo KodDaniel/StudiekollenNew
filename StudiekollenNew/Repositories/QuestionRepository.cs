@@ -17,6 +17,20 @@ namespace StudiekollenNew.Repositories
             _context = context;
         }
 
+        public Question GetQuestion(int id)
+        {
+            return _context.Question.Find(id);
+        }
+
+
+        public List<Question> GetAllQuestions(int id)
+        {
+            return _context.Question.Include(a => a.Test)
+                .Where(a => a.TestId == id)
+                .OrderBy(c => c.Id).ToList();
+        }
+
+
         public void AddQuestionsToTest(int testId, Question questionModel)
         {
             questionModel.TestId = testId;
@@ -26,14 +40,10 @@ namespace StudiekollenNew.Repositories
             _context.SaveChanges();
         }
 
-        public Question GetSingleQuestionModelByQuestionId(int id)
-        {
-            return _context.Question.Find(id);
-        }
-
+      
         public void UpdateQuestion(Question questionModel, int questionId)
         {
-            var currentQuestionModel = GetSingleQuestionModelByQuestionId(questionId);
+            var currentQuestionModel = GetQuestion(questionId);
 
             currentQuestionModel.Query = questionModel.Query;
 
@@ -45,8 +55,7 @@ namespace StudiekollenNew.Repositories
         }
 
 
-
-        public void RemoveQuestionFromTest(int id)
+        public void RemoveQuestion(int id)
         {
             // Viss logik implementerad för att jag inte vill sätta att provet ändrats innan jag är säker på att delete-raden exekeveras. 
             // Försöka effektivisera detta.
@@ -64,12 +73,7 @@ namespace StudiekollenNew.Repositories
 
         }
 
-        public List<Question> AllQuestionModelsByTestId(int id)
-        {
-            return _context.Question.Include(a => a.Test)
-                .Where(a => a.TestId == id)
-                .OrderBy(c => c.Id).ToList();
-        }
+       
 
         //public int NumberOfQuestionsForThisTest(int testId)
         //{

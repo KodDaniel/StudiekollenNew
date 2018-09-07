@@ -16,7 +16,7 @@ namespace StudiekollenNew.Controllers
         {
             var questionService = new QuestionService(new RepositoryFactory());
 
-            questionService.RemoveQuestionFromTest(questionId);
+            questionService.RemoveQuestion(questionId);
 
             return RedirectToAction("EditTest", "Test", new { id = testId });
         }
@@ -27,7 +27,7 @@ namespace StudiekollenNew.Controllers
          
             var questionService = new QuestionService(new RepositoryFactory());
 
-            var questionModel = questionService.GetSingleQuestionModelByQuestionId(questionId);
+            var questionModel = questionService.GetQuestion(questionId);
          
             var viewModel = new EditQuestionViewModel
             {     

@@ -72,7 +72,7 @@ namespace StudiekollenNew.Controllers
             
             var userId = User.Identity.GetUserId();
 
-            var recentTestName = testService.GetMostRecentTestName(userId);
+            var recentTestName = testService.GetMostRecentTest(userId).Name;
 
             if (!ModelState.IsValid)
             {
@@ -85,8 +85,8 @@ namespace StudiekollenNew.Controllers
 
                 return View(viewModel);
             }
-         
-            var testId = testService.GetMostRecentTestId(userId);
+
+            var testId = testService.GetMostRecentTest(userId).Id;
 
             var questionService = new QuestionService(repoFactory);
 
@@ -150,7 +150,7 @@ namespace StudiekollenNew.Controllers
 
             var userId = User.Identity.GetUserId();
 
-            var userName = userService.GetUserByUserId(userId).UserName;
+            var userName = userService.GetUser(userId).UserName;
 
             testService.RemoveTest(testModel);
 
@@ -167,7 +167,7 @@ namespace StudiekollenNew.Controllers
 
             var testName = testService.GetSingleTestModelByTestId(id).Name;
 
-            var questionModels = questionService.AllQuestionsModelsByTestId(id);
+            var questionModels = questionService.GetAllQuestions(id);
 
             var viewModel = new EditTestViewModel
             {
