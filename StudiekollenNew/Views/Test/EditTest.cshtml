@@ -23,7 +23,17 @@
     {
         <tr>
             <td>@item.Query</td>
-            <td>@item.Answer</td>
+            
+            @if (item.Answer is null)
+            {
+                <td><em>Frågan har ännu inget svar.</em></td>
+            }
+            else
+            {
+                <td>@item.Answer</td>
+            }
+
+
             <td>@Html.ActionLink("Redigera fråga", "EditQuestion", "Question", new { questionId = item.Id, testName = item.Test.Name, testId = item.TestId }, null)
             <td>@Html.ActionLink("Radera fråga", "DeleteQuestion", "Question", new { questionId = item.Id, testId = item.TestId }, null)</td>
 

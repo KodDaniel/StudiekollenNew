@@ -48,6 +48,7 @@ namespace StudiekollenNew.Controllers
         public ActionResult EditQuestion(Question questionModel)
         {
             var tempModel = TempData["viewModel"] as EditQuestionViewModel;
+
             TempData.Keep();
 
             if (!ModelState.IsValid)
