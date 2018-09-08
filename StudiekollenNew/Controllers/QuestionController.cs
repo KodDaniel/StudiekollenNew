@@ -78,7 +78,6 @@ namespace StudiekollenNew.Controllers
             {
                 Name = testName,
                 TestId = testId
-
             };
 
             TempData["viewModel"] = vievModel;
