@@ -23,8 +23,7 @@ namespace StudiekollenNew.Controllers
 
 
         public ViewResult UpdateQuestion(int questionId, string testName, int testId)
-        {
-         
+        {        
             var questionService = new QuestionService(new RepositoryFactory());
 
             var questionModel = questionService.GetQuestion(questionId);
