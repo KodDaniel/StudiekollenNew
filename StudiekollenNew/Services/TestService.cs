@@ -44,9 +44,9 @@ namespace StudiekollenNew.Services
             return _testRepository.GetTest(id);
         }
 
-        public void AddTest(Test testModel)
+        public void AddTest(Test testModel, string userId)
         {
-            _testRepository.AddTest(testModel);
+            _testRepository.AddTest(testModel,userId);
         }
 
     

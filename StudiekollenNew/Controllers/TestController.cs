@@ -44,7 +44,7 @@ namespace StudiekollenNew.Controllers
 
             var testService = new TestService(new RepositoryFactory());
 
-            testService.AddTest(testModel);
+            testService.AddTest(testModel,userId);
 
             return RedirectToAction("CreateTest", new {testName = testModel.Name});
         

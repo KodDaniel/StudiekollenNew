@@ -67,10 +67,12 @@ namespace StudiekollenNew.Repositories
         }
 
 
-        public void AddTest(Test testModel)
+        public void AddTest(Test testModel, string userId)
         {
-            _context.Test.Add(testModel);
+            testModel.UserId = userId;
 
+            _context.Test.Add(testModel);
+            
             _context.SaveChanges();
         }
 
