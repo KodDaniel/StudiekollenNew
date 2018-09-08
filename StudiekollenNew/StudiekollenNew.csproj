@@ -255,6 +255,10 @@
     <Compile Include="Migrations\201809071217423_s.Designer.cs">
       <DependentUpon>201809071217423_s.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201809081559265_intial1.cs" />
+    <Compile Include="Migrations\201809081559265_intial1.Designer.cs">
+      <DependentUpon>201809081559265_intial1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Repositories\QuestionRepository.cs" />
     <Compile Include="Repositories\RepositoryFactory.cs" />
@@ -385,6 +389,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201809071217423_s.resx">
       <DependentUpon>201809071217423_s.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201809081559265_intial1.resx">
+      <DependentUpon>201809081559265_intial1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
