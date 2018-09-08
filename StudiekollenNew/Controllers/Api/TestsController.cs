@@ -4,7 +4,9 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using AutoMapper;
 using Microsoft.AspNet.Identity;
+using StudiekollenNew.Dtos;
 using StudiekollenNew.Models;
 using StudiekollenNew.Repositories;
 using StudiekollenNew.Services;
@@ -14,15 +16,16 @@ namespace StudiekollenNew.Controllers.Api
     public class TestsController : ApiController
     {
         //GET /api/tests
-        public IEnumerable<Test> GetAllTests()
+        public IEnumerable<TestDto> GetAllTests()
         {
             var testService = new TestService(new RepositoryFactory());
 
-            return testService.GetAllTests().ToList();
+            return testService.GetAllTests().ToList().Select(Mapper.Map<Test, TestDto>);
         }
 
+
         //GET /api/tests/1
-        public Test GetTest(int id)
+        public IHttpActionResult GetTest(int id)
         {
             var testService = new TestService(new RepositoryFactory());
 
@@ -30,33 +33,37 @@ namespace StudiekollenNew.Controllers.Api
 
             if (test is null)
             {
-                throw new HttpResponseException(HttpStatusCode.NotFound);
+                return NotFound();
             }
 
-            return test;
+            return Ok(Mapper.Map<Test, TestDto>(test));
         }
 
         //POST /api/tests
         [HttpPost]
-        public Test CreateTest(Test test)
+        public IHttpActionResult CreateTest(TestDto testDto)
         {
             if (!ModelState.IsValid)
             {
-                throw new HttpResponseException(HttpStatusCode.BadRequest);
+                return BadRequest();
             }
 
             var testService = new TestService(new RepositoryFactory());
 
             var userId = User.Identity.GetUserId();
 
+            var test = Mapper.Map<TestDto, Test>(testDto);
+
             testService.AddTest(test,userId);
 
-            return test;
+            testDto.Id = test.Id;
+
+            return Created(new Uri(Request.RequestUri + "/" + test.Id),testDto);
         }
 
         //PUT /api/tests/1
         [HttpPut]
-        public void UpdateTest(Test test, int id)
+        public void UpdateTest(TestDto testDto, int id)
         {
             if (!ModelState.IsValid)
             {
@@ -72,7 +79,10 @@ namespace StudiekollenNew.Controllers.Api
                 throw new HttpResponseException(HttpStatusCode.NotFound);
             }
 
-            testService.UpdateTest(test, id);
+            Mapper.Map(testDto,testInDb);
+
+            // rad nedan osäker
+            testService.UpdateTest(testInDb, id);
         }
 
         //DELETE /api/tests/1
