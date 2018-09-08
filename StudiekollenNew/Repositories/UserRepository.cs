@@ -23,7 +23,7 @@ namespace StudiekollenNew.Repositories
         }
 
         // Get specific User
-        public User GetSingleUserByUserId(string id)
+        public User GetUser(string id)
         {
             return _context.Users.Find(id);
         }

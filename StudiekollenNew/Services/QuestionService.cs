@@ -18,29 +18,33 @@ namespace StudiekollenNew.Services
             _questionRepository = repoFactory.GetQuestionRepository();
         }
 
-        public void UpdateQuestion(EditQuestionViewModel viewModel, int questionId)
+        public Question GetQuestion(int id)
         {
-            _questionRepository.UpdateQuestion(viewModel,questionId);
-        }
-        public Question GetSingleQuestionModelByQuestionId(int id)
-        {
-            return _questionRepository.GetSingleQuestionModelByQuestionId(id);
-        }
-        public void AddQuestionsToTest(CreateTestViewModel viewModel)
-        {
-            _questionRepository.AddQuestionsToTest(viewModel);
+            return _questionRepository.GetQuestion(id);
         }
 
-        public void RemoveQuestionFromTest(int id)
+        public List<Question> GetAllQuestions(int id)
         {
-            _questionRepository.RemoveQuestionFromTest(id);
+            return _questionRepository.GetAllQuestions(id);
+        }
+
+        public void AddQuestion(int testId, Question questionModel)
+        {
+            _questionRepository.AddQuestion(testId, questionModel);
+        }
+
+        public void UpdateQuestion(Question questionModel, int questionId)
+        {
+            _questionRepository.UpdateQuestion(questionModel, questionId);
+        }
+
+        public void DeleteTest(int id)
+        {
+            _questionRepository.DeleteQuestion(id);
         }
 
 
-        public List<Question> AllQuestionsModelsByTestId (int id)
-        {
-            return _questionRepository.AllQuestionModelsByTestId(id);
-        }
+        
 
         //public int NumberOfQuestionsForThisTest(int testId)
         //{

@@ -14,52 +14,63 @@ namespace StudiekollenNew.Controllers
     {
         public ActionResult DeleteQuestion(int questionId, int testId)
         {
-
             var questionService = new QuestionService(new RepositoryFactory());
 
-            questionService.RemoveQuestionFromTest(questionId);
+            questionService.DeleteTest(questionId);
 
-            return RedirectToAction("EditTest", "Test", new { id = testId });
+            return RedirectToAction("HandleTest", "Test", new { id = testId });
         }
 
-        public ViewResult EditQuestion(int questionId, string testName, int testId)
+
+        public ViewResult UpdateQuestion(int questionId, string testName, int testId)
         {
+         
             var questionService = new QuestionService(new RepositoryFactory());
 
-            var questionModel = questionService.GetSingleQuestionModelByQuestionId(questionId);
-
-            TempData["idList"] = new List<int> {questionId, testId};
-
+            var questionModel = questionService.GetQuestion(questionId);
+         
             var viewModel = new EditQuestionViewModel
             {     
+                TestId = testId,
                 Name = testName,
                 Query = questionModel.Query,
                 Answer = questionModel.Answer,
+                QuestionId = questionId
         
             };
 
-           
+            TempData["viewModel"] = viewModel;
 
             return View(viewModel);
         }
 
         [HttpPost]
-        public ActionResult EditQuestion(EditQuestionViewModel viewModel)
+        [ValidateAntiForgeryToken]
+        public ActionResult UpdateQuestion(Question questionModel)
         {
+            var tempModel = TempData["viewModel"] as EditQuestionViewModel;
+
+            TempData.Keep();
+
             if (!ModelState.IsValid)
             {
+                var viewModel = new EditQuestionViewModel
+                {
+                    Name = tempModel.Name,
+                    Query = tempModel.Query,
+                    Answer = tempModel.Answer
+                };
+
                 return View(viewModel);
             }
-
-            var idList = TempData["idList"] as List<int>;        
 
             var repoFactory = new RepositoryFactory();
 
             var questionService = new QuestionService(repoFactory);
 
-            questionService.UpdateQuestion(viewModel, idList[0]);
+            questionService.UpdateQuestion(questionModel,tempModel.QuestionId);
 
-            return RedirectToAction("EditTest", "Test", new { id = idList[1]});
+            return RedirectToAction("HandleTest", "Test", new { id = tempModel.TestId});
         }
 
         public ActionResult AddQuestionToTest(string testName, int testId)
@@ -67,26 +78,47 @@ namespace StudiekollenNew.Controllers
             var vievModel = new CreateTestViewModel()
             {
                 Name = testName,
-                Id = testId
+                TestId = testId
+
             };
+
+            TempData["viewModel"] = vievModel;
+
 
             return View(vievModel);
         }
 
         [HttpPost]
-        public ActionResult AddQuestionToTest(CreateTestViewModel viewModel)
+        [ValidateAntiForgeryToken]
+        public ActionResult AddQuestionToTest(Question questionModel)
         {
+            var tempModel = TempData["viewModel"] as CreateTestViewModel;
 
-            var testId = viewModel.Id;
+            TempData.Keep();
 
-            var questionService = new QuestionService(new RepositoryFactory());
+            if (!ModelState.IsValid)
+            {
+                var viewModel = new CreateTestViewModel
+                {
+                    Name = tempModel.Name,
+                    Query = questionModel.Query,
+                    Answer = questionModel.Answer
+                };
 
-            questionService.AddQuestionsToTest(viewModel);
+                return View(viewModel);
+             }
 
-            return RedirectToAction("EditTest", "Test", new { id = testId });
+            var testId = tempModel.TestId;
+
+            var repoFactory = new RepositoryFactory();
+
+            var questionService = new QuestionService(repoFactory);
+
+            questionService.AddQuestion(testId, questionModel);
+
+            return RedirectToAction("HandleTest", "Test", new { id = testId });
 
         }
-
 
 
     }

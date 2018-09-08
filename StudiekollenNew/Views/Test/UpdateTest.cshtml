@@ -1,8 +1,8 @@
-﻿@model StudiekollenNew.ViewModels.TestViewModels.NewTestViewModel
+﻿@model StudiekollenNew.ViewModels.TestViewModels.UpdateTestViewModel
 
-<h2>Nytt prov</h2>
+<h2>Uppdatera prov</h2>
 
-@using (Html.BeginForm("NewTest", "Test"))
+@using (Html.BeginForm("UpdateTest", "Test"))
 {
     <div class="form-horizontal">
         <hr />
@@ -16,14 +16,15 @@
         <div class="form-group">
             @Html.AntiForgeryToken()
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Gå vidare" class="btn btn-default btn-block"/><br/>
+                <input type="submit" value="Uppdatera" class="btn btn-default btn-block" /><br />
                 @Html.ValidationMessageFor(model => model.Name)
             </div>
         </div>
     </div>
 }
-
 @*Klientvalidering*@
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
+
+

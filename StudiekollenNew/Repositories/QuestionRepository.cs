@@ -17,44 +17,45 @@ namespace StudiekollenNew.Repositories
             _context = context;
         }
 
-        // Lägger till ett Question i databasen. 
-        public void AddQuestionsToTest(CreateTestViewModel viewModel)
+        public Question GetQuestion(int id)
         {
-           
-            var questionModel = new Question
-            {
-                TestId = viewModel.Id,
-                Query = viewModel.Query,
-                Answer = viewModel.Answer
+            return _context.Question.Find(id);
+        }
 
-            };
+
+        public List<Question> GetAllQuestions(int id)
+        {
+            return _context.Question.Include(a => a.Test)
+                .Where(a => a.TestId == id)
+                .OrderBy(c => c.Id).ToList();
+        }
+
+
+        public void AddQuestion(int testId, Question questionModel)
+        {
+            questionModel.TestId = testId;
+
             _context.Question.Add(questionModel);
 
             _context.SaveChanges();
         }
 
-        public Question GetSingleQuestionModelByQuestionId(int id)
+      
+        public void UpdateQuestion(Question questionModel, int questionId)
         {
-            return _context.Question.Find(id);
-        }
+            var currentQuestionModel = GetQuestion(questionId);
 
-        public void UpdateQuestion(EditQuestionViewModel viewModel, int questionId)
-        {
-            var currentQuestionModel = GetSingleQuestionModelByQuestionId(questionId);
+            currentQuestionModel.Query = questionModel.Query;
 
-            currentQuestionModel.Query = viewModel.Query;
-
-            currentQuestionModel.Answer = viewModel.Answer;
+            currentQuestionModel.Answer = questionModel.Answer;
 
             currentQuestionModel.Test.ChangeDate = DateTime.Now;
             
             _context.SaveChanges();
-
         }
 
-        
 
-        public void RemoveQuestionFromTest(int id)
+        public void DeleteQuestion(int id)
         {
             // Viss logik implementerad för att jag inte vill sätta att provet ändrats innan jag är säker på att delete-raden exekeveras. 
             // Försöka effektivisera detta.
@@ -72,12 +73,7 @@ namespace StudiekollenNew.Repositories
 
         }
 
-        public List<Question> AllQuestionModelsByTestId(int id)
-        {
-            return _context.Question.Include(a => a.Test)
-                .Where(a => a.TestId == id)
-                .OrderBy(c => c.Id).ToList();
-        }
+       
 
         //public int NumberOfQuestionsForThisTest(int testId)
         //{

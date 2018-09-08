@@ -26,23 +26,28 @@ namespace StudiekollenNew.Controllers
         }
 
         [HttpPost]
-        public ActionResult NewTest(NewTestViewModel viewModel)
+        [ValidateAntiForgeryToken]
+        public ActionResult NewTest(Test testModel)
         {
 
             if (!ModelState.IsValid)
             {
+                var viewModel = new NewTestViewModel
+                {
+                    Name = testModel.Name
+                };
+
                 return View(viewModel);
             }
-            else
-            {
-                var userId = User.Identity.GetUserId();
 
-                var testService = new TestService(new RepositoryFactory());
+            var userId = User.Identity.GetUserId();
 
-                testService.AddTest(viewModel,userId);
+            var testService = new TestService(new RepositoryFactory());
 
-                return RedirectToAction("CreateTest", new {testName = viewModel.Name});
-            }
+            testService.AddTest(testModel);
+
+            return RedirectToAction("CreateTest", new {testName = testModel.Name});
+        
        }
 
         public ActionResult CreateTest(string testName)
@@ -58,41 +63,91 @@ namespace StudiekollenNew.Controllers
         }
 
         [HttpPost]
-        public ActionResult CreateTest(CreateTestViewModel viewModel)
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateTest(Question questionModel)
         {
-
             var repoFactory = new RepositoryFactory();
 
             var testService = new TestService(repoFactory);
-
+            
             var userId = User.Identity.GetUserId();
 
-            var recentTestName = testService.GetMostRecentTestName(userId);
+            var recentTestName = testService.GetMostRecentTest(userId).Name;
 
             if (!ModelState.IsValid)
             {
-                viewModel.Name = recentTestName;
+                var viewModel = new CreateTestViewModel
+                {
+                    Name = recentTestName,
+                    Query = questionModel.Query,
+                    Answer = questionModel.Answer
+                };
 
                 return View(viewModel);
             }
 
-            var questionService = new QuestionService(repoFactory);
-         
-            viewModel.Id = testService.GetMostRecentTestId(userId);
+            var testId = testService.GetMostRecentTest(userId).Id;
 
-            questionService.AddQuestionsToTest(viewModel);
+            var questionService = new QuestionService(repoFactory);
+
+            questionService.AddQuestion(testId,questionModel);
 
             return RedirectToAction("CreateTest", new {testName = recentTestName});
         }
 
+        public ViewResult UpdateTest(int testId)
+        {
+            var testService = new TestService(new RepositoryFactory());
+
+            var test = testService.GetTest(testId);
+
+            testService.UpdateTest(test,testId);
+
+            var viewModel = new UpdateTestViewModel
+            {
+                Name = test.Name,
+                TestId = testId
+                
+            };
+
+            TempData["viewModel"] = viewModel;
+
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult UpdateTest(Test test)
+        {
+            var tempModel = TempData["viewModel"] as UpdateTestViewModel;
+
+            TempData.Keep();
+
+            if (!ModelState.IsValid)
+            {
+                var viewModel = new UpdateTestViewModel
+                {
+                    Name = tempModel.Name,
+                };
+
+                return View(viewModel);
+            }
+
+            var testService = new TestService(new RepositoryFactory());
+
+            testService.UpdateTest(test, tempModel.TestId);
+
+            return RedirectToAction("HandleTest", "Test", new { id = tempModel.TestId });
+        }
+
+
         public ViewResult SearchForTest()
         {
-
             var userService = new UserService(new RepositoryFactory());
 
             var allUsers = userService.GetAllUsers();
 
-            var vievModel = new FindTestViewModel
+            var vievModel = new SearchTestViewModel
             {
                 Users = allUsers,
             };
@@ -101,26 +156,26 @@ namespace StudiekollenNew.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult SearchForTest(string userName)
         {
+            // If-satsen kan ta bort helt om du listar ut hur du kan göra alternativet "välj användare" unselectable via koden i din view.
             if (string.IsNullOrWhiteSpace(userName))
             {
                 return RedirectToAction("SearchForTest");
             }
-            else
-            {                 
-                return RedirectToAction("Details", new { userNameSelected = userName});
-            }
 
+            return RedirectToAction("DetailsTest", new { userNameSelected = userName});
+            
         }
 
-        public ViewResult Details(string userNameSelected)
+        public ViewResult DetailsTest(string userNameSelected)
         {
             var testService = new TestService(new RepositoryFactory());
 
             var allTests = testService.GetAllTestsForThisUserName(userNameSelected);
 
-            var viewmodel = new FindTestViewModel
+            var viewmodel = new SearchTestViewModel
             {
                 AllTests = allTests,
                 Username = userNameSelected,                     
@@ -135,20 +190,18 @@ namespace StudiekollenNew.Controllers
 
             var testService = new TestService(repoFactory);
 
-            var testModel = testService.GetSingleTestModelByTestId(id);
-
             var userService = new UserService(repoFactory);
 
             var userId = User.Identity.GetUserId();
 
-            var userName = userService.GetUserByUserId(userId).UserName;
+            var userName = userService.GetUser(userId).UserName;
 
-            testService.RemoveTest(testModel);
+            testService.DeleteTest(id);
 
-            return RedirectToAction("Details", new {userNameSelected = userName});
+            return RedirectToAction("DetailsTest", new {userNameSelected = userName});
         }
 
-        public ViewResult EditTest(int id)
+        public ViewResult HandleTest(int id)
         {
             var repoFactory = new RepositoryFactory();
 
@@ -156,11 +209,11 @@ namespace StudiekollenNew.Controllers
 
             var testService = new TestService(repoFactory);
 
-            var testName = testService.GetSingleTestModelByTestId(id).Name;
+            var testName = testService.GetTest(id).Name;
 
-            var questionModels = questionService.AllQuestionsModelsByTestId(id);
+            var questionModels = questionService.GetAllQuestions(id);
 
-            var viewModel = new EditTestViewModel
+            var viewModel = new HandleTestViewModel
             {
                 TestId = id,
                 TestName = testName,

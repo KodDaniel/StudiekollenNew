@@ -8,11 +8,11 @@ namespace StudiekollenNew.ViewModels
 {
     public class CreateTestViewModel
     {
-        public int Id { get; set; }
+        public int TestId { get; set; }
 
         public string Name { get; set; }
 
-        [Required]
+        [Required (ErrorMessage = "Du måste fylla i en fråga.")]
         [Display(Name = "Fråga")]
         public string Query { get; set; }
 

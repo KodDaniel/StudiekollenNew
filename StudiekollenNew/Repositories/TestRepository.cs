@@ -6,10 +6,19 @@ using System.Web;
 using StudiekollenNew.Models;
 using StudiekollenNew.ViewModels;
 using StudiekollenNew.ViewModels.TestViewModels;
-using NetPipeStyleUriParser = System.NetPipeStyleUriParser;
+using Microsoft.AspNet.Identity;
+using System.Web.Mvc;
+using System.Security.Claims;
+using System.Collections;
+using System.Web.WebPages;
+using StudiekollenNew.DataBase;
+using StudiekollenNew.Repositories;
+using StudiekollenNew.Services;
+
 
 namespace StudiekollenNew.Repositories
 {
+
     public class TestRepository
     {
         private ApplicationDbContext _context;
@@ -19,75 +28,79 @@ namespace StudiekollenNew.Repositories
             _context = context;
         }
 
+        public Test GetTest(int id)
+        {
+            return _context.Test.Find(id);
+        }
+
         public IEnumerable<Test> GetAllTests()
         {
             return _context.Test.ToList();
         }
 
-        public void AddTest(NewTestViewModel viewModel, string userId)
-        {
-            var testModel = new Test
-            {
-                Id = viewModel.TestId,
-                Name = viewModel.Name,               
-                UserId = userId
-            };
-
-            _context.Test.Add(testModel);
-
-            _context.SaveChanges();
-        }
-
-        public void RemoveTest(Test testModel)
-        {
-            _context.Test.Remove(testModel);
-
-            _context.SaveChanges();
-        }
-
-        public int GetMostRecentTestIdFromThisUser(string currentUserId)
+        public Test GetMostRecentTest(string currentUserId)
         {
             // Substitut för Last-operator. Tänk på att du ej behöver EagerLoda med "Include" eftersom som du ju här rör dig i en och samma tabell.
             return _context.Test
                 .OrderByDescending(c => c.Id)
-                .First(c => c.UserId == currentUserId).Id;
+                .First(c => c.UserId == currentUserId);
         }
 
-        public string GetMostRecentTestNameFromThisUser(string currentUserId)
-        {
-            // Substitut för Last-operator. Tänk på att du ej behöver EagerLoda med "Include" eftersom som du ju här rör dig i en och samma tabell.
-            return _context.Test
-                .OrderByDescending(c => c.Id)
-                .First(c => c.UserId == currentUserId).Name;
-        }
 
         public IEnumerable<Test> GetAllTestsForThisUserName(string userName)
         {
             return _context.Test.
-                Include(a => a.User).Include(a=>a.Questions)
+                Include(a => a.User).Include(a => a.Questions)
                 .Where(a => a.User.UserName == userName)
-                .OrderByDescending(c=>c.CreateDate)
-                .ThenByDescending(c=>c.ChangeDate)
+                .OrderByDescending(c => c.CreateDate)
+                .ThenByDescending(c => c.ChangeDate)
                 .ToList();
         }
 
         public IEnumerable<Test> GetAllTestsForThisUserId(string userId)
         {
             return _context.Test.
-                Include(a => a.User).Where(a=>a.UserId == userId).Include(a => a.Questions)             
+                Include(a => a.User).Where(a => a.UserId == userId).Include(a => a.Questions)
                 .OrderByDescending(c => c.CreateDate)
                 .ThenByDescending(c => c.ChangeDate)
                 .ToList();
         }
 
-        public Test GetSingleTestModelByTestId(int id)
+
+        public void AddTest(Test testModel)
         {
-            return _context.Test.Find(id);
+            _context.Test.Add(testModel);
+
+            _context.SaveChanges();
         }
 
-        
+        public void DeleteTest(int id)
+        {
+            var test = _context.Test
+                .Single(a => a.Id == id);
 
-       
+            _context.Test.Remove(test);
+
+            _context.SaveChanges();
+        }
+
+        public void UpdateTest(Test test, int testId)
+        {
+            var currentTest = GetTest(testId);
+
+            currentTest.Name = test.Name;
+
+            currentTest.ChangeDate = DateTime.Now;
+           
+            _context.SaveChanges();
+        }
+
+
+
+
+
+
+
 
 
     }

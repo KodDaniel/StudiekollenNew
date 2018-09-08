@@ -9,15 +9,19 @@ namespace StudiekollenNew.ViewModels
 {
     public class EditQuestionViewModel
     {
+        public int TestId { get; set; }
 
         public string Name { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Du måste fylla i en fråga.")]
         [Display(Name = "Fråga")]
         public string Query { get; set; }
 
         [Display(Name = "Svar")]
         public string Answer { get; set; }
+
+        public int QuestionId { get; set; }
+
 
     }
 }

@@ -23,20 +23,11 @@ namespace StudiekollenNew.Services
             return _testRepository.GetAllTests();
         }
 
-        public void AddTest(NewTestViewModel viewModel, string userId)
+        public Test GetMostRecentTest(string currentUserId)
         {
-            _testRepository.AddTest(viewModel,userId);
+            return _testRepository.GetMostRecentTest(currentUserId);
         }
 
-        public int GetMostRecentTestId(string currentUserId)
-        {
-            return _testRepository.GetMostRecentTestIdFromThisUser(currentUserId);
-        }
-
-        public string GetMostRecentTestName(string currentUserId)
-        {
-            return _testRepository.GetMostRecentTestNameFromThisUser(currentUserId);
-        }
 
         public IEnumerable<Test> GetAllTestsForThisUserName(string userName)
         {
@@ -48,15 +39,25 @@ namespace StudiekollenNew.Services
             return _testRepository.GetAllTestsForThisUserId(userId);
         }
 
-
-        public Test GetSingleTestModelByTestId(int id)
+        public Test GetTest(int id)
         {
-           return _testRepository.GetSingleTestModelByTestId(id);
+            return _testRepository.GetTest(id);
         }
 
-        public void RemoveTest(Test testModel)
+        public void AddTest(Test testModel)
         {
-            _testRepository.RemoveTest(testModel);
+            _testRepository.AddTest(testModel);
+        }
+
+    
+        public void DeleteTest(int id)
+        {
+            _testRepository.DeleteTest(id);
+        }
+
+        public void UpdateTest(Test test, int testId)
+        {
+            _testRepository.UpdateTest(test,testId);
         }
 
 

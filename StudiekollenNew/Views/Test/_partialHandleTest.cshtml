@@ -1,0 +1,10 @@
+﻿<h2>@Model.TestName</h2><br />
+
+<h4>Provet har inga frågor.</h4><br />
+
+@Html.ActionLink("Lägg till ny fråga", "AddQuestionToTest", "Question", new { testName = Model.TestName, testId = Model.TestId }, new { @class = "btn btn-default" })
+<text>&nbsp;&nbsp;&nbsp;</text>
+@Html.ActionLink("Ändra provnamn", "UpdateTest", "Test", new { testId = Model.TestId }, new { @class = "btn btn-default" })<br />
+
+
+

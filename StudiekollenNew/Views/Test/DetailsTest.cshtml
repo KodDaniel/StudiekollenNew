@@ -1,13 +1,11 @@
-﻿@model StudiekollenNew.ViewModels.FindTestViewModel
-@{
-    ViewBag.Title = "Details";
-}
+﻿@model StudiekollenNew.ViewModels.SearchTestViewModel
 
-    <h3>Prov tillhörande @Model.Username:</h3><br/>
+<h3>Prov tillhörande @Model.Username:</h3><br/>
        
   @if (!Model.AllTests.Any())
   {
-      <h5><strong>Denna användare har inga prov sparade</strong>.</h5>
+      @Html.Partial("_partialDetails")
+
   }
   else
   {
@@ -21,12 +19,11 @@
               <th></th>
           </tr>
                
-
           @foreach (var test in Model.AllTests)
           {
               <tr>
 
-                  <td>@Html.ActionLink(test.Name, "EditTest", "Test", new {id = test.Id}, null)</td>
+                  <td>@Html.ActionLink(test.Name, "HandleTest", "Test", new {id = test.Id}, null)</td>
                     
                   @if (!test.Questions.Any())
                   {
@@ -48,8 +45,6 @@
                       <td>@test.ChangeDate</td>
                   }
                   <td>@Html.ActionLink("Radera prov", "DeleteTest", "Test", new {id = test.Id}, null)</td>
-
-
               </tr>
           }
 
