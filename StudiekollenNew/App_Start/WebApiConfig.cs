@@ -11,11 +11,6 @@ namespace StudiekollenNew
     {
         public static void Register(HttpConfiguration config)
         {
-            // fixar Camel Case
-            var settings = config.Formatters.JsonFormatter.SerializerSettings;
-            settings.ContractResolver = new CamelCasePropertyNamesContractResolver();
-            settings.Formatting = Formatting.Indented;
-
             config.MapHttpAttributeRoutes();
 
             config.Routes.MapHttpRoute(
