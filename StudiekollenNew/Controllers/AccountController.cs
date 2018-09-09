@@ -21,7 +21,7 @@ namespace StudiekollenNew.Controllers
 
         public AccountController()
         {
-            // ost 
+           
         }
 
         public AccountController(UserManager userManager, ApplicationSignInManager signInManager )
