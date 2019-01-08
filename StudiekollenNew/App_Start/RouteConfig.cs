@@ -12,7 +12,10 @@ namespace StudiekollenNew
     {
         public static void RegisterRoutes(RouteCollection routes)
         {
-            routes.IgnoreRoute("{resource}.axd/{*pathInfo}");           
+            routes.IgnoreRoute("{resource}.axd/{*pathInfo}");   
+            
+            // Aktiverar attribute - routing. 
+            routes.MapMvcAttributeRoutes();
 
             routes.MapRoute(
                 name: "Default",

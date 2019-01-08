@@ -9,7 +9,6 @@ namespace StudiekollenNew.Models
     public class Test
     {
         public int Id { get; set; }
-
         [Required(ErrorMessage = "Du måste fylla i ett provnamn.")]
         [Display(Name = "Provnamn")]
         public string Name { get; set; }

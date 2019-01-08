@@ -18,6 +18,15 @@ namespace StudiekollenNew.Controllers
 
     public class TestController : Controller
     {
+        // Denna Action returnerar det användarnamn...
+        // ... som skrivs in med hjälp av Router-attibuting. 
+        [Route("Test/{userName}")]
+        public ActionResult ReturnUsernameFromUrl(string userName)
+        {
+            return Content(userName);
+
+        }
+
         public ViewResult NewTest()
         {
             var viewModel = new NewTestViewModel();
