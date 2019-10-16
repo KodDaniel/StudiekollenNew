@@ -22,7 +22,7 @@ namespace StudiekollenNew.Controllers
         {
             var viewModel = new NewTestViewModel();
 
-            return View(viewModel);
+            return View(viewModel);  
         }
 
         [HttpPost]
