@@ -157,10 +157,10 @@ namespace StudiekollenNew.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    var roleStore = new RoleStore<IdentityRole>(new ApplicationDbContext());
-                    var roleManager = new RoleManager<IdentityRole>(roleStore);
-                    await roleManager.CreateAsync(new IdentityRole("Member"));
-                    await UserManager.AddToRoleAsync(user.Id, "Member");
+                    //var roleStore = new RoleStore<IdentityRole>(new ApplicationDbContext());
+                    //var roleManager = new RoleManager<IdentityRole>(roleStore);
+                    //await roleManager.CreateAsync(new IdentityRole("Member"));
+                    //await UserManager.AddToRoleAsync(user.Id, "Member");
 
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
                     
