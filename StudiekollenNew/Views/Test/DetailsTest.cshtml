@@ -1,6 +1,6 @@
 ﻿@model StudiekollenNew.ViewModels.SearchTestViewModel
 
-<h3>Prov tillhörande @Model.Username:</h3><br/>
+@*<h3>Prov tillhörande @Model.Username:</h3><br/>*@
        
   @if (!Model.AllTests.Any())
   {
@@ -23,7 +23,7 @@
           {
               <tr>
 
-                  <td>@Html.ActionLink(test.Name, "HandleTest", "Test", new {id = test.Id}, null)</td>
+                  <td>@Html.ActionLink(test.Name, "HandleTest", "Test", new {testId = test.Id}, null)</td>
                     
                   @if (!test.Questions.Any())
                   {
@@ -44,11 +44,13 @@
                   {
                       <td>@test.ChangeDate</td>
                   }
-                  <td>@Html.ActionLink("Radera prov", "DeleteTest", "Test", new {id = test.Id}, null)</td>
+                  <td>@Html.ActionLink("Radera prov", "DeleteTest", "Test", new {testId = test.Id}, null)</td>
               </tr>
           }
 
       </table>
+
+      <h4>@Html.ActionLink("Tillbaka", "SearchForTest", "Test", null) </h4>
   }
 
 

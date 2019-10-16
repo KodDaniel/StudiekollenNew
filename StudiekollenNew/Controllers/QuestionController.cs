@@ -10,6 +10,7 @@ using StudiekollenNew.ViewModels;
 
 namespace StudiekollenNew.Controllers
 {
+    [Authorize]
     public class QuestionController : Controller
     {
         public ActionResult DeleteQuestion(int questionId, int testId)
@@ -18,7 +19,7 @@ namespace StudiekollenNew.Controllers
 
             questionService.DeleteTest(questionId);
 
-            return RedirectToAction("HandleTest", "Test", new { id = testId });
+            return RedirectToAction("HandleTest", "Test", new { testId = testId });
         }
 
 
@@ -69,7 +70,7 @@ namespace StudiekollenNew.Controllers
 
             questionService.UpdateQuestion(questionModel,tempModel.QuestionId);
 
-            return RedirectToAction("HandleTest", "Test", new { id = tempModel.TestId});
+            return RedirectToAction("HandleTest", "Test", new { testId = tempModel.TestId});
         }
 
         public ActionResult AddQuestionToTest(string testName, int testId)
@@ -104,7 +105,7 @@ namespace StudiekollenNew.Controllers
                 };
 
                 return View(viewModel);
-             }
+            }
 
             var testId = tempModel.TestId;
 
@@ -114,7 +115,7 @@ namespace StudiekollenNew.Controllers
 
             questionService.AddQuestion(testId, questionModel);
 
-            return RedirectToAction("HandleTest", "Test", new { id = testId });
+            return RedirectToAction("HandleTest", "Test", new { testId = testId });
 
         }
 

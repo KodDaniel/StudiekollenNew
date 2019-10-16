@@ -29,9 +29,9 @@ namespace StudiekollenNew.Services
         }
 
 
-        public IEnumerable<Test> GetAllTestsForThisUserName(string userName)
+        public IEnumerable<Test> GetAllTestsForThisTestId(int testId)
         {
-            return _testRepository.GetAllTestsForThisUserName(userName);
+            return _testRepository.GetAllTestsForThisTestId(testId);
         }
 
         public IEnumerable<Test> GetAllTestsForThisUserId(string userId)
