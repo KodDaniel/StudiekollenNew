@@ -27,6 +27,7 @@ namespace StudiekollenNew.Models
         public DbSet<Exam> Exam { get; set; }
         public DbSet<Question> Question{ get; set; }
 
+        //public DbSet<ExamStats> ExamStats { get; set; }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             //modelBuilder.Entity<Test>().Property(t => t.Id).HasColumnName("ExamId");

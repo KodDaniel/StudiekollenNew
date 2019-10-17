@@ -234,29 +234,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201808231135013_intial.cs" />
-    <Compile Include="Migrations\201808231135013_intial.Designer.cs">
-      <DependentUpon>201808231135013_intial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201808231140398_test.cs" />
-    <Compile Include="Migrations\201808231140398_test.Designer.cs">
-      <DependentUpon>201808231140398_test.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201809011033108_hej.cs" />
-    <Compile Include="Migrations\201809011033108_hej.Designer.cs">
-      <DependentUpon>201809011033108_hej.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201809051345060_currentState.cs" />
-    <Compile Include="Migrations\201809051345060_currentState.Designer.cs">
-      <DependentUpon>201809051345060_currentState.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201809071217423_s.cs" />
-    <Compile Include="Migrations\201809071217423_s.Designer.cs">
-      <DependentUpon>201809071217423_s.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201809081559265_intial1.cs" />
-    <Compile Include="Migrations\201809081559265_intial1.Designer.cs">
-      <DependentUpon>201809081559265_intial1.cs</DependentUpon>
+    <Compile Include="Migrations\201910170633094_start.cs" />
+    <Compile Include="Migrations\201910170633094_start.Designer.cs">
+      <DependentUpon>201910170633094_start.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Repositories\QuestionRepository.cs" />
@@ -274,7 +254,6 @@
     <Compile Include="ViewModels\ExamViewModels\SearchExamViewModel.cs" />
     <Compile Include="ViewModels\ManageViewModels.cs" />
     <Compile Include="DomainModels\Question.cs" />
-    <Compile Include="DomainModels\Test.cs" />
     <Compile Include="DomainModels\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -374,23 +353,8 @@
     <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201808231135013_intial.resx">
-      <DependentUpon>201808231135013_intial.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201808231140398_test.resx">
-      <DependentUpon>201808231140398_test.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201809011033108_hej.resx">
-      <DependentUpon>201809011033108_hej.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201809051345060_currentState.resx">
-      <DependentUpon>201809051345060_currentState.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201809071217423_s.resx">
-      <DependentUpon>201809071217423_s.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201809081559265_intial1.resx">
-      <DependentUpon>201809081559265_intial1.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201910170633094_start.resx">
+      <DependentUpon>201910170633094_start.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

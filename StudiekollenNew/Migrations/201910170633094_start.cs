@@ -3,37 +3,39 @@ namespace StudiekollenNew.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class intial : DbMigration
+    public partial class start : DbMigration
     {
         public override void Up()
         {
             CreateTable(
-                "dbo.Question",
+                "dbo.Exams",
+                c => new
+                    {
+                        ExamId = c.Int(nullable: false, identity: true),
+                        ExamName = c.String(),
+                        CreateDate = c.DateTime(nullable: false),
+                        ChangeDate = c.DateTime(),
+                        SendReminderDate = c.DateTime(),
+                        ExamTime = c.Time(precision: 7),
+                        RandomOrder = c.Boolean(),
+                        UserId = c.String(maxLength: 128),
+                    })
+                .PrimaryKey(t => t.ExamId)
+                .ForeignKey("dbo.AspNetUsers", t => t.UserId)
+                .Index(t => t.UserId);
+            
+            CreateTable(
+                "dbo.Questions",
                 c => new
                     {
                         QuestionId = c.Int(nullable: false, identity: true),
                         Query = c.String(),
                         Answer = c.String(),
-                        Result = c.String(maxLength: 20),
-                        TestId = c.Int(nullable: false),
+                        ExamId = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.QuestionId)
-                .ForeignKey("dbo.Test", t => t.TestId, cascadeDelete: true)
-                .Index(t => t.TestId);
-            
-            CreateTable(
-                "dbo.Test",
-                c => new
-                    {
-                        TestId = c.Int(nullable: false, identity: true),
-                        Name = c.String(nullable: false, maxLength: 100),
-                        CreateDate = c.DateTime(),
-                        ChangeDate = c.DateTime(),
-                        UserId = c.String(nullable: false, maxLength: 128),
-                    })
-                .PrimaryKey(t => t.TestId)
-                .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: true)
-                .Index(t => t.UserId);
+                .ForeignKey("dbo.Exams", t => t.ExamId, cascadeDelete: true)
+                .Index(t => t.ExamId);
             
             CreateTable(
                 "dbo.AspNetUsers",
@@ -59,12 +61,12 @@ namespace StudiekollenNew.Migrations
                 "dbo.AspNetUserClaims",
                 c => new
                     {
-                        UserClaimId = c.Int(nullable: false, identity: true),
+                        Id = c.Int(nullable: false, identity: true),
                         UserId = c.String(nullable: false, maxLength: 128),
                         ClaimType = c.String(),
                         ClaimValue = c.String(),
                     })
-                .PrimaryKey(t => t.UserClaimId)
+                .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: true)
                 .Index(t => t.UserId);
             
@@ -97,47 +99,37 @@ namespace StudiekollenNew.Migrations
                 "dbo.AspNetRoles",
                 c => new
                     {
-                        RoleId = c.String(nullable: false, maxLength: 128),
+                        Id = c.String(nullable: false, maxLength: 128),
                         Name = c.String(nullable: false, maxLength: 256),
                     })
-                .PrimaryKey(t => t.RoleId)
+                .PrimaryKey(t => t.Id)
                 .Index(t => t.Name, unique: true, name: "RoleNameIndex");
-            
-            CreateTable(
-                "dbo.RoleViewModel",
-                c => new
-                    {
-                        Id = c.String(nullable: false, maxLength: 128),
-                        Name = c.String(),
-                    })
-                .PrimaryKey(t => t.Id);
             
         }
         
         public override void Down()
         {
             DropForeignKey("dbo.AspNetUserRoles", "RoleId", "dbo.AspNetRoles");
-            DropForeignKey("dbo.Question", "ExamId", "dbo.Test");
-            DropForeignKey("dbo.Test", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserRoles", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserLogins", "UserId", "dbo.AspNetUsers");
+            DropForeignKey("dbo.Exams", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserClaims", "UserId", "dbo.AspNetUsers");
+            DropForeignKey("dbo.Questions", "ExamId", "dbo.Exams");
             DropIndex("dbo.AspNetRoles", "RoleNameIndex");
             DropIndex("dbo.AspNetUserRoles", new[] { "RoleId" });
             DropIndex("dbo.AspNetUserRoles", new[] { "UserId" });
             DropIndex("dbo.AspNetUserLogins", new[] { "UserId" });
             DropIndex("dbo.AspNetUserClaims", new[] { "UserId" });
             DropIndex("dbo.AspNetUsers", "UserNameIndex");
-            DropIndex("dbo.Test", new[] { "UserId" });
-            DropIndex("dbo.Question", new[] { "ExamId" });
-            DropTable("dbo.RoleViewModel");
+            DropIndex("dbo.Questions", new[] { "ExamId" });
+            DropIndex("dbo.Exams", new[] { "UserId" });
             DropTable("dbo.AspNetRoles");
             DropTable("dbo.AspNetUserRoles");
             DropTable("dbo.AspNetUserLogins");
             DropTable("dbo.AspNetUserClaims");
             DropTable("dbo.AspNetUsers");
-            DropTable("dbo.Test");
-            DropTable("dbo.Question");
+            DropTable("dbo.Questions");
+            DropTable("dbo.Exams");
         }
     }
 }
