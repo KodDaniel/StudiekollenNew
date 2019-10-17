@@ -256,6 +256,7 @@
     <Compile Include="Services\UserService.cs" />
     <Compile Include="ViewModels\AccountViewModels.cs" />
     <Compile Include="DatabaseContext\ApplicationDbContext.cs" />
+    <Compile Include="ViewModels\ExamViewModels\ExamConfirmationViewModel.cs" />
     <Compile Include="ViewModels\QuestionsViewModels\UpdateQuestionViewModel.cs" />
     <Compile Include="ViewModels\ExamViewModels\PlaceholderViewModel.cs" />
     <Compile Include="ViewModels\ExamViewModels\HandleExamViewModel.cs" />
@@ -343,6 +344,7 @@
     <Content Include="Views\Exam\CreateExam.cshtml" />
     <Content Include="Views\Exam\ReminderDateInput.cshtml" />
     <Content Include="Views\Exam\TimeInput.cshtml" />
+    <Content Include="Views\Exam\ExamConfirmation.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

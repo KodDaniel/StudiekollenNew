@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -12,6 +13,7 @@ using StudiekollenNew.Models;
 using StudiekollenNew.Repositories;
 using StudiekollenNew.Services;
 using StudiekollenNew.ViewModels;
+using StudiekollenNew.ViewModels.ExamViewModels;
 using StudiekollenNew.ViewModels.TestViewModels;
 using CreateExamViewModel = StudiekollenNew.ViewModels.ExamViewModels.CreateExamViewModel;
 
@@ -22,27 +24,25 @@ namespace StudiekollenNew.Controllers
     [Authorize]
     public class ExamController : Controller
     {
-        public ViewResult CreateExam()
+       
+        public ViewResult CreateExam(bool? regret)
         {
-            var viewModel = new CreateExamViewModel();
+            //return regret is null ? View(new CreateExamViewModel()): 
+            //View(TempData["examViewModel"] as CreateExamViewModel);
 
-            return View(viewModel); 
+            // Om bool inte är null har användaren ångrat sig (från examconfirmation)
+            if (regret is null)
+            {
+                var viewModel = new CreateExamViewModel();
+
+                return View(viewModel);
+            }
+
+            var tempModel = TempData["examViewModel"] as CreateExamViewModel;
+
+            return View(tempModel);
+
         }
-
-        //public ActionResult Empty()
-        //{
-        //    return new EmptyResult();
-        //}
-
-        //public ActionResult ReminderDateInput()
-        //{
-        //    return PartialView("ReminderDateInput");
-        //}
-
-        //public ActionResult TimeInput()
-        //{
-        //    return PartialView("TimeInput");
-        //}
 
 
         [HttpPost]
@@ -54,6 +54,43 @@ namespace StudiekollenNew.Controllers
             {
                 return View(viewExamModel);
             }
+
+            TempData["examViewModel"] = viewExamModel;
+
+
+            return RedirectToAction("ExamConfirmation");
+
+        }
+
+
+        public ActionResult ExamConfirmation()
+        {
+            var tempModel = TempData["examViewModel"] as CreateExamViewModel;
+
+            TempData.Keep();
+
+            string timeKeeping = (tempModel.ExamTimeBool is true) ? "Ja" : "Nej";
+            string sendReminder =  (tempModel.ReminderDateBool is true) ? "Ja" : "Nej";
+            string randomOrder = (tempModel.RandomOrder is true) ? "Ja" : "Nej";
+
+
+            var confirmationModel = new ExamConfirmationViewModel
+            {
+                ExamName = tempModel.ExamName,
+                Timekeeping = timeKeeping,
+                Duration = tempModel.ExamTime.ToString(),
+                SendReminder = sendReminder,
+                ReminderDate = tempModel.SendReminderDate.ToString(),
+                Randomorder = randomOrder
+            };
+
+            return View(confirmationModel);
+
+        }
+
+        public ActionResult SaveExam()
+        {
+            var viewExamModel = TempData["examViewModel"] as CreateExamViewModel;
 
             var examService = new ExamService(new RepositoryFactory());
 
@@ -67,8 +104,7 @@ namespace StudiekollenNew.Controllers
 
             examService.AddExam(examModel, User.Identity.GetUserId());
 
-            return RedirectToAction("Placeholder", new { examName = examModel.ExamName});
-
+            return RedirectToAction("DetailsExam");
         }
 
         public ActionResult Placeholder(string examName)
@@ -91,9 +127,7 @@ namespace StudiekollenNew.Controllers
 
             var examService = new ExamService(repoFactory);
             
-            var userId = User.Identity.GetUserId();
-
-            var recentExamName = examService.GetMostRecentExam(userId).ExamName;
+            var recentExamName = examService.GetMostRecentExam(User.Identity.GetUserId()).ExamName;
 
             if (!ModelState.IsValid)
             {
@@ -107,11 +141,11 @@ namespace StudiekollenNew.Controllers
                 return View(viewModel);
             }
 
-            var ExamId = examService.GetMostRecentExam(userId).ExamId;
+            var examId = examService.GetMostRecentExam(User.Identity.GetUserId()).ExamId;
 
             var questionService = new QuestionService(repoFactory);
 
-            questionService.AddQuestion(ExamId,questionModel);
+            questionService.AddQuestion(examId,questionModel);
 
             return RedirectToAction("Placeholder", new {examName = recentExamName});
         }
@@ -132,6 +166,7 @@ namespace StudiekollenNew.Controllers
             };
 
             TempData["viewModel"] = viewModel;
+
 
             return View(viewModel);
         }

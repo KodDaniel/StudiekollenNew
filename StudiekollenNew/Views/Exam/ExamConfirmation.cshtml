@@ -1,0 +1,67 @@
+﻿@model StudiekollenNew.ViewModels.ExamViewModels.ExamConfirmationViewModel
+
+
+<div>
+    <h2>Bekräfta inställningar för provet @Model.ExamName</h2>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ExamName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ExamName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Timekeeping)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Timekeeping)
+        </dd>
+
+        @if (Model.Timekeeping == "Ja")
+        {
+            <dt>
+                @Html.DisplayNameFor(model => model.Duration)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Duration)
+            </dd>
+        }
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SendReminder)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SendReminder)
+        </dd>
+
+        @if (Model.SendReminder == "Ja")
+        {
+            <dt>
+                @Html.DisplayNameFor(model => model.ReminderDate)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ReminderDate)
+            </dd>
+        }
+        <dt>
+            @Html.DisplayNameFor(model => model.Randomorder)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Randomorder)
+        </dd><br />
+
+        @Html.ActionLink("Gå Tillbaka", "CreateExam", "Exam",
+            new { regret = true }, new { @class = "btn btn-default" })
+
+        @Html.ActionLink("Spara", "SaveExam", "Exam", 
+            null, new { @class = "btn btn-default" })
+    </dl>
+</div>
