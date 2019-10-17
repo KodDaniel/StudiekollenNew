@@ -19,32 +19,32 @@
               <th></th>
           </tr>
                
-          @foreach (var test in Model.AllExams)
+          @foreach (var exam in Model.AllExams)
           {
               <tr>
 
-                  <td>@Html.ActionLink(test.Name, "HandleExam", "Exam", new {testId = test.Id}, null)</td>
+                  <td>@Html.ActionLink(exam.ExamName, "HandleExam", "Exam", new {examId = exam.ExamId}, null)</td>
                     
-                  @if (!test.Questions.Any())
+                  @if (!exam.Questions.Any())
                   {
                       <td>0</td>
                   }
                   else
                   {
-                      <td>@test.Questions.Count()</td>
+                      <td>@exam.Questions.Count()</td>
                   }
                     
-                  <td>@test.CreateDate</td>
+                  <td>@exam.CreateDate</td>
 
-                  @if (test.ChangeDate is null)
+                  @if (exam.ChangeDate is null)
                   {
                       <td>Har aldrig ändrats</td>
                   }
                   else
                   {
-                      <td>@test.ChangeDate</td>
+                      <td>@exam.ChangeDate</td>
                   }
-                  <td>@Html.ActionLink("Radera prov", "DeleteExam", "Exam", new {testId = test.Id}, null)</td>
+                  <td>@Html.ActionLink("Radera prov", "DeleteExam", "Exam", new {examId = exam.ExamId}, null)</td>
               </tr>
           }
 

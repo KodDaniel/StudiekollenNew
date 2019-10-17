@@ -142,7 +142,10 @@ input::-moz-focus-inner {
 }
 input {
   line-height: normal;
+
 }
+
+
 input[type="checkbox"],
 input[type="radio"] {
   -webkit-box-sizing: border-box;

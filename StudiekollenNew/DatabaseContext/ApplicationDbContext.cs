@@ -30,38 +30,30 @@ namespace StudiekollenNew.Models
         //public DbSet<ExamStats> ExamStats { get; set; }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            //modelBuilder.Entity<Test>().Property(t => t.Id).HasColumnName("ExamId");
-            //modelBuilder.Entity<Test>().Property(t => t.ExamName).HasMaxLength(100).IsRequired();
-            //modelBuilder.Entity<Test>().Property(t => t.CreateDate).IsOptional();
-            //modelBuilder.Entity<Test>().Property(t => t.ChangeDate).IsOptional();
+           
+            modelBuilder.Entity<Exam>().Property(t => t.ExamName).HasMaxLength(100).IsRequired();
+            modelBuilder.Entity<Exam>().Property(t => t.CreateDate).IsRequired();
+            modelBuilder.Entity<Exam>().Property(t => t.CreateDate).IsRequired();
+            modelBuilder.Entity<Exam>().Property(d => d.CreateDate).HasColumnType("datetime2");
+            modelBuilder.Entity<Exam>().Property(d => d.ChangeDate).HasColumnType("datetime2");
 
 
 
-
-            //modelBuilder.Entity<Question>().Property(t => t.Id).HasColumnName("QuestionId");
-            //modelBuilder.Entity<Question>().Property(t => t.Answer).IsOptional();
-            //modelBuilder.Entity<Question>().Property(t => t.Result).HasMaxLength(20).IsOptional();
-
-
-            //modelBuilder.Entity<Exam>().Property(e=>e.)
+            modelBuilder.Entity<Exam>()
+                .HasRequired(c => c.User)
+                .WithMany(a => a.Exams)
+                .HasForeignKey(c => c.UserId)
+                .WillCascadeOnDelete(true);
 
 
-            //#region Relations
-            //modelBuilder.Entity<Test>()
-            //    .HasRequired(c => c.User)
-            //    .WithMany(a => a.Test)
-            //    .HasForeignKey(c => c.UserId)
-            //    .WillCascadeOnDelete(true);
-
-            //modelBuilder.Entity<Question>()
-            //    .HasRequired(c => c.Test)
-            //    .WithMany(a => a.Questions)
-            //    .HasForeignKey(c => c.ExamId)
-            //    .WillCascadeOnDelete(true);
-            //#endregion
+            modelBuilder.Entity<Question>()
+                .HasRequired(c => c.Exam)
+                .WithMany(a => a.Questions)
+                .HasForeignKey(c => c.ExamId)
+                .WillCascadeOnDelete(true);
 
 
-   
+
             base.OnModelCreating(modelBuilder);
         }
 

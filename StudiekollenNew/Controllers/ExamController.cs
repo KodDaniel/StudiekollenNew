@@ -13,6 +13,8 @@ using StudiekollenNew.Repositories;
 using StudiekollenNew.Services;
 using StudiekollenNew.ViewModels;
 using StudiekollenNew.ViewModels.TestViewModels;
+using CreateExamViewModel = StudiekollenNew.ViewModels.ExamViewModels.CreateExamViewModel;
+
 
 namespace StudiekollenNew.Controllers
 {
@@ -20,43 +22,59 @@ namespace StudiekollenNew.Controllers
     [Authorize]
     public class ExamController : Controller
     {
-        public ViewResult NewExam()
+        public ViewResult CreateExam()
         {
-            var viewModel = new NewExamViewModel();
+            var viewModel = new CreateExamViewModel();
 
             return View(viewModel); 
         }
 
+        //public ActionResult Empty()
+        //{
+        //    return new EmptyResult();
+        //}
+
+        //public ActionResult ReminderDateInput()
+        //{
+        //    return PartialView("ReminderDateInput");
+        //}
+
+        //public ActionResult TimeInput()
+        //{
+        //    return PartialView("TimeInput");
+        //}
+
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult NewExam(Exam examModel)
+        public ActionResult CreateExam(CreateExamViewModel viewExamModel)
         {
 
             if (!ModelState.IsValid)
             {
-                var viewModel = new NewExamViewModel
-                {
-                    ExamName = examModel.ExamName
-                };
-
-                return View(viewModel);
+                return View(viewExamModel);
             }
-
-            var userId = User.Identity.GetUserId();
 
             var examService = new ExamService(new RepositoryFactory());
 
-            examService.AddExam(examModel,userId);
+            var examModel = new Exam
+            {
+                ExamName = viewExamModel.ExamName,
+                ExamTime = viewExamModel.ExamTime,
+                SendReminderDate = viewExamModel.SendReminderDate,
+                RandomOrder = viewExamModel.RandomOrder
+            };
 
-            return RedirectToAction("CreateExam", new {eName = examModel.ExamName});
-        
-       }
+            examService.AddExam(examModel, User.Identity.GetUserId());
 
-        public ActionResult CreateExam(string examName)
+            return RedirectToAction("Placeholder", new { examName = examModel.ExamName});
+
+        }
+
+        public ActionResult Placeholder(string examName)
         {
 
-            var viewModel = new CreateExamViewModel
+            var viewModel = new ViewModels.CreateExamViewModel
             {
                 ExamName = examName
             };
@@ -67,7 +85,7 @@ namespace StudiekollenNew.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CreateExam(Question questionModel)
+        public ActionResult Placeholder(Question questionModel)
         {
             var repoFactory = new RepositoryFactory();
 
@@ -79,7 +97,7 @@ namespace StudiekollenNew.Controllers
 
             if (!ModelState.IsValid)
             {
-                var viewModel = new CreateExamViewModel
+                var viewModel = new ViewModels.CreateExamViewModel
                 {
                     ExamName = recentExamName,
                     Query = questionModel.Query,
@@ -95,7 +113,7 @@ namespace StudiekollenNew.Controllers
 
             questionService.AddQuestion(ExamId,questionModel);
 
-            return RedirectToAction("CreateExam", new {examName = recentExamName});
+            return RedirectToAction("Placeholder", new {examName = recentExamName});
         }
 
         public ViewResult UpdateExam(int examId)

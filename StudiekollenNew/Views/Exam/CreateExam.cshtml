@@ -1,38 +1,108 @@
-﻿@model StudiekollenNew.ViewModels.CreateExamViewModel
+﻿@model StudiekollenNew.ViewModels.ExamViewModels.CreateExamViewModel
 
-<h2>@Model.ExamName</h2>
+@*<script>
+    $(document).ready(function () {
 
-@using (Html.BeginForm("CreateExam", "Exam"))
+        $('#ExamTimeBool').bind('click', function () {
+
+            if ($(this).is(":checked")) {
+                $("#SendReminderDate").load("TimeInput");
+
+            } else {
+                $("#SendReminderDate").load("Empty");
+            }
+
+
+            if($(this).is(":checked")) {
+                $("#SendReminderDate").load("ReminderDateInput");
+
+            } else {
+                $("#SendReminderDate").load("Empty");
+            }
+        });
+
+    });
+</script>*@
+
+<h2>Skapa prov</h2>
+
+@using (Html.BeginForm()) 
 {
-    <div class="form-horizontal">
-        <hr />
-        <div class="form-group">
-            @Html.LabelFor(model => model.Query, htmlAttributes: new { @class = "control-label col-lg-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Query, new { htmlAttributes = new { @class = "form-control" } })
-            </div>
+    @Html.AntiForgeryToken()
+    
+<div class="form-horizontal">
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.LabelFor(model => model.ExamName, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.ExamName, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.ExamName, "", new { @class = "text-danger" })
         </div>
+    </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Answer, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.TextAreaFor(model => model.Answer, 7, 100, new { htmlAttributes = new { @class = "form-control" } })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                @Html.AntiForgeryToken()
-                <input type="submit" value="Spara fråga" class="btn btn-default btn-block"/><br/>
-                @Html.ValidationMessageFor(model => model.Query)
-
+    <div class="form-group">
+        @Html.LabelFor(model => model.ExamTimeBool, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <div class="checkbox">
+                @Html.EditorFor(model => model.ExamTimeBool)
+                @Html.ValidationMessageFor(model => model.ExamTimeBool, "", new { @class = "text-danger" })
             </div>
         </div>
     </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.ExamTime, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.ExamTime, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.ExamTime, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.ReminderDateBool, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <div class="checkbox">
+                @Html.EditorFor(model => model.ReminderDateBool)
+                @Html.ValidationMessageFor(model => model.ReminderDateBool, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.SendReminderDate, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.SendReminderDate, "{0:yyyy-MM-ddThh:mm:ss}", new { @class = "form-control", type = "datetime-local" })
+            @Html.ValidationMessageFor(model => model.SendReminderDate, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+
+
+
+    @* Div för Ajax SendReminderDate *@
+    @*<div
+            id="SendReminderDate" name="SendReminderDate">
+            <span asp-validation-for="SendReminderDate" class="text-danger"></span>
+        </div>*@
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.RandomOrder, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <div class="checkbox">
+                @Html.EditorFor(model => model.RandomOrder)
+                @Html.ValidationMessageFor(model => model.RandomOrder, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Skapa prov" class="btn btn-default btn-block" />
+        </div>
+    </div>
+</div>
 }
-@*Klientvalidering*@
-@section Scripts {
-        @Scripts.Render("~/bundles/jqueryval")
-    }
 
 

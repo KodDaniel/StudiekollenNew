@@ -10,7 +10,7 @@ namespace StudiekollenNew.DomainModels
     {
         public int ExamId { get; set; }
         public string ExamName { get; set; }
-        public DateTime CreateDate { get; set; }
+        public DateTime CreateDate { get; set; } = DateTime.Now;
         public DateTime? ChangeDate { get; set; }
         public DateTime? SendReminderDate { get; set; }
         public TimeSpan? ExamTime { get; set; }
