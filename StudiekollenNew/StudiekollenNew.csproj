@@ -226,9 +226,11 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\QuestionController.cs" />
-    <Compile Include="Controllers\TestController.cs" />
+    <Compile Include="Controllers\ExamController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="DatabaseContext\ContextSingelton.cs" />
+    <Compile Include="DomainModels\Exam.cs" />
+    <Compile Include="DomainModels\ExamStats.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -259,25 +261,25 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Repositories\QuestionRepository.cs" />
     <Compile Include="Repositories\RepositoryFactory.cs" />
-    <Compile Include="Repositories\TestRepository.cs" />
+    <Compile Include="Repositories\ExamRepository.cs" />
     <Compile Include="Repositories\UserRepository.cs" />
     <Compile Include="Services\QuestionService.cs" />
-    <Compile Include="Services\TestService.cs" />
+    <Compile Include="Services\ExamService.cs" />
     <Compile Include="Services\UserService.cs" />
     <Compile Include="ViewModels\AccountViewModels.cs" />
     <Compile Include="DatabaseContext\ApplicationDbContext.cs" />
     <Compile Include="ViewModels\QuestionsViewModels\UpdateQuestionViewModel.cs" />
-    <Compile Include="ViewModels\TestViewModels\CreateTestViewModel.cs" />
-    <Compile Include="ViewModels\TestViewModels\HandleTestViewModel.cs" />
-    <Compile Include="ViewModels\TestViewModels\SearchTestViewModel.cs" />
+    <Compile Include="ViewModels\ExamViewModels\CreateExamViewModel.cs" />
+    <Compile Include="ViewModels\ExamViewModels\HandleExamViewModel.cs" />
+    <Compile Include="ViewModels\ExamViewModels\SearchExamViewModel.cs" />
     <Compile Include="ViewModels\ManageViewModels.cs" />
     <Compile Include="DomainModels\Question.cs" />
     <Compile Include="DomainModels\Test.cs" />
     <Compile Include="DomainModels\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
-    <Compile Include="ViewModels\TestViewModels\NewTestViewModel.cs" />
-    <Compile Include="ViewModels\TestViewModels\UpdateTestViewModel.cs" />
+    <Compile Include="ViewModels\ExamViewModels\NewExamViewModel.cs" />
+    <Compile Include="ViewModels\ExamViewModels\UpdateExamViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="All kod för att autotilldela roller.txt" />
@@ -340,18 +342,18 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Test\NewTest.cshtml" />
+    <Content Include="Views\Exam\NewExam.cshtml" />
     <Content Include="Views\Shared\_NavBar.cshtml" />
-    <Content Include="Views\Test\CreateTest.cshtml" />
-    <Content Include="Views\Test\SearchForTest.cshtml" />
-    <Content Include="Views\Test\DetailsTest.cshtml" />
-    <Content Include="Views\Test\HandleTest.cshtml" />
+    <Content Include="Views\Exam\CreateExam.cshtml" />
+    <Content Include="Views\Exam\SearchForExam.cshtml" />
+    <Content Include="Views\Exam\DetailsExam.cshtml" />
+    <Content Include="Views\Exam\HandleExam.cshtml" />
     <Content Include="Views\Question\UpdateQuestion.cshtml" />
-    <Content Include="Views\Question\AddQuestionToTest.cshtml" />
+    <Content Include="Views\Question\AddQuestionToExam.cshtml" />
     <Content Include="Views\Home\ToDo.cshtml" />
-    <Content Include="Views\Test\UpdateTest.cshtml" />
-    <Content Include="Views\Test\_partialHandleTest.cshtml" />
-    <Content Include="Views\Test\_partialDetails.cshtml" />
+    <Content Include="Views\Exam\UpdateExam.cshtml" />
+    <Content Include="Views\Exam\_partialHandleTest.cshtml" />
+    <Content Include="Views\Exam\_partialDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

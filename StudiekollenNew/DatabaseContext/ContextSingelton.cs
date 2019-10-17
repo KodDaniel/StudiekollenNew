@@ -11,13 +11,10 @@ namespace StudiekollenNew.DataBase
     {
         private static ApplicationDbContext _context;
 
+        // Testar Null operator (Om connection är null, returnera ny connection)
         public static ApplicationDbContext GetContext()
         {
-            if (_context == null)
-            {
-                _context = new ApplicationDbContext();
-            }
-                return _context;       
+            return _context ?? (_context = new ApplicationDbContext());
         }
     }
 }

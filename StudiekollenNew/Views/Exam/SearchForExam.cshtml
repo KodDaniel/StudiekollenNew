@@ -1,16 +1,16 @@
-﻿@model StudiekollenNew.ViewModels.SearchTestViewModel
+﻿@model StudiekollenNew.ViewModels.SearchExamViewModel
 
 <h2>Sök efter prov</h2>
 
-@using (Html.BeginForm("SearchForTest", "Test"))
+@using (Html.BeginForm("SearchForExam", "Exam"))
 {
     <div class="form-horizontal">
         <hr />
         <div class="form-group">
             @Html.Label("Mina prov", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @*@Html.DropDownListFor(model => model.Username, new SelectList(Model.Users, "Username", "UserName", "Välj användare"), "Välj användare", new { @class = "form-control" })*@
-                @Html.DropDownListFor(model => model.Id, new SelectList(Model.AllTests, "Id", "Name", null), null, new { @class = "form-control" })
+                @*@Html.DropDownListFor(model => model.Username, new SelectList(Model.Users, "Username", "UserExamExamExamName", "Välj användare"), "Välj användare", new { @class = "form-control" })*@
+                @Html.DropDownListFor(model => model.Id, new SelectList(Model.AllExams, "Id", "ExamName", null), null, new { @class = "form-control" })
             </div>
         </div>
         <div class="form-group">
@@ -19,7 +19,7 @@
                 <input type="submit" value="Hämta" class="btn btn-default btn-block" /><br />
             </div>
         </div>
-        <h4>@Html.ActionLink("Visa alla prov", "DetailsTest", "Test", null)</h4> 
+        <h4>@Html.ActionLink("Visa alla prov", "DetailsExam", "Test", null)</h4> 
     </div>
 }
 

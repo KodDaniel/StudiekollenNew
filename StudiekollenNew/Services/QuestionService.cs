@@ -28,9 +28,9 @@ namespace StudiekollenNew.Services
             return _questionRepository.GetAllQuestions(id);
         }
 
-        public void AddQuestion(int testId, Question questionModel)
+        public void AddQuestion(int examId, Question questionModel)
         {
-            _questionRepository.AddQuestion(testId, questionModel);
+            _questionRepository.AddQuestion(examId, questionModel);
         }
 
         public void UpdateQuestion(Question questionModel, int questionId)
@@ -42,15 +42,6 @@ namespace StudiekollenNew.Services
         {
             _questionRepository.DeleteQuestion(id);
         }
-
-
-        
-
-        //public int NumberOfQuestionsForThisTest(int testId)
-        //{
-        //    return _questionRepository.NumberOfQuestionsForThisTest(testId);
-        //}
-
 
 
 

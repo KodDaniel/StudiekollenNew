@@ -117,7 +117,7 @@ namespace StudiekollenNew.Migrations
         public override void Down()
         {
             DropForeignKey("dbo.AspNetUserRoles", "RoleId", "dbo.AspNetRoles");
-            DropForeignKey("dbo.Question", "TestId", "dbo.Test");
+            DropForeignKey("dbo.Question", "ExamId", "dbo.Test");
             DropForeignKey("dbo.Test", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserRoles", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserLogins", "UserId", "dbo.AspNetUsers");
@@ -129,7 +129,7 @@ namespace StudiekollenNew.Migrations
             DropIndex("dbo.AspNetUserClaims", new[] { "UserId" });
             DropIndex("dbo.AspNetUsers", "UserNameIndex");
             DropIndex("dbo.Test", new[] { "UserId" });
-            DropIndex("dbo.Question", new[] { "TestId" });
+            DropIndex("dbo.Question", new[] { "ExamId" });
             DropTable("dbo.RoleViewModel");
             DropTable("dbo.AspNetRoles");
             DropTable("dbo.AspNetUserRoles");

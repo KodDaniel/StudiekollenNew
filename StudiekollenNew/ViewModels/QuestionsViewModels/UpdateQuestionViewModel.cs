@@ -9,7 +9,7 @@ namespace StudiekollenNew.ViewModels
 {
     public class EditQuestionViewModel
     {
-        public int TestId { get; set; }
+        public int ExamId { get; set; }
 
         public string Name { get; set; }
 

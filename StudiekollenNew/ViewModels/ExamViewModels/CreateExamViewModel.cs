@@ -6,11 +6,11 @@ using System.Web;
 
 namespace StudiekollenNew.ViewModels
 {
-    public class CreateTestViewModel
+    public class CreateExamViewModel
     {
-        public int TestId { get; set; }
+        public int ExamId { get; set; }
 
-        public string Name { get; set; }
+        public string ExamName { get; set; }
 
         [Required (ErrorMessage = "Du måste fylla i en fråga.")]
         [Display(Name = "Fråga")]

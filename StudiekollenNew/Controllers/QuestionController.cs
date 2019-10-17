@@ -13,17 +13,17 @@ namespace StudiekollenNew.Controllers
     [Authorize]
     public class QuestionController : Controller
     {
-        public ActionResult DeleteQuestion(int questionId, int testId)
+        public ActionResult DeleteQuestion(int questionId, int examId)
         {
             var questionService = new QuestionService(new RepositoryFactory());
 
             questionService.DeleteTest(questionId);
 
-            return RedirectToAction("HandleTest", "Test", new { testId = testId });
+            return RedirectToAction("HandleExam", "Exam", new { examId = examId });
         }
 
 
-        public ViewResult UpdateQuestion(int questionId, string testName, int testId)
+        public ViewResult UpdateQuestion(int questionId, string examName, int examId)
         {        
             var questionService = new QuestionService(new RepositoryFactory());
 
@@ -31,8 +31,8 @@ namespace StudiekollenNew.Controllers
          
             var viewModel = new EditQuestionViewModel
             {     
-                TestId = testId,
-                Name = testName,
+                ExamId = examId,
+                Name = examName,
                 Query = questionModel.Query,
                 Answer = questionModel.Answer,
                 QuestionId = questionId
@@ -70,15 +70,15 @@ namespace StudiekollenNew.Controllers
 
             questionService.UpdateQuestion(questionModel,tempModel.QuestionId);
 
-            return RedirectToAction("HandleTest", "Test", new { testId = tempModel.TestId});
+            return RedirectToAction("HandleExam", "Exam", new {examId = tempModel.ExamId});
         }
 
-        public ActionResult AddQuestionToTest(string testName, int testId)
+        public ActionResult AddQuestionToExam(string examName, int examId)
         {
-            var vievModel = new CreateTestViewModel()
+            var vievModel = new CreateExamViewModel()
             {
-                Name = testName,
-                TestId = testId
+                ExamName = examName,
+                ExamId = examId
             };
 
             TempData["viewModel"] = vievModel;
@@ -89,17 +89,17 @@ namespace StudiekollenNew.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult AddQuestionToTest(Question questionModel)
+        public ActionResult AddQuestionToExam(Question questionModel)
         {
-            var tempModel = TempData["viewModel"] as CreateTestViewModel;
+            var tempModel = TempData["viewModel"] as CreateExamViewModel;
 
             TempData.Keep();
 
             if (!ModelState.IsValid)
             {
-                var viewModel = new CreateTestViewModel
+                var viewModel = new CreateExamViewModel
                 {
-                    Name = tempModel.Name,
+                    ExamName = tempModel.ExamName,
                     Query = questionModel.Query,
                     Answer = questionModel.Answer
                 };
@@ -107,15 +107,15 @@ namespace StudiekollenNew.Controllers
                 return View(viewModel);
             }
 
-            var testId = tempModel.TestId;
+            var examId = tempModel.ExamId;
 
             var repoFactory = new RepositoryFactory();
 
             var questionService = new QuestionService(repoFactory);
 
-            questionService.AddQuestion(testId, questionModel);
+            questionService.AddQuestion(examId, questionModel);
 
-            return RedirectToAction("HandleTest", "Test", new { testId = testId });
+            return RedirectToAction("HandleExam", "Exam", new { examId = examId });
 
         }
 

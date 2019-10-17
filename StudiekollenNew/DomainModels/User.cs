@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Web;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using StudiekollenNew.DomainModels;
 
 namespace StudiekollenNew.Models
 {
@@ -14,7 +15,7 @@ namespace StudiekollenNew.Models
 
     public class User : IdentityUser
     {
-        public ICollection<Test> Test { get; set; }
+        public ICollection<Exam> Exams{ get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<User> manager)
         {

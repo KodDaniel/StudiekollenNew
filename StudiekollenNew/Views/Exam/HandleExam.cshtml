@@ -1,4 +1,4 @@
-﻿@model StudiekollenNew.ViewModels.TestViewModels.HandleTestViewModel
+﻿@model StudiekollenNew.ViewModels.TestViewModels.HandleExamViewModel
 
 @if (!Model.QuestionsModels.Any())
 {
@@ -7,11 +7,11 @@
 
 else
 {
-    <h2>@Model.TestName</h2><br />
+    <h2>@Model.ExamName</h2><br />
 
-    @Html.ActionLink("Lägg till ny fråga", "AddQuestionToTest", "Question", new { testName = Model.TestName, testId = Model.TestId }, new { @class = "btn btn-default" })
+    @Html.ActionLink("Lägg till ny fråga", "AddQuestionToExam", "Question", new { testName = Model.ExamName, testId = Model.ExamId }, new { @class = "btn btn-default" })
     <text>&nbsp;&nbsp;&nbsp;</text>
-    @Html.ActionLink("Ändra provnamn", "UpdateTest", "Test", new { testId = Model.TestId }, new { @class = "btn btn-default" })<br />
+    @Html.ActionLink("Ändra provnamn", "UpdateExam", "Exam", new { testId = Model.ExamId }, new { @class = "btn btn-default" })<br />
 
 
     <table id="customers" class="table table-bordered table-hover">
@@ -46,7 +46,7 @@ else
     </table>
 }
 
-    <h4>@Html.ActionLink("Tillbaka", "DetailsTest", "Test", null)</h4>
+    <h4>@Html.ActionLink("Tillbaka", "DetailsExam", "Test", null)</h4>
 
 
 @*Klientvalidering*@

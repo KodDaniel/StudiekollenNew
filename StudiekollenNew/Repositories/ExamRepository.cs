@@ -12,6 +12,8 @@ using System.Security.Claims;
 using System.Collections;
 using System.Web.WebPages;
 using StudiekollenNew.DataBase;
+using StudiekollenNew.DomainModels;
+using StudiekollenNew.Migrations;
 using StudiekollenNew.Repositories;
 using StudiekollenNew.Services;
 
@@ -19,45 +21,45 @@ using StudiekollenNew.Services;
 namespace StudiekollenNew.Repositories
 {
 
-    public class TestRepository
+    public class ExamRepository
     {
         private ApplicationDbContext _context;
 
-        public TestRepository(ApplicationDbContext context)
+        public ExamRepository(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        public Test GetTest(int id)
+        public Exam GetSingleExam(int id)
         {
-            return _context.Test.Find(id);
+            return _context.Exam.Find(id);
         }
 
-        public IEnumerable<Test> GetAllTests()
+        public IEnumerable<Exam> GetAllExams()
         {
-            return _context.Test.ToList();
+            return _context.Exam.ToList();
         }
 
-        public Test GetMostRecentTest(string currentUserId)
+        public Exam GetMostRecentExam(string currentUserId)
         {
             // Substitut för Last-operator. Tänk på att du ej behöver EagerLoda med "Include" eftersom som du ju här rör dig i en och samma tabell.
-            return _context.Test
-                .OrderByDescending(c => c.Id)
+            return _context.Exam
+                .OrderByDescending(e => e.ExamId)
                 .First(c => c.UserId == currentUserId);
         }
 
 
-        public IEnumerable<Test> GetAllTestsForThisTestId(int testId)
+        public IEnumerable<Exam> GetAllExamsForThisExamId(int id)
         {
-            return _context.Test.Where(a => a.Id == testId)
+            return _context.Exam.Where(a => a.ExamId == id)
                 .OrderByDescending(c => c.CreateDate)
                 .ThenByDescending(c => c.ChangeDate)
                 .ToList();
         }
 
-        public IEnumerable<Test> GetAllTestsForThisUserId(string userId)
+        public IEnumerable<Exam> GetAllExamsForThisUserId(string userId)
         {
-            return _context.Test.
+            return _context.Exam.
                 Include(a => a.User).Where(a => a.UserId == userId).Include(a => a.Questions)
                 .OrderByDescending(c => c.CreateDate)
                 .ThenByDescending(c => c.ChangeDate)
@@ -65,32 +67,32 @@ namespace StudiekollenNew.Repositories
         }
 
 
-        public void AddTest(Test testModel, string userId)
+        public void AddExam(Exam examModel, string userId)
         {
-            testModel.UserId = userId;
+            examModel.UserId = userId;
 
-            _context.Test.Add(testModel);
+            _context.Exam.Add(examModel);
             
             _context.SaveChanges();
         }
 
-        public void DeleteTest(int id)
+        public void DeleteExam(int id)
         {
-            var test = _context.Test
-                .Single(a => a.Id == id);
+            var exam = _context.Exam
+                .Single(a => a.ExamId== id);
 
-            _context.Test.Remove(test);
+            _context.Exam.Remove(exam);
 
             _context.SaveChanges();
         }
 
-        public void UpdateTest(Test test, int testId)
+        public void UpdateExam(Exam exam, int eXamId)
         {
-            var currentTest = GetTest(testId);
+            var currentExam = GetSingleExam(eXamId);
 
-            currentTest.Name = test.Name;
+            currentExam.ExamName = exam.ExamName;
 
-            currentTest.ChangeDate = DateTime.Now;
+            currentExam.ChangeDate = DateTime.Now;
            
             _context.SaveChanges();
         }

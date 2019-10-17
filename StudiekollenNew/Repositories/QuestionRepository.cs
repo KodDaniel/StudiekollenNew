@@ -25,15 +25,15 @@ namespace StudiekollenNew.Repositories
 
         public List<Question> GetAllQuestions(int id)
         {
-            return _context.Question.Include(a => a.Test)
-                .Where(a => a.TestId == id)
-                .OrderBy(c => c.Id).ToList();
+            return _context.Question.Include(a => a.Exam)
+                .Where(a => a.ExamId == id)
+                .OrderBy(c => c.QuestionId).ToList();
         }
 
 
-        public void AddQuestion(int testId, Question questionModel)
+        public void AddQuestion(int examId, Question questionModel)
         {
-            questionModel.TestId = testId;
+            questionModel.ExamId = examId;
 
             _context.Question.Add(questionModel);
 
@@ -49,7 +49,7 @@ namespace StudiekollenNew.Repositories
 
             currentQuestionModel.Answer = questionModel.Answer;
 
-            currentQuestionModel.Test.ChangeDate = DateTime.Now;
+            currentQuestionModel.Exam.ChangeDate = DateTime.Now;
             
             _context.SaveChanges();
         }
@@ -60,25 +60,18 @@ namespace StudiekollenNew.Repositories
             // Viss logik implementerad för att jag inte vill sätta att provet ändrats innan jag är säker på att delete-raden exekeveras. 
             // Försöka effektivisera detta.
             var questionModel = _context.Question
-                .Single(a => a.Id == id);
+                .Single(a => a.QuestionId == id);
 
-            var belongsToTest = _context.Test
-                .Single(a => a.Id == questionModel.TestId);
+            var belongsToExam = _context.Exam
+                .Single(a => a.ExamId == questionModel.ExamId);
 
             _context.Question.Remove(questionModel);
 
-            belongsToTest.ChangeDate = DateTime.Now;
+            belongsToExam.ChangeDate = DateTime.Now;
 
             _context.SaveChanges();
 
         }
 
-       
-
-        //public int NumberOfQuestionsForThisTest(int testId)
-        //{
-        //    return _context.Question.Where(a => a.TestId == testId).Select(a => a.Id).Count();
-
-        //}
     }
 }

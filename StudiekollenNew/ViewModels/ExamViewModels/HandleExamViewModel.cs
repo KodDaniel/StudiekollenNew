@@ -6,10 +6,10 @@ using StudiekollenNew.Models;
 
 namespace StudiekollenNew.ViewModels.TestViewModels
 {
-    public class HandleTestViewModel
+    public class HandleExamViewModel
     {
-        public int TestId { get; set; }
-        public string TestName { get; set; }
+        public int ExamId { get; set; }
+        public string ExamName { get; set; }
         public IEnumerable<Question> QuestionsModels { get; set; }
 
  
