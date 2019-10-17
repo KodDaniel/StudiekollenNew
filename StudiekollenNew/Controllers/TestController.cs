@@ -16,23 +16,16 @@ using StudiekollenNew.ViewModels.TestViewModels;
 namespace StudiekollenNew.Controllers
 {
 
+    [Authorize]
     public class TestController : Controller
     {
-        // Denna Action returnerar det användarnamn...
-        // ... som skrivs in med hjälp av Router-attibuting. 
-        [Route("Test/{userName}")]
-        public ActionResult ReturnUsernameFromUrl(string userName)
-        {
-            return Content(userName);
-
-        }
-
         public ViewResult NewTest()
         {
             var viewModel = new NewTestViewModel();
 
-            return View(viewModel);
+            return View(viewModel); 
         }
+
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -146,19 +139,26 @@ namespace StudiekollenNew.Controllers
 
             testService.UpdateTest(test, tempModel.TestId);
 
-            return RedirectToAction("HandleTest", "Test", new { id = tempModel.TestId });
+            return RedirectToAction("HandleTest", "Test", new { testId = tempModel.TestId });
         }
 
 
-        public ViewResult SearchForTest()
+        public ActionResult SearchForTest()
         {
-            var userService = new UserService(new RepositoryFactory());
+            var testService = new TestService(new RepositoryFactory());
 
-            var allUsers = userService.GetAllUsers();
+            var userId = User.Identity.GetUserId();
+
+            var allTestsForThisUser = testService.GetAllTestsForThisUserId(userId);
+
+            if (!allTestsForThisUser.Any())
+            {
+                return View("_partialDetails");
+            }
 
             var vievModel = new SearchTestViewModel
             {
-                Users = allUsers,
+                AllTests = allTestsForThisUser
             };
 
             return View(vievModel);
@@ -166,51 +166,39 @@ namespace StudiekollenNew.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult SearchForTest(string userName)
+        public ActionResult SearchForTest(string id)
         {
-            // If-satsen kan ta bort helt om du listar ut hur du kan göra alternativet "välj användare" unselectable via koden i din view.
-            if (string.IsNullOrWhiteSpace(userName))
-            {
-                return RedirectToAction("SearchForTest");
-            }
+            return RedirectToAction("HandleTest", new { testId = id });
 
-            return RedirectToAction("DetailsTest", new { userNameSelected = userName});
-            
         }
 
-        public ViewResult DetailsTest(string userNameSelected)
+
+        public ViewResult DetailsTest()
         {
             var testService = new TestService(new RepositoryFactory());
 
-            var allTests = testService.GetAllTestsForThisUserName(userNameSelected);
-
+            var allTests = testService.GetAllTestsForThisUserId(User.Identity.GetUserId());
+       
             var viewmodel = new SearchTestViewModel
             {
-                AllTests = allTests,
-                Username = userNameSelected,                     
+                AllTests = allTests
             };
-            
+
             return View(viewmodel);
         }
 
-        public ActionResult DeleteTest(int id)
+        public ActionResult DeleteTest(int testId)
         {
             var repoFactory = new RepositoryFactory();
 
             var testService = new TestService(repoFactory);
 
-            var userService = new UserService(repoFactory);
+            testService.DeleteTest(testId);
 
-            var userId = User.Identity.GetUserId();
-
-            var userName = userService.GetUser(userId).UserName;
-
-            testService.DeleteTest(id);
-
-            return RedirectToAction("DetailsTest", new {userNameSelected = userName});
+            return RedirectToAction("DetailsTest");
         }
 
-        public ViewResult HandleTest(int id)
+        public ViewResult HandleTest(int testId)
         {
             var repoFactory = new RepositoryFactory();
 
@@ -218,13 +206,13 @@ namespace StudiekollenNew.Controllers
 
             var testService = new TestService(repoFactory);
 
-            var testName = testService.GetTest(id).Name;
+            var testName = testService.GetTest(testId).Name;
 
-            var questionModels = questionService.GetAllQuestions(id);
+            var questionModels = questionService.GetAllQuestions(testId);
 
             var viewModel = new HandleTestViewModel
             {
-                TestId = id,
+                TestId = testId,
                 TestName = testName,
                 QuestionsModels = questionModels
             };
