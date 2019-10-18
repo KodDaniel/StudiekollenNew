@@ -38,7 +38,7 @@ namespace StudiekollenNew.Services
             _questionRepository.UpdateQuestion(questionModel, questionId);
         }
 
-        public void DeleteTest(int id)
+        public void DeleteQuestion(int id)
         {
             _questionRepository.DeleteQuestion(id);
         }

@@ -1,0 +1,111 @@
+﻿@model IEnumerable<StudiekollenNew.DomainModels.Exam> 
+
+<h2>Prov tillhörande @ViewBag.UserName</h2><br/>
+       
+  @if (!@Model.Any())
+  {
+      @Html.Partial("_partialDetails")
+
+  }
+  else
+  {
+      <table id="customers" class="table table-bordered table-hover">
+
+          <tr>
+              <th>          
+                  @Html.ActionLink("Provnamn", "DisplayExams", new { sortOrder = ViewBag.NameSortParm })
+              </th>
+              <th>@Html.ActionLink("Antal frågor", "DisplayExams", new { sortOrder = ViewBag.NumberOfQuestionsSortParm })</th>
+              <th>    
+                  @Html.ActionLink("Skapades", "DisplayExams", new { sortOrder = ViewBag.CreateDateSortParm })
+              </th>
+              <th>       
+                  @Html.ActionLink("Ändrades senast", "DisplayExams", new { sortOrder = ViewBag.ChangeDateSortParm })
+              </th>
+              <th>
+                  @Html.ActionLink("Tidtagning", "DisplayExams", new { sortOrder = ViewBag.TimeKeepingSortParm })
+              </th>
+              <th>                 
+                  @Html.ActionLink("Mejlpåminnelse", "DisplayExams", new { sortOrder = ViewBag.SendReminderSortParm })
+              </th>
+              <th> @Html.ActionLink("Slumpmässig ordning", "DisplayExams", new { sortOrder = ViewBag.RandomOrderSortParm })</th>
+              <th></th>
+              <th></th>
+
+          </tr>
+               
+          @foreach (var exam in Model)
+          {
+          <tr>
+
+              <td>@exam.ExamName</td>
+
+              @if (!exam.Questions.Any())
+              {
+                  <td>0</td>
+              }
+              else
+              {
+                  <td>@exam.Questions.Count()</td>
+              }
+
+              <td>@exam.CreateDate</td>
+
+              @if (exam.ChangeDate is null)
+              {
+                  <td>Har aldrig ändrats</td>
+              }
+              else
+              {
+                  <td>@exam.ChangeDate</td>
+              }
+
+              @if (exam.ExamTime is null)
+              {
+                  <td>Nej</td>
+              }
+              else
+              {
+                  <td>@exam.ExamTime</td>
+              }
+              @if (exam.SendReminderDate is null)
+              {
+                  <td>Nej</td>
+              }
+              else
+              {
+                  <td>@exam.SendReminderDate</td>
+              }
+              
+              @if (exam.RandomOrder is false)
+              {
+                  <td>Nej</td>
+              }
+              else
+              {
+                  <td>Ja</td>
+              }
+              <td>
+                  @Html.ActionLink("Redigera prov", "HandleExam", "Exam", new { examId = exam.ExamId }, null)
+              </td>
+              <td>                  
+                  @Html.ActionLink("Radera prov", "DeleteExam", "Exam", new {examId = exam.ExamId}, null)
+              </td>
+
+          </tr>
+          }
+
+      </table>
+
+      <h4>@Html.ActionLink("Tillbaka", "SearchForExam", "Test", null) </h4>
+  }
+
+
+
+
+
+
+
+
+
+    

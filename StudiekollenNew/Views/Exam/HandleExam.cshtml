@@ -9,9 +9,9 @@ else
 {
     <h2>@Model.ExamName</h2><br />
 
-    @Html.ActionLink("Lägg till ny fråga", "AddQuestionToExam", "Question", new { testName = Model.ExamName, testId = Model.ExamId }, new { @class = "btn btn-default" })
+    @Html.ActionLink("Lägg till ny fråga", "AddQuestionToExam", "Question", new { examName = Model.ExamName, examId = Model.ExamId }, new { @class = "btn btn-default" })
     <text>&nbsp;&nbsp;&nbsp;</text>
-    @Html.ActionLink("Ändra provnamn", "UpdateExam", "Exam", new { testId = Model.ExamId }, new { @class = "btn btn-default" })<br />
+    @Html.ActionLink("Ändra provnamn", "UpdateExam", "Exam", new { examId = Model.ExamId }, new { @class = "btn btn-default" })<br />
 
 
     <table id="customers" class="table table-bordered table-hover">
@@ -37,8 +37,8 @@ else
                     <td>@item.Answer</td>
                 }
 
-                <td>@Html.ActionLink("Redigera fråga", "UpdateQuestion", "Question", new { questionId = item.Id, testName = item.Test.Name, testId = item.TestId }, null)
-                <td>@Html.ActionLink("Radera fråga", "DeleteQuestion", "Question", new { questionId = item.Id, testId = item.TestId }, null)</td>
+                <td>@Html.ActionLink("Redigera fråga", "UpdateQuestion", "Question", new { questionId = item.QuestionId, examName = item.Exam.ExamName,examId = item.ExamId }, null)
+                <td>@Html.ActionLink("Radera fråga", "DeleteQuestion", "Question", new { questionId = item.QuestionId, examId = item.ExamId }, null)</td>
 
             </tr>
         }
@@ -46,7 +46,7 @@ else
     </table>
 }
 
-    <h4>@Html.ActionLink("Tillbaka", "DetailsExam", "Test", null)</h4>
+    <h4>@Html.ActionLink("Tillbaka", "DisplayExams", "Test", null)</h4>
 
 
 @*Klientvalidering*@

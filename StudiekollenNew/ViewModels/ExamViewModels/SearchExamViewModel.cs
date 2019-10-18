@@ -6,18 +6,13 @@ using System.Web;
 using StudiekollenNew.DomainModels;
 using StudiekollenNew.Models;
 
-namespace StudiekollenNew.ViewModels
+namespace StudiekollenNew.ViewModels.ExamViewModels
 {
     public class SearchExamViewModel
     {
         public IEnumerable<Exam> AllExams { get; set; }
         [Required(ErrorMessage = "Du måste fylla i ett provnamn")]
-
-        public int Id {get; set; }
-
-
-
-
+        public int Id { get; set; }
     }
 
 }

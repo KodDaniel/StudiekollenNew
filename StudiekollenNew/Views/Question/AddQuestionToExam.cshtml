@@ -25,7 +25,7 @@
             @Html.AntiForgeryToken()
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Lägg till ny fråga" class="btn btn-default btn-block"/><br/>
-                <input type="button"  class="btn btn-default btn-block" value="Spara prov" onclick="@("window.location.href='" + @Url.Action("DetailsExam", "Exam") + "'");" />
+                <input type="button"  class="btn btn-default btn-block" value="Spara prov" onclick="@("window.location.href='" + @Url.Action("DisplayExams", "Exam") + "'");" />
 
                 @Html.ValidationMessageFor(model => model.Query)
 

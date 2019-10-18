@@ -17,7 +17,7 @@ namespace StudiekollenNew.Controllers
         {
             var questionService = new QuestionService(new RepositoryFactory());
 
-            questionService.DeleteTest(questionId);
+            questionService.DeleteQuestion(questionId);
 
             return RedirectToAction("HandleExam", "Exam", new { examId = examId });
         }
@@ -36,10 +36,10 @@ namespace StudiekollenNew.Controllers
                 Query = questionModel.Query,
                 Answer = questionModel.Answer,
                 QuestionId = questionId
-        
             };
 
-            TempData["viewModel"] = viewModel;
+            Session["viewModel"] = viewModel;
+
 
             return View(viewModel);
         }
@@ -48,17 +48,15 @@ namespace StudiekollenNew.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult UpdateQuestion(Question questionModel)
         {
-            var tempModel = TempData["viewModel"] as EditQuestionViewModel;
-
-            TempData.Keep();
+            var sessionModel = Session["viewModel"] as EditQuestionViewModel;
 
             if (!ModelState.IsValid)
             {
                 var viewModel = new EditQuestionViewModel
                 {
-                    Name = tempModel.Name,
-                    Query = tempModel.Query,
-                    Answer = tempModel.Answer
+                    Name = sessionModel.Name,
+                    Query = sessionModel.Query,
+                    Answer = sessionModel.Answer
                 };
 
                 return View(viewModel);
@@ -68,38 +66,36 @@ namespace StudiekollenNew.Controllers
 
             var questionService = new QuestionService(repoFactory);
 
-            questionService.UpdateQuestion(questionModel,tempModel.QuestionId);
+            questionService.UpdateQuestion(questionModel,sessionModel.QuestionId);
 
-            return RedirectToAction("HandleExam", "Exam", new {examId = tempModel.ExamId});
+            return RedirectToAction("HandleExam", "Exam", new {examId = sessionModel.ExamId});
         }
 
         public ActionResult AddQuestionToExam(string examName, int examId)
         {
-            var vievModel = new CreateExamViewModel()
+            var viewModel = new CreateExamViewModel()
             {
                 ExamName = examName,
                 ExamId = examId
             };
 
-            TempData["viewModel"] = vievModel;
+            Session["viewCreateModel"] = viewModel;
 
 
-            return View(vievModel);
+            return View(viewModel);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult AddQuestionToExam(Question questionModel)
         {
-            var tempModel = TempData["viewModel"] as CreateExamViewModel;
-
-            TempData.Keep();
+            var sessionModel = Session["viewCreateModel"] as CreateExamViewModel;
 
             if (!ModelState.IsValid)
             {
                 var viewModel = new CreateExamViewModel
                 {
-                    ExamName = tempModel.ExamName,
+                    ExamName = sessionModel.ExamName,
                     Query = questionModel.Query,
                     Answer = questionModel.Answer
                 };
@@ -107,7 +103,7 @@ namespace StudiekollenNew.Controllers
                 return View(viewModel);
             }
 
-            var examId = tempModel.ExamId;
+            var examId = sessionModel.ExamId;
 
             var repoFactory = new RepositoryFactory();
 

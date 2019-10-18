@@ -333,7 +333,7 @@
     <Content Include="Views\Shared\_NavBar.cshtml" />
     <Content Include="Views\Exam\Placeholder.cshtml" />
     <Content Include="Views\Exam\SearchForExam.cshtml" />
-    <Content Include="Views\Exam\DetailsExam.cshtml" />
+    <Content Include="Views\Exam\DisplayExams.cshtml" />
     <Content Include="Views\Exam\HandleExam.cshtml" />
     <Content Include="Views\Question\UpdateQuestion.cshtml" />
     <Content Include="Views\Question\AddQuestionToExam.cshtml" />
