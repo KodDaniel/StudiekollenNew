@@ -2,18 +2,21 @@
 
 @*<script>
     $(document).ready(function () {
-
         $('#ExamTimeBool').bind('click', function () {
-
             if ($(this).is(":checked")) {
-                $("#SendReminderDate").load("TimeInput");
+                $("#ExamTime").load("TimeInput");
 
             } else {
-                $("#SendReminderDate").load("Empty");
+                $("#ExamTime").load("Empty");
             }
+        });
+    });
+
+    $(document).ready(function () {
 
 
-            if($(this).is(":checked")) {
+        $('#ReminderDateBool').bind('click', function () {
+            if ($(this).is(":checked")) {
                 $("#SendReminderDate").load("ReminderDateInput");
 
             } else {
@@ -22,6 +25,8 @@
         });
 
     });
+
+
 </script>*@
 
 <h2>Skapa prov</h2>
@@ -50,8 +55,7 @@
             </div>
         </div>
     </div>
-    
-    @if (Model.ExamTime != null)
+    @if (Model.DataFormatString != null)
     {
         <div class="form-group">
             @Html.LabelFor(model => model.DataFormatString, htmlAttributes: new {@class = "control-label col-md-2"})
@@ -64,14 +68,13 @@
     else
     {
         <div class="form-group">
-            @Html.LabelFor(model => model.ExamTime, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.ExamTime, htmlAttributes: new {@class = "control-label col-md-2"})
             <div class="col-md-10">
-                @Html.EditorFor(model => model.ExamTime, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.ExamTime, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.ExamTime, new {htmlAttributes = new {@class = "form-control"}})
+                @Html.ValidationMessageFor(model => model.ExamTime, "", new {@class = "text-danger"})
             </div>
         </div>
     }
-
     <div class="form-group">
         @Html.LabelFor(model => model.ReminderDateBool, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
@@ -82,7 +85,6 @@
         </div>
     </div>
 
-
     <div class="form-group">
         @Html.LabelFor(model => model.SendReminderDate, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
@@ -90,9 +92,6 @@
             @Html.ValidationMessageFor(model => model.SendReminderDate, "", new { @class = "text-danger" })
         </div>
     </div>
-
-
-
 
     @* Div för Ajax SendReminderDate *@
     @*<div

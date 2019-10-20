@@ -15,7 +15,7 @@ namespace StudiekollenNew.ViewModels.ExamViewModels
         public string ExamName { get; set; }
         [Display(Name = "Aktivera tidtagning")]
         public bool ExamTimeBool { get; set; }
-        [Display(Name = "Önskat tidsintervall")]
+        [Display(Name = "Önskat tidsintervall (H:MM)")]
         [DataType(DataType.Time)]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:H:mm}")]
         public TimeSpan? ExamTime { get; set; }

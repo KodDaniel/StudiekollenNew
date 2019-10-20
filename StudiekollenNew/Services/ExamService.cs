@@ -25,6 +25,14 @@ namespace StudiekollenNew.Services
             return _examRepository.GetAllExams();
         }
 
+
+
+        //public IEnumerable<Exam> OrderExams(IOrderedEnumerable<Exam> lambda)
+        //{
+        //   return _examRepository.OrderExams(lambda);
+        //}
+
+
         public Exam GetMostRecentExam(string currentUserId)
         {
             return _examRepository.GetMostRecentExam(currentUserId);

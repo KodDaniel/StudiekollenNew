@@ -9,10 +9,12 @@ html {
   -webkit-text-size-adjust: 100%;
       -ms-text-size-adjust: 100%;
 }
-body {
-  margin: 0;
-    /*background-image: url(https://nhl.bamcontent.com/images/headshots/current/168x168/8458520.jpg);*/
 
+body {
+    margin-top: 30px;
+    background: url(https://newevolutiondesigns.com/images/freebies/white-wallpaper-30.jpg) no-repeat center center fixed;
+    color: black;
+    font-family: Arial;
 }
 article,
 aside,

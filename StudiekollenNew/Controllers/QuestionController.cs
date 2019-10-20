@@ -7,6 +7,8 @@ using StudiekollenNew.Models;
 using StudiekollenNew.Repositories;
 using StudiekollenNew.Services;
 using StudiekollenNew.ViewModels;
+using StudiekollenNew.ViewModels.ExamViewModels;
+using StudiekollenNew.ViewModels.QuestionsViewModels;
 
 namespace StudiekollenNew.Controllers
 {
@@ -62,9 +64,7 @@ namespace StudiekollenNew.Controllers
                 return View(viewModel);
             }
 
-            var repoFactory = new RepositoryFactory();
-
-            var questionService = new QuestionService(repoFactory);
+            var questionService = new QuestionService(new RepositoryFactory());
 
             questionService.UpdateQuestion(questionModel,sessionModel.QuestionId);
 
@@ -73,13 +73,13 @@ namespace StudiekollenNew.Controllers
 
         public ActionResult AddQuestionToExam(string examName, int examId)
         {
-            var viewModel = new CreateExamViewModel()
+            var viewModel = new AddQuestionViewModel()
             {
                 ExamName = examName,
                 ExamId = examId
             };
 
-            Session["viewCreateModel"] = viewModel;
+            Session["viewAddQuestionModel"] = viewModel;
 
 
             return View(viewModel);
@@ -89,11 +89,11 @@ namespace StudiekollenNew.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult AddQuestionToExam(Question questionModel)
         {
-            var sessionModel = Session["viewCreateModel"] as CreateExamViewModel;
+            var sessionModel = Session["viewAddQuestionModel"] as AddQuestionViewModel;
 
             if (!ModelState.IsValid)
             {
-                var viewModel = new CreateExamViewModel
+                var viewModel = new AddQuestionViewModel()
                 {
                     ExamName = sessionModel.ExamName,
                     Query = questionModel.Query,
@@ -105,9 +105,7 @@ namespace StudiekollenNew.Controllers
 
             var examId = sessionModel.ExamId;
 
-            var repoFactory = new RepositoryFactory();
-
-            var questionService = new QuestionService(repoFactory);
+            var questionService = new QuestionService(new RepositoryFactory());
 
             questionService.AddQuestion(examId, questionModel);
 

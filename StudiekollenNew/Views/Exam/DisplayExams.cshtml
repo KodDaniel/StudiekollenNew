@@ -9,7 +9,7 @@
   }
   else
   {
-      <table id="customers" class="table table-bordered table-hover">
+      <table id="examTable" class="table table-bordered table-hover">
 
           <tr>
               <th>          
@@ -36,63 +36,63 @@
                
           @foreach (var exam in Model)
           {
-          <tr>
+              <tr>
 
-              <td>@exam.ExamName</td>
+                  <td><i>@exam.ExamName</i></td>
 
-              @if (!exam.Questions.Any())
-              {
-                  <td>0</td>
-              }
-              else
-              {
-                  <td>@exam.Questions.Count()</td>
-              }
+                  @if (!exam.Questions.Any())
+                  {
+                      <td>0</td>
+                  }
+                  else
+                  {
+                      <td>@exam.Questions.Count()</td>
+                  }
 
-              <td>@exam.CreateDate</td>
+                  <td>@exam.CreateDate</td>
 
-              @if (exam.ChangeDate is null)
-              {
-                  <td>Har aldrig ändrats</td>
-              }
-              else
-              {
-                  <td>@exam.ChangeDate</td>
-              }
+                  @if (exam.ChangeDate == null)
+                  {
+                      <td>Har aldrig ändrats</td>
+                  }
+                  else
+                  {
+                      <td>@exam.ChangeDate</td>
+                  }
 
-              @if (exam.ExamTime is null)
-              {
-                  <td>Nej</td>
-              }
-              else
-              {
-                  <td>@exam.ExamTime</td>
-              }
-              @if (exam.SendReminderDate is null)
-              {
-                  <td>Nej</td>
-              }
-              else
-              {
-                  <td>@exam.SendReminderDate</td>
-              }
-              
-              @if (exam.RandomOrder is false)
-              {
-                  <td>Nej</td>
-              }
-              else
-              {
-                  <td>Ja</td>
-              }
-              <td>
-                  @Html.ActionLink("Redigera prov", "HandleExam", "Exam", new { examId = exam.ExamId }, null)
-              </td>
-              <td>                  
-                  @Html.ActionLink("Radera prov", "DeleteExam", "Exam", new {examId = exam.ExamId}, null)
-              </td>
+                  @if (exam.ExamTime == null)
+                  {
+                      <td>Nej</td>
+                  }
+                  else
+                  {
+                      <td>@exam.ExamTime</td>
+                  }
+                  @if (exam.SendReminderDate == null)
+                  {
+                      <td>Nej</td>
+                  }
+                  else
+                  {
+                      <td>@exam.SendReminderDate</td>
+                  }
 
-          </tr>
+                  @if (exam.RandomOrder == false)
+                  {
+                      <td>Nej</td>
+                  }
+                  else
+                  {
+                      <td>Ja</td>
+                  }
+                  <td>
+                      @Html.ActionLink("Redigera prov", "HandleExam", "Exam", new {examId = exam.ExamId}, null)
+                  </td>
+                  <td>
+                      @Html.ActionLink("Radera prov", "DeleteExam", "Exam", new {examId = exam.ExamId}, null)
+                  </td>
+
+              </tr>
           }
 
       </table>

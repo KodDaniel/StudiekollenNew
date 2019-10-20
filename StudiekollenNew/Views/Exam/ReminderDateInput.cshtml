@@ -2,7 +2,7 @@
 <div class="form-group">
     @Html.LabelFor(model => model.SendReminderDate, htmlAttributes: new { @class = "control-label col-md-2" })
     <div class="col-md-10">
-        @Html.EditorFor(model => model.SendReminderDate, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.TextBoxFor(m => m.SendReminderDate, "{0:yyyy-MM-ddThh:mm:ss}", new { @class = "form-control", type = "datetime-local" })
         @Html.ValidationMessageFor(model => model.SendReminderDate, "", new { @class = "text-danger" })
     </div>
 </div>
