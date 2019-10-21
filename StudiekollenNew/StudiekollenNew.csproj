@@ -359,8 +359,8 @@
     <Content Include="Views\Exam\_partialHandleTest.cshtml" />
     <Content Include="Views\Exam\_partialDetails.cshtml" />
     <Content Include="Views\Exam\CreateExam.cshtml" />
-    <Content Include="Views\Exam\ReminderDateInput.cshtml" />
-    <Content Include="Views\Exam\TimeInput.cshtml" />
+    <Content Include="Views\Exam\_ReminderDateInput.cshtml" />
+    <Content Include="Views\Exam\_TimeInput.cshtml" />
     <Content Include="Views\Exam\ExamConfirmation.cshtml" />
   </ItemGroup>
   <ItemGroup>

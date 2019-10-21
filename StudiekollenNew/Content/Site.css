@@ -25,17 +25,18 @@ input, select, textarea {
     /*max-width: 680px;*/
 }
 
-/*input .testclass {
-    width: 700px !important;
-}*/
-
-.testclass input, textarea, btn {
+.questionForm input, textarea, btn {
     max-width: 700px;
+}
+
+.questionForm .btnDiv {
+    padding-left: 17px;
 }
 
 .createExam .checkbox input[type="checkbox"], .checkbox-inline input[type="checkbox"] {
     margin-left: 0;
 }
+
 
 
 .font {
