@@ -17,15 +17,30 @@
     white-space: normal;
 }
 
+
 /* Set width on the form input elements since they're 100% wide by default */
 input, select, textarea {
+    
     max-width: 280px;
     /*max-width: 680px;*/
 }
 
- .font {
-        font-weight: bold;
-    }
+/*input .testclass {
+    width: 700px !important;
+}*/
+
+.testclass input, textarea, btn {
+    max-width: 700px;
+}
+
+.createExam .checkbox input[type="checkbox"], .checkbox-inline input[type="checkbox"] {
+    margin-left: 0;
+}
+
+
+.font {
+    font-weight: bold;
+}
 
 body {
     margin-top: 30px;

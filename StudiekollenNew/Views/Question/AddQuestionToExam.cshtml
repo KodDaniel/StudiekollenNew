@@ -1,37 +1,32 @@
 ﻿@model StudiekollenNew.ViewModels.QuestionsViewModels.AddQuestionViewModel
 
-
 <h2>@Model.ExamName</h2>
 
 @using (Html.BeginForm("AddQuestionToExam", "Question"))
 {
-    <div class="form-horizontal">
+    <div class="form-horizontal testclass">
         <hr />
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Query, htmlAttributes: new { @class = "control-label col-lg-2" })
+        <div class="form-group testclass">
+            @Html.LabelFor(model => model.Query, htmlAttributes: new { @class = "control-label col-md-2" })<br/>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Query, new { htmlAttributes = new { @class = "form-control" } })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Answer, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.TextAreaFor(model => model.Answer, 7, 100, new { htmlAttributes = new { @class = "form-control" } })
-            </div>
-        </div>
-        <div class="form-group">
-            @Html.AntiForgeryToken()
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Lägg till ny fråga" class="btn btn-default btn-block"/><br/>
-                <input type="button"  class="btn btn-default btn-block" value="Spara prov" onclick="@("window.location.href='" + @Url.Action("DisplayExams", "Exam") + "'");" />
-
                 @Html.ValidationMessageFor(model => model.Query)
-
             </div>
         </div>
-    </div>
+        <div class="form-group testclass">
+            <div class="col-md-10">
+                @Html.LabelFor(model => model.Answer, htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.TextAreaFor(model => model.Answer, 7, 100, new { htmlAttributes = new { @class = "form-control textarea" } })
+            </div>
+        </div>
+            <div class="form-group testclass">
+                @Html.AntiForgeryToken()
+                <div class="col-md-offset-2">
+                    <input type="submit" value="Lägg till ny fråga" class="btn btn-default btn-block" /><br />
+                </div>
+            </div>
+        </div>
+
 }
 @*Klientvalidering*@
 @section Scripts {

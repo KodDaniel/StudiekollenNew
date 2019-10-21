@@ -1,33 +1,33 @@
 ﻿@model StudiekollenNew.ViewModels.ExamViewModels.CreateExamViewModel
 
-@*<script>
-    $(document).ready(function () {
-        $('#ExamTimeBool').bind('click', function () {
-            if ($(this).is(":checked")) {
-                $("#ExamTime").load("TimeInput");
+<script>
 
-            } else {
-                $("#ExamTime").load("Empty");
-            }
-        });
-    });
+    //$(document).ready(function () {
 
-    $(document).ready(function () {
+    //  $('#ExamTimeBool').bind('click',
+    //                function() {
+    //                    if ($(this).is(":checked")) {
+    //                        $("#ExamTime").show();
+    //                    } else {
+    //                        $("#ExamTime").hide();
+    //                    }
+    //                });
+      
+    //    $('input[name=ExamTimeBool]').change(function(){
+    //        if ($('input[name=ExamTimeBool]').is(':checked'))
 
+    //            $('#ExamTimeBool').bind('click',
+    //                function() {
+    //                    if ($(this).is(":checked")) {
+    //                        $("#ExamTime").show();
+    //                    } else {
+    //                        $("#ExamTime").hide();
+    //                    }
+    //                });
+    //    });
+    //});
 
-        $('#ReminderDateBool').bind('click', function () {
-            if ($(this).is(":checked")) {
-                $("#SendReminderDate").load("ReminderDateInput");
-
-            } else {
-                $("#SendReminderDate").load("Empty");
-            }
-        });
-
-    });
-
-
-</script>*@
+</script>
 
 <h2>Skapa prov</h2>
 
@@ -35,13 +35,13 @@
 {
     @Html.AntiForgeryToken()
     
-<div class="form-horizontal">
+<div class="form-horizontal createExam">
     <hr />
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     <div class="form-group">
         @Html.LabelFor(model => model.ExamName, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.ExamName, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.EditorFor(model => model.ExamName, new { htmlAttributes = new { @class = "form-control testclas" } })
             @Html.ValidationMessageFor(model => model.ExamName, "", new { @class = "text-danger" })
         </div>
     </div>
@@ -53,28 +53,25 @@
                 @Html.EditorFor(model => model.ExamTimeBool)
                 @Html.ValidationMessageFor(model => model.ExamTimeBool, "", new { @class = "text-danger" })
             </div>
+
         </div>
     </div>
-    @if (Model.DataFormatString != null)
-    {
-        <div class="form-group">
-            @Html.LabelFor(model => model.DataFormatString, htmlAttributes: new {@class = "control-label col-md-2"})
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.DataFormatString, new {htmlAttributes = new {@class = "form-control", type = "time"}})
-                @Html.ValidationMessageFor(model => model.ExamTime, "", new {@class = "text-danger"})
-            </div>
+
+    @*<div id="ExamTime" hidden>
+            @Html.Partial("TimeInput")
+        </div>*@
+
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.ExamTime, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.ExamTime, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.ExamTime, "", new { @class = "text-danger" })
         </div>
-    }
-    else
-    {
-        <div class="form-group">
-            @Html.LabelFor(model => model.ExamTime, htmlAttributes: new {@class = "control-label col-md-2"})
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.ExamTime, new {htmlAttributes = new {@class = "form-control"}})
-                @Html.ValidationMessageFor(model => model.ExamTime, "", new {@class = "text-danger"})
-            </div>
-        </div>
-    }
+    </div>
+
+
+
     <div class="form-group">
         @Html.LabelFor(model => model.ReminderDateBool, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
@@ -88,16 +85,12 @@
     <div class="form-group">
         @Html.LabelFor(model => model.SendReminderDate, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.TextBoxFor(m => m.SendReminderDate, "{0:yyyy-MM-ddThh:mm:ss}", new { @class = "form-control", type = "datetime-local" })
+            @Html.TextBoxFor(m => m.SendReminderDate, "{0:yyyy-MM-ddThh:mm:ss}", new { @class = "form-control", type = "datetime-local", min = DateTime.Now })
             @Html.ValidationMessageFor(model => model.SendReminderDate, "", new { @class = "text-danger" })
         </div>
     </div>
 
-    @* Div för Ajax SendReminderDate *@
-    @*<div
-            id="SendReminderDate" name="SendReminderDate">
-            <span asp-validation-for="SendReminderDate" class="text-danger"></span>
-        </div>*@
+
 
     <div class="form-group">
         @Html.LabelFor(model => model.RandomOrder, htmlAttributes: new { @class = "control-label col-md-2" })

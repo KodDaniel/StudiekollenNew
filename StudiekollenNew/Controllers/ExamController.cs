@@ -26,7 +26,6 @@ namespace StudiekollenNew.Controllers
     {
         public ActionResult CreateExam(bool? regret)
         {
-
             if (regret == null)
             {
                 return View(new CreateExamViewModel());
@@ -35,9 +34,6 @@ namespace StudiekollenNew.Controllers
             else
             {
                 var sessionModel = Session["examViewModel"] as CreateExamViewModel;
-
-                // Använder propertin 'DataformatString' för att jag ska kunna stoppa tillbaka i min HTML-time-input
-                sessionModel.DataFormatString = sessionModel.ExamTime.ToString();
 
                 return View(sessionModel);
             }
@@ -48,16 +44,10 @@ namespace StudiekollenNew.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult CreateExam(CreateExamViewModel viewExamModel)
         {
-            
+
             if (!ModelState.IsValid)
             {
                 return View(viewExamModel);
-            }
-
-            if (viewExamModel.DataFormatString != null)
-            {
-                viewExamModel.ExamTime = TimeSpan.Parse(viewExamModel.DataFormatString);
-                viewExamModel.DataFormatString = null;
             }
 
             Session["examViewModel"] = viewExamModel;
@@ -67,18 +57,14 @@ namespace StudiekollenNew.Controllers
 
         }
 
-        public ActionResult Empty()
-        {
-            return new EmptyResult();
-        }
-
         public ActionResult TimeInput()
         {
-            return PartialView();
+            return PartialView(new CreateExamViewModel());
         }
 
         public ActionResult ReminderDateInput()
         {
+            
             return PartialView();
         }
 
