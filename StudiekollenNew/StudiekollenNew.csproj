@@ -356,8 +356,8 @@
     <Content Include="Views\Question\AddQuestionToExam.cshtml" />
     <Content Include="Views\Home\ToDo.cshtml" />
     <Content Include="Views\Exam\UpdateExam.cshtml" />
-    <Content Include="Views\Exam\_partialHandleTest.cshtml" />
-    <Content Include="Views\Exam\_partialDetails.cshtml" />
+    <Content Include="Views\Exam\_NoQuestions.cshtml" />
+    <Content Include="Views\Exam\_NoExams.cshtml" />
     <Content Include="Views\Exam\CreateExam.cshtml" />
     <Content Include="Views\Exam\_ReminderDateInput.cshtml" />
     <Content Include="Views\Exam\_TimeInput.cshtml" />

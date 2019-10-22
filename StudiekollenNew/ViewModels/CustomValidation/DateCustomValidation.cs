@@ -21,6 +21,9 @@ namespace StudiekollenNew.ViewModels.CustomValidaiton
                 return datetime > DateTime.Now;
 
             }
+
         }
+
+
     }
 }

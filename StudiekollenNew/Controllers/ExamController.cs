@@ -39,14 +39,25 @@ namespace StudiekollenNew.Controllers
             }
         }
 
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult CreateExam(CreateExamViewModel viewExamModel)
         {
-
             if (!ModelState.IsValid)
             {
+                return View(viewExamModel);
+            }
+
+            if (viewExamModel.ExamTimeBool && viewExamModel.ExamTime == null)
+            {
+                ModelState.AddModelError("ExamTime", "Du måste fylla i en provtid");
+
+                return View(viewExamModel);
+            }
+
+            if (viewExamModel.ReminderDateBool && viewExamModel.SendReminderDate == null)
+            {
+                ModelState.AddModelError("SendReminderDate", "Du måste fylla i ett datum för mejlpåminnelse");
                 return View(viewExamModel);
             }
 
@@ -59,13 +70,13 @@ namespace StudiekollenNew.Controllers
 
         public ActionResult TimeInput()
         {
-            return PartialView(new CreateExamViewModel());
+            return PartialView("_TimeInput");
         }
 
         public ActionResult ReminderDateInput()
         {
             
-            return PartialView();
+            return PartialView("_ReminderDateInput");
         }
 
 
@@ -261,7 +272,7 @@ namespace StudiekollenNew.Controllers
 
             if (!allExamsForThisUser.Any())
             {
-                return View("_partialDetails");
+                return View("_NoExams");
             }
 
             var vievModel = new SearchExamViewModel
