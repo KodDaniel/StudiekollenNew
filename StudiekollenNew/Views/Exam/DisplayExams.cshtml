@@ -38,7 +38,7 @@
           {
               <tr>
 
-                  <td><i>@exam.ExamName</i></td>
+                  <td><strong>@exam.ExamName</strong></td>
 
                   @if (!exam.Questions.Any())
                   {
@@ -49,7 +49,7 @@
                       <td>@exam.Questions.Count()</td>
                   }
 
-                  <td>@exam.CreateDate</td>
+                  <td>@exam.CreateDate.ToString("yyyy/MM/dd hh:mm")</td>
 
                   @if (exam.ChangeDate == null)
                   {
@@ -57,7 +57,7 @@
                   }
                   else
                   {
-                      <td>@exam.ChangeDate</td>
+                      <td>@exam.ChangeDate.Value.ToString("yyyy/MM/dd hh:mm")</td>
                   }
 
                   @if (exam.ExamTime == null)
@@ -66,7 +66,7 @@
                   }
                   else
                   {
-                      <td>@exam.ExamTime</td>
+                      <td>@exam.ExamTime.Value.ToString(@"hh\:mm") </td>
                   }
                   @if (exam.SendReminderDate == null)
                   {
@@ -74,7 +74,7 @@
                   }
                   else
                   {
-                      <td>@exam.SendReminderDate</td>
+                      <td>@exam.SendReminderDate.Value.ToString("yyyy/MM/dd hh:mm")</td>
                   }
 
                   @if (exam.RandomOrder == false)
