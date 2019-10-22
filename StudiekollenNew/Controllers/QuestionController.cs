@@ -109,6 +109,7 @@ namespace StudiekollenNew.Controllers
 
             questionService.AddQuestion(examId, questionModel);
 
+
             return RedirectToAction("HandleExam", "Exam", new { examId = examId });
 
         }

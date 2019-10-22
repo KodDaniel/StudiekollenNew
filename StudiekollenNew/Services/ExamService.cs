@@ -65,9 +65,9 @@ namespace StudiekollenNew.Services
             _examRepository.DeleteExam(id);
         }
 
-        public void UpdateExam(Exam exam, int testId)
+        public void UpdateExam(Exam exam, int examId)
         {
-            _examRepository.UpdateExam(exam,testId);
+            _examRepository.UpdateExam(exam,examId);
         }
 
 

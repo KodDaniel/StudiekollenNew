@@ -15,7 +15,7 @@ using StudiekollenNew.Services;
 using StudiekollenNew.ViewModels;
 using StudiekollenNew.ViewModels.ExamViewModels;
 using StudiekollenNew.ViewModels.TestViewModels;
-using CreateExamViewModel = StudiekollenNew.ViewModels.ExamViewModels.CreateExamViewModel;
+using CreateAndUpdateExamViewModel = StudiekollenNew.ViewModels.ExamViewModels.CreateAndUpdateExamViewModel;
 
 
 namespace StudiekollenNew.Controllers
@@ -28,12 +28,12 @@ namespace StudiekollenNew.Controllers
         {
             if (regret == null)
             {
-                return View(new CreateExamViewModel());
+                return View(new CreateAndUpdateExamViewModel());
             }
             // Om bool inte är null har användaren ångrat sig (från examconfirmation.csthml)
             else
             {
-                var sessionModel = Session["examViewModel"] as CreateExamViewModel;
+                var sessionModel = Session["examViewModel"] as CreateAndUpdateExamViewModel;
 
                 return View(sessionModel);
             }
@@ -41,8 +41,13 @@ namespace StudiekollenNew.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CreateExam(CreateExamViewModel viewExamModel)
+        public ActionResult CreateExam(CreateAndUpdateExamViewModel viewExamModel)
         {
+            // Ser till att ett ett ifyllt formulär nollställs om tillhörande checkbox klickas ur
+            viewExamModel.ExamTime = (!viewExamModel.ExamTimeBool) ? null : viewExamModel.ExamTime;
+            
+            viewExamModel.SendReminderDate = (!viewExamModel.ReminderDateBool) ? null : viewExamModel.SendReminderDate;
+
             if (!ModelState.IsValid)
             {
                 return View(viewExamModel);
@@ -60,6 +65,7 @@ namespace StudiekollenNew.Controllers
                 ModelState.AddModelError("SendReminderDate", "Du måste fylla i ett datum för mejlpåminnelse");
                 return View(viewExamModel);
             }
+
 
             Session["examViewModel"] = viewExamModel;
 
@@ -83,7 +89,7 @@ namespace StudiekollenNew.Controllers
         public ActionResult ExamConfirmation()
         {
 
-            var sessionModel = Session["examViewModel"] as CreateExamViewModel;
+            var sessionModel = Session["examViewModel"] as CreateAndUpdateExamViewModel;
 
             // Undersöker mina checkboxes
             string timeKeeping = (sessionModel.ExamTimeBool) ? "Ja" : "Nej";
@@ -178,7 +184,7 @@ namespace StudiekollenNew.Controllers
 
         public ActionResult SaveExam()
         {
-            var viewExamModel = Session["examViewModel"] as CreateExamViewModel;
+            var viewExamModel = Session["examViewModel"] as CreateAndUpdateExamViewModel;
 
             var examService = new ExamService(new RepositoryFactory());
 
@@ -222,45 +228,67 @@ namespace StudiekollenNew.Controllers
         {
             var examService = new ExamService(new RepositoryFactory());
 
-            var exam = examService.GetSingleExam(examId);
+            var examToUpdate = examService.GetSingleExam(examId);
 
-            examService.UpdateExam(exam,examId);
-
-            var viewModel = new UpdateExamViewModel
+            var examSettings = new CreateAndUpdateExamViewModel
             {
-                ExamName = exam.ExamName,
-                ExamId = examId
-                
+                // Två första raderna sätter checkboxar utifrån villkor
+                ExamTimeBool = (examToUpdate.ExamTime != null),
+                ReminderDateBool = (examToUpdate.SendReminderDate != null),
+                RandomOrder = examToUpdate.RandomOrder,
+                ExamName = examToUpdate.ExamName,
+                ExamTime = examToUpdate.ExamTime,
+                SendReminderDate = examToUpdate.SendReminderDate,
             };
 
-            Session["viewModel"] = viewModel;
+            Session["ExamId"] = examId;
 
-
-            return View(viewModel);
+            return View(examSettings);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult UpdateExam(Exam exam)
+        public ActionResult UpdateExam(CreateAndUpdateExamViewModel viewExamModel)
         {
-            return Content("TO-DO!");
-            //var sessionModel = Session["viewModel"] as UpdateExamViewModel;
+            viewExamModel.ExamTime = (!viewExamModel.ExamTimeBool) ? null : viewExamModel.ExamTime;
 
-            //if (!ModelState.IsValid)
-            //{
-            //    var viewModel = new UpdateExamViewModel
-            //    {
-            //        ExamName = sessionModel.ExamName,
-            //    };
+            viewExamModel.SendReminderDate = (!viewExamModel.ReminderDateBool) ? null : viewExamModel.SendReminderDate;
 
-            //    return View(viewModel);
-            //}
+            if (viewExamModel.ExamTimeBool && viewExamModel.ExamTime == null)
+            {
+                ModelState.AddModelError("ExamTime", "Du måste fylla i en provtid");
 
-            //var examService = new ExamService(new RepositoryFactory());
+                return View(viewExamModel);
+            }
 
-            //examService.UpdateExam(exam, sessionModel.ExamId);
+            if (viewExamModel.ReminderDateBool && viewExamModel.SendReminderDate == null)
+            {
+                ModelState.AddModelError("SendReminderDate", "Du måste fylla i ett datum för mejlpåminnelse");
+                return View(viewExamModel);
+            }
 
-            //return RedirectToAction("HandleExam", "Exam", new { examId = sessionModel.ExamId });
+            if (!ModelState.IsValid)
+            {
+                return View(viewExamModel);
+            }
+
+            var examService = new ExamService(new RepositoryFactory());
+
+            int examId = (int)Session["examId"];
+
+            var exam = new Exam
+            {
+                ExamName = viewExamModel.ExamName,
+                SendReminderDate = viewExamModel.SendReminderDate,
+                ExamTime = viewExamModel.ExamTime,
+                RandomOrder = viewExamModel.RandomOrder,
+                ExamId = examId
+            };
+
+
+            examService.UpdateExam(exam,examId);
+
+            return RedirectToAction("HandleExam", "Exam", new { examId = examId});
         }
 
 

@@ -10,7 +10,7 @@ using StudiekollenNew.ViewModels.CustomValidation;
 namespace StudiekollenNew.ViewModels.ExamViewModels
 
 {
-    public class CreateExamViewModel
+    public class CreateAndUpdateExamViewModel
     {
         [Display(Name = "Provnamn")]
         [Required(ErrorMessage = "Du måste fylla i ett provnamn")]

@@ -37,6 +37,11 @@ namespace StudiekollenNew.Repositories
 
             _context.Question.Add(questionModel);
 
+            var belongsToExam = _context.Exam
+                .Single(a => a.ExamId == questionModel.ExamId);
+
+            belongsToExam.ChangeDate = DateTime.Now;
+
             _context.SaveChanges();
         }
 

@@ -86,14 +86,16 @@ namespace StudiekollenNew.Repositories
             _context.SaveChanges();
         }
 
-        public void UpdateExam(Exam exam, int eXamId)
+        public void UpdateExam(Exam exam, int examId)
         {
-            var currentExam = GetSingleExam(eXamId);
+            var currentExam = GetSingleExam(examId);
 
             currentExam.ExamName = exam.ExamName;
-
+            currentExam.ExamTime = exam.ExamTime;
             currentExam.ChangeDate = DateTime.Now;
-           
+            currentExam.SendReminderDate = exam.SendReminderDate;
+            currentExam.RandomOrder = exam.RandomOrder;
+
             _context.SaveChanges();
         }
 

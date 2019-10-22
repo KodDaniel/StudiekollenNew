@@ -262,6 +262,10 @@
     <Compile Include="Migrations\201910170905367_datetime.Designer.cs">
       <DependentUpon>201910170905367_datetime.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201910220846027_updateOfDatabase.cs" />
+    <Compile Include="Migrations\201910220846027_updateOfDatabase.Designer.cs">
+      <DependentUpon>201910220846027_updateOfDatabase.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Repositories\QuestionRepository.cs" />
     <Compile Include="Repositories\RepositoryFactory.cs" />
@@ -284,7 +288,7 @@
     <Compile Include="DomainModels\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
-    <Compile Include="ViewModels\ExamViewModels\CreateExamViewModel.cs" />
+    <Compile Include="ViewModels\ExamViewModels\CreateAndUpdateExamViewModel.cs" />
     <Compile Include="ViewModels\ExamViewModels\UpdateExamViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -390,6 +394,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201910170905367_datetime.resx">
       <DependentUpon>201910170905367_datetime.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201910220846027_updateOfDatabase.resx">
+      <DependentUpon>201910220846027_updateOfDatabase.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
