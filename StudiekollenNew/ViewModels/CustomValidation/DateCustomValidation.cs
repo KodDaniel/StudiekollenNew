@@ -15,11 +15,13 @@ namespace StudiekollenNew.ViewModels.CustomValidaiton
             {
                 return true;
             }
+
             else
             {
                 var datetime = Convert.ToDateTime(value);
-                return datetime > DateTime.Now;
+                return   datetime > DateTime.Now;
 
+             
             }
 
         }
