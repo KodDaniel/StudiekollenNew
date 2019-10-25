@@ -18,7 +18,7 @@ namespace StudiekollenNew.ViewModels.CustomValidation
             {
                 var time = (TimeSpan)value;
 
-                return time > new TimeSpan(0, 0, 1, 0);
+                return time >= new TimeSpan(0, 0, 1, 0);
 
             }
         }

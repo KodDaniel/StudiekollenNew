@@ -385,7 +385,6 @@
     <Content Include="Views\Exam\HandleExam.cshtml" />
     <Content Include="Views\Question\UpdateQuestion.cshtml" />
     <Content Include="Views\Question\AddQuestionToExam.cshtml" />
-    <Content Include="Views\Home\ToDo.cshtml" />
     <Content Include="Views\Exam\UpdateExam.cshtml" />
     <Content Include="Views\Exam\_NoQuestions.cshtml" />
     <Content Include="Views\Exam\_NoExams.cshtml" />

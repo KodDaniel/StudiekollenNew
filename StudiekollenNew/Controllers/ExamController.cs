@@ -35,9 +35,22 @@ namespace StudiekollenNew.Controllers
             var metaService = new MetaTagService(new RepositoryFactory());
             var meta = metaService.GetPageMetaTags(metaDataUrl);
 
-            ViewBag.Title = meta.Title;
-            ViewBag.Description = meta.MetaDescription;
-            ViewBag.Keywords = meta.MetaKeyWords;
+            string errorMsgMeta = "Metadata gick inte att hämta";
+
+            // Vill att sidan ska ladda även om metadata inte lyckas hämtas
+            if (meta == null)
+            {
+                ViewBag.Title = errorMsgMeta;
+                ViewBag.Description = errorMsgMeta;
+                ViewBag.Keywords = errorMsgMeta;
+            }
+            else
+            {
+                // Undersöker därför också respektive property (Om null sätt errormsg)
+                ViewBag.Title = meta.Title ?? errorMsgMeta;
+                ViewBag.Description= meta.MetaDescription ?? errorMsgMeta;
+                ViewBag.Keywords = meta.MetaKeyWords ?? errorMsgMeta;
+            }
 
             if (regret == null)
             {
@@ -45,11 +58,9 @@ namespace StudiekollenNew.Controllers
             }
 
             // Om bool inte är null har användaren ångrat sig (från examconfirmation.csthml)
-           
-                var sessionModel = Session["examViewModel"] as CreateAndUpdateExamViewModel;
+            var sessionModel = Session["examViewModel"] as CreateAndUpdateExamViewModel;
 
                 return View(sessionModel);
-            
         }
 
         [HttpPost]
@@ -108,9 +119,22 @@ namespace StudiekollenNew.Controllers
             var metaService = new MetaTagService(new RepositoryFactory());
             var meta = metaService.GetPageMetaTags(metaDataUrl);
 
-            ViewBag.Title = meta.Title;
-            ViewBag.Description = meta.MetaDescription;
-            ViewBag.Keywords = meta.MetaKeyWords;
+            string errorMsgMeta = "Metadata gick inte att hämta";
+
+            // Vill att sidan ska ladda även om metadata inte lyckas hämtas
+            if (meta == null)
+            {
+                ViewBag.Title = errorMsgMeta;
+                ViewBag.Description = errorMsgMeta;
+                ViewBag.Keywords = errorMsgMeta;
+            }
+            else
+            {
+                // Undersöker därför också respektive property (Om null sätt errormsg)
+                ViewBag.Title = meta.Title ?? errorMsgMeta;
+                ViewBag.Description = meta.MetaDescription ?? errorMsgMeta;
+                ViewBag.Keywords = meta.MetaKeyWords ?? errorMsgMeta;
+            }
 
             var sessionModel = Session["examViewModel"] as CreateAndUpdateExamViewModel;
 
@@ -145,9 +169,22 @@ namespace StudiekollenNew.Controllers
             var metaService = new MetaTagService(repoFactory);
             var meta = metaService.GetPageMetaTags(metaDataUrl);
 
-            ViewBag.Title = meta.Title;
-            ViewBag.Description = meta.MetaDescription;
-            ViewBag.Keywords = meta.MetaKeyWords;
+            string errorMsgMeta = "Metadata gick inte att hämta";
+
+            // Vill att sidan ska ladda även om metadata inte lyckas hämtas
+            if (meta == null)
+            {
+                ViewBag.Title = errorMsgMeta;
+                ViewBag.Description = errorMsgMeta;
+                ViewBag.Keywords = errorMsgMeta;
+            }
+            else
+            {
+                // Undersöker därför också respektive property (Om null sätt errormsg)
+                ViewBag.Title = meta.Title ?? errorMsgMeta;
+                ViewBag.Description = meta.MetaDescription ?? errorMsgMeta;
+                ViewBag.Keywords = meta.MetaKeyWords ?? errorMsgMeta;
+            }
 
             var examService = new ExamService(repoFactory);
 
@@ -165,7 +202,6 @@ namespace StudiekollenNew.Controllers
             ViewBag.NumberOfQuestionsSortParm = sortOrder == "NumberOfQuestions" ? "NumberOfQuestions_Desc" : "NumberOfQuestions";
 
 
-            // TO-DO: Lyfta ut sorteringen till repository genom att skicka predikat från switch. 
             switch (sortOrder)
             {
                 case "Name_Desc":
@@ -248,13 +284,22 @@ namespace StudiekollenNew.Controllers
             var metaService = new MetaTagService(repoFactory);
             var meta = metaService.GetPageMetaTags(metaDataUrl);
 
-            //string errorMsg = "Metadata gick inte att hämta";
-            //errorMsg = meta.Title ?? meta.MetaDescription ?? meta.MetaKeyWords;
+            string errorMsgMeta = "Metadata gick inte att hämta";
 
-            ViewBag.Title = meta.Title;
-            ViewBag.Description = meta.MetaDescription;
-            ViewBag.Keywords = meta.MetaKeyWords;
-
+            // Vill att sidan ska ladda även om metadata inte lyckas hämtas
+            if (meta == null)
+            {
+                ViewBag.Title = errorMsgMeta;
+                ViewBag.Description = errorMsgMeta;
+                ViewBag.Keywords = errorMsgMeta;
+            }
+            else
+            {
+                // Undersöker därför också respektive property (Om null sätt errormsg)
+                ViewBag.Title = meta.Title ?? errorMsgMeta;
+                ViewBag.Description = meta.MetaDescription ?? errorMsgMeta;
+                ViewBag.Keywords = meta.MetaKeyWords ?? errorMsgMeta;
+            }
             var questionService = new QuestionService(repoFactory);
 
             var examService = new ExamService(repoFactory);
@@ -285,9 +330,22 @@ namespace StudiekollenNew.Controllers
             var metaService = new MetaTagService(repoFactory);
             var meta = metaService.GetPageMetaTags(metaDataUrl);
 
-            ViewBag.Title = meta.Title;
-            ViewBag.Description = meta.MetaDescription;
-            ViewBag.Keywords = meta.MetaKeyWords;
+            string errorMsgMeta = "Metadata gick inte att hämta";
+
+            // Vill att sidan ska ladda även om metadata inte lyckas hämtas
+            if (meta == null)
+            {
+                ViewBag.Title = errorMsgMeta;
+                ViewBag.Description = errorMsgMeta;
+                ViewBag.Keywords = errorMsgMeta;
+            }
+            else
+            {
+                // Undersöker därför också respektive property (Om null sätt errormsg)
+                ViewBag.Title = meta.Title ?? errorMsgMeta;
+                ViewBag.Description = meta.MetaDescription ?? errorMsgMeta;
+                ViewBag.Keywords = meta.MetaKeyWords ?? errorMsgMeta;
+            }
 
             var examService = new ExamService(repoFactory);
 
@@ -313,9 +371,10 @@ namespace StudiekollenNew.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult UpdateExam(CreateAndUpdateExamViewModel viewExamModel)
         {
+            // Ser till att ett ett ifyllt formulär nollställs om tillhörande checkbox klickas ur
             viewExamModel.ExamTime = (!viewExamModel.ExamTimeBool) ? null : viewExamModel.ExamTime;
-
             viewExamModel.SendReminderDate = (!viewExamModel.ReminderDateBool) ? null : viewExamModel.SendReminderDate;
+
 
             if (viewExamModel.ExamTimeBool && viewExamModel.ExamTime == null)
             {
@@ -351,7 +410,7 @@ namespace StudiekollenNew.Controllers
 
             examService.UpdateExam(exam,examId);
 
-            return RedirectToAction("HandleExam", "Exam", new { examId = examId});
+            return RedirectToAction("DisplayExams");
         }
 
 
@@ -366,9 +425,22 @@ namespace StudiekollenNew.Controllers
             var metaService = new MetaTagService(repoFactory);
             var meta = metaService.GetPageMetaTags(metaDataUrl);
 
-            ViewBag.Title = meta.Title;
-            ViewBag.Description = meta.MetaDescription;
-            ViewBag.Keywords = meta.MetaKeyWords;
+            string errorMsgMeta = "Metadata gick inte att hämta";
+
+            // Vill att sidan ska ladda även om metadata inte lyckas hämtas
+            if (meta == null)
+            {
+                ViewBag.Title = errorMsgMeta;
+                ViewBag.Description = errorMsgMeta;
+                ViewBag.Keywords = errorMsgMeta;
+            }
+            else
+            {
+                // Undersöker därför också respektive property (Om null sätt errormsg)
+                ViewBag.Title = meta.Title ?? errorMsgMeta;
+                ViewBag.Description = meta.MetaDescription ?? errorMsgMeta;
+                ViewBag.Keywords = meta.MetaKeyWords ?? errorMsgMeta;
+            }
 
             var testService = new ExamService(repoFactory);
 
@@ -391,7 +463,6 @@ namespace StudiekollenNew.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult SearchForExam(string id)
         {
-
             return RedirectToAction("HandleExam", new { examId = id });
         }
 
@@ -405,9 +476,6 @@ namespace StudiekollenNew.Controllers
         }
 
 
-       
-
-        
     }
 }
 

@@ -18,12 +18,6 @@ namespace StudiekollenNew.Controllers
         {
             return View();
 
-
-        }
-
-        public ViewResult ToDo()
-        {
-            return View();
         }
 
     }

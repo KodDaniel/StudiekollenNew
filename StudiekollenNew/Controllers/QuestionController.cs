@@ -36,9 +36,22 @@ namespace StudiekollenNew.Controllers
             var metaService = new MetaTagService(repoFactory);
             var meta = metaService.GetPageMetaTags(metaDataUrl);
 
-            ViewBag.Title = meta.Title;
-            ViewBag.Description = meta.MetaDescription;
-            ViewBag.Keywords = meta.MetaKeyWords;
+            string errorMsgMeta = "Metadata gick inte att hämta";
+
+            // Vill att sidan ska ladda även om metadata inte lyckas hämtas
+            if (meta == null)
+            {
+                ViewBag.Title = errorMsgMeta;
+                ViewBag.Description = errorMsgMeta;
+                ViewBag.Keywords = errorMsgMeta;
+            }
+            else
+            {
+                // Undersöker därför också respektive property (Om null sätt errormsg)
+                ViewBag.Title = meta.Title ?? errorMsgMeta;
+                ViewBag.Description = meta.MetaDescription ?? errorMsgMeta;
+                ViewBag.Keywords = meta.MetaKeyWords ?? errorMsgMeta;
+            }
 
             var questionService = new QuestionService(repoFactory);
 
@@ -95,9 +108,22 @@ namespace StudiekollenNew.Controllers
             var metaService = new MetaTagService(repoFactory);
             var meta = metaService.GetPageMetaTags(metaDataUrl);
 
-            ViewBag.Title = meta.Title;
-            ViewBag.Description = meta.MetaDescription;
-            ViewBag.Keywords = meta.MetaKeyWords;
+            string errorMsgMeta = "Metadata gick inte att hämta";
+
+            // Vill att sidan ska ladda även om metadata inte lyckas hämtas
+            if (meta == null)
+            {
+                ViewBag.Title = errorMsgMeta;
+                ViewBag.Description = errorMsgMeta;
+                ViewBag.Keywords = errorMsgMeta;
+            }
+            else
+            {
+                // Undersöker därför också respektive property (Om null sätt errormsg)
+                ViewBag.Title = meta.Title ?? errorMsgMeta;
+                ViewBag.Description = meta.MetaDescription ?? errorMsgMeta;
+                ViewBag.Keywords = meta.MetaKeyWords ?? errorMsgMeta;
+            }
 
             var viewModel = new AddQuestionViewModel()
             {

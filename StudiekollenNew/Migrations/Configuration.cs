@@ -146,14 +146,14 @@ namespace StudiekollenNew.Migrations
                 },
                 new MetaTags
                 {
-                    PageUrl = "/Question/AddQuestion",
+                    PageUrl = "/Question/AddQuestionToExam",
                     MetaDescription = "Lägg till en ny fråga till ett existerande prov",
                     MetaKeyWords = "Prov,lägg till, redigera, ändra",
                     Title = "Lägg till fråga"
                 },
                 new MetaTags
                 {
-                    PageUrl = "/Question/UpdateQuestionToExam",
+                    PageUrl = "/Question/UpdateQuestion",
                     MetaDescription = "Uppdatera en fråga i ett existerande prov",
                     MetaKeyWords = "Prov,uppdatera, redigera, ändra",
                     Title = "Uppdatera fråga"
