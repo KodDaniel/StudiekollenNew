@@ -27,7 +27,7 @@ namespace StudiekollenNew.Models
         public DbSet<Exam> Exam { get; set; }
         public DbSet<Question> Question{ get; set; }
         //public DbSet<ExamStats> ExamStats { get; set; }
-        public DbSet<MetaTagDetails> MetaTags {get; set; }
+        public DbSet<MetaTags> MetaTags {get; set; }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
            
@@ -37,10 +37,11 @@ namespace StudiekollenNew.Models
             modelBuilder.Entity<Exam>().Property(d => d.CreateDate).HasColumnType("datetime2");
 
 
-            modelBuilder.Entity<MetaTagDetails>().Property(a => a.Id).HasColumnName("MetaTagId");
-            modelBuilder.Entity<MetaTagDetails>().Property(a => a.MetaDescription).HasMaxLength(100);
-            modelBuilder.Entity<MetaTagDetails>().Property(a => a.PageUrl).HasMaxLength(100);
-            modelBuilder.Entity<MetaTagDetails>().Property(a => a.MetaKeyWords).HasMaxLength(100);
+            modelBuilder.Entity<MetaTags>().Property(a => a.Id).HasColumnName("MetaTagId");
+            modelBuilder.Entity<MetaTags>().Property(a => a.Title).HasMaxLength(100);
+            modelBuilder.Entity<MetaTags>().Property(a => a.MetaDescription).HasMaxLength(100);
+            modelBuilder.Entity<MetaTags>().Property(a => a.PageUrl).HasMaxLength(100);
+            modelBuilder.Entity<MetaTags>().Property(a => a.MetaKeyWords).HasMaxLength(100);
 
             modelBuilder.Entity<Exam>().Property(d => d.ChangeDate).HasColumnType("datetime2");
 

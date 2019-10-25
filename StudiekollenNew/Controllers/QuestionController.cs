@@ -26,8 +26,21 @@ namespace StudiekollenNew.Controllers
 
 
         public ViewResult UpdateQuestion(int questionId, string examName, int examId)
-        {        
-            var questionService = new QuestionService(new RepositoryFactory());
+        {
+            var repoFactory = new RepositoryFactory();
+
+            string controllerName = ControllerContext.RouteData.Values["controller"].ToString();
+            string actionName = ControllerContext.RouteData.Values["action"].ToString();
+            string metaDataUrl = "/" + controllerName + "/" + actionName;
+
+            var metaService = new MetaTagService(repoFactory);
+            var meta = metaService.GetPageMetaTags(metaDataUrl);
+
+            ViewBag.Title = meta.Title;
+            ViewBag.Description = meta.MetaDescription;
+            ViewBag.Keywords = meta.MetaKeyWords;
+
+            var questionService = new QuestionService(repoFactory);
 
             var questionModel = questionService.GetQuestion(questionId);
          
@@ -73,6 +86,19 @@ namespace StudiekollenNew.Controllers
 
         public ActionResult AddQuestionToExam(string examName, int examId)
         {
+            var repoFactory = new RepositoryFactory();
+
+            string controllerName = ControllerContext.RouteData.Values["controller"].ToString();
+            string actionName = ControllerContext.RouteData.Values["action"].ToString();
+            string metaDataUrl = "/" + controllerName + "/" + actionName;
+
+            var metaService = new MetaTagService(repoFactory);
+            var meta = metaService.GetPageMetaTags(metaDataUrl);
+
+            ViewBag.Title = meta.Title;
+            ViewBag.Description = meta.MetaDescription;
+            ViewBag.Keywords = meta.MetaKeyWords;
+
             var viewModel = new AddQuestionViewModel()
             {
                 ExamName = examName,

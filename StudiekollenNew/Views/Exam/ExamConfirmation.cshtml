@@ -1,6 +1,11 @@
 ﻿@model StudiekollenNew.ViewModels.ExamViewModels.ExamConfirmationViewModel
 
-
+@section metatags
+{
+    <meta name="Title" content="@ViewBag.Title" />
+    <meta name="Description" content="@ViewBag.Description" />
+    <meta name="Keywords" content="@ViewBag.KeyWords" />
+}
 <div>
     <h2>Bekräfta inställningar för provet @Model.ExamName</h2>
     <hr />
@@ -56,12 +61,13 @@
 
         <dd>
             @Html.DisplayFor(model => model.Randomorder)
-        </dd><br />
+        </dd>
+        <br />
 
         @Html.ActionLink("Gå Tillbaka", "CreateExam", "Exam",
             new { regret = true }, new { @class = "btn btn-default" })
 
-        @Html.ActionLink("Spara", "SaveExam", "Exam", 
+        @Html.ActionLink("Spara", "SaveExam", "Exam",
             null, new { @class = "btn btn-default" })
     </dl>
 </div>

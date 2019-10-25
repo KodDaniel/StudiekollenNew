@@ -1,5 +1,10 @@
 ﻿@model StudiekollenNew.ViewModels.TestViewModels.HandleExamViewModel
-
+@section metatags
+{
+    <meta name="Title" content="@ViewBag.Title" />
+    <meta name="Description" content="@ViewBag.Description" />
+    <meta name="Keywords" content="@ViewBag.KeyWords" />
+}
 @if (!Model.QuestionsModels.Any())
 {
     @Html.Partial("_NoQuestions")
@@ -37,7 +42,7 @@ else
                     <td>@item.Answer</td>
                 }
 
-                <td>@Html.ActionLink("Redigera fråga", "UpdateQuestion", "Question", new { questionId = item.QuestionId, examName = item.Exam.ExamName,examId = item.ExamId }, null)
+                <td>@Html.ActionLink("Redigera fråga", "UpdateQuestion", "Question", new { questionId = item.QuestionId, examName = item.Exam.ExamName, examId = item.ExamId }, null)
                 <td>@Html.ActionLink("Radera fråga", "DeleteQuestion", "Question", new { questionId = item.QuestionId, examId = item.ExamId }, null)</td>
 
             </tr>
@@ -46,7 +51,7 @@ else
     </table>
 }
 
-    <h4>@Html.ActionLink("Tillbaka", "DisplayExams", "Test", null)</h4>
+<h4>@Html.ActionLink("Tillbaka", "DisplayExams", "Test", null)</h4>
 
 
 @*Klientvalidering*@

@@ -1,5 +1,10 @@
 ﻿@model StudiekollenNew.ViewModels.ExamViewModels.CreateAndUpdateExamViewModel
-
+@section metatags
+{
+    <meta name="Title" content="@ViewBag.Title" />
+    <meta name="Description" content="@ViewBag.Description" />
+    <meta name="Keywords" content="@ViewBag.KeyWords" />
+}
 <script>
 
     $(document).ready(function () {

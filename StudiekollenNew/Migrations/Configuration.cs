@@ -49,22 +49,25 @@ namespace StudiekollenNew.Migrations
                 new Question
                 {
                     Query = "I vilka rättsområden kan juridik delas in i?",
-                    Answer = "Juridiken delas in i olika rättsområden, beroende på vad som regleras. Den offentliga rätten reglerar förhållandet mellan enskilda personer och det allmänna, " +
-                             "medan förhållandet mellan privata rättssubjekt regleras genom civilrätten. " +
-                             "Gränserna är inte knivskarpa utan vissa civilrättsliga områden kan ha offentligrättsliga inslag, exempelvis att fastigheter regleras genom offentliga förfaranden, " +
-                             "liksom vissa offentligrättsliga områden kan ha civilrättsliga inslag, exempelvis att konkurrensrätten har betydelse för utformningen av civilrättsliga avtal."
+                    Answer =
+                        "Juridiken delas in i olika rättsområden, beroende på vad som regleras. Den offentliga rätten reglerar förhållandet mellan enskilda personer och det allmänna, " +
+                        "medan förhållandet mellan privata rättssubjekt regleras genom civilrätten. " +
+                        "Gränserna är inte knivskarpa utan vissa civilrättsliga områden kan ha offentligrättsliga inslag, exempelvis att fastigheter regleras genom offentliga förfaranden, " +
+                        "liksom vissa offentligrättsliga områden kan ha civilrättsliga inslag, exempelvis att konkurrensrätten har betydelse för utformningen av civilrättsliga avtal."
                 },
                 new Question
                 {
                     Query = "Vad är havsrätt?",
-                    Answer = "Havsrätt är en del av den internationella rätten som styr bland annat staters rätt till olika havsområden. Havsrätten regleras bland annat i Havsrättskonventionen från 1982."
+                    Answer =
+                        "Havsrätt är en del av den internationella rätten som styr bland annat staters rätt till olika havsområden. Havsrätten regleras bland annat i Havsrättskonventionen från 1982."
                 },
-                new  Question()
+                new Question()
                 {
                     Query = "Vad är konkurrensrätt?",
-                    Answer = "onkurrensrätt är en gemensam klassificering för de rättsområden som reglerar ramarna för konkurrens och hur staten, " +
-                             "företag eller personer som bedriver en ekonomisk verksamhet får agera. Rättsområdet innefattar bland " +
-                             "annat hur företag kan samverka och möjligheterna att köpa och sälja företag, frågor om monopol, offentliga upphandlingar och statsstödsregler inom EU.[1]"
+                    Answer =
+                        "Konkurrensrätt är en gemensam klassificering för de rättsområden som reglerar ramarna för konkurrens och hur staten, " +
+                        "företag eller personer som bedriver en ekonomisk verksamhet får agera. Rättsområdet innefattar bland " +
+                        "annat hur företag kan samverka och möjligheterna att köpa och sälja företag, frågor om monopol, offentliga upphandlingar och statsstödsregler inom EU.[1]"
                 }
             };
 
@@ -72,13 +75,13 @@ namespace StudiekollenNew.Migrations
                 new Exam
                 {
                     ExamName = "Ekonomi",
-                    ExamTime = new TimeSpan(0,2,30,0),
-                    SendReminderDate = DateTime.Now.Add(new TimeSpan(2,3,0,0)),
+                    ExamTime = new TimeSpan(0, 2, 30, 0),
+                    SendReminderDate = DateTime.Now.Add(new TimeSpan(2, 3, 0, 0)),
                     RandomOrder = false,
                     UserId = "1a73d7e9-138b-4704-9cee-e34138d24c00",
                     Questions = economiQuestions
                 },
-                
+
                 new Exam
                 {
                     ExamName = "Juridik",
@@ -88,11 +91,76 @@ namespace StudiekollenNew.Migrations
 
                 }
 
-
-
             );
 
-            base.Seed(context);
+            context.MetaTags.AddOrUpdate(
+
+                new MetaTags
+                {
+                    PageUrl = "/Exam/CreateExam",
+                    MetaDescription =
+                        "Skapa ett nytt prov med tillval som tidtagning, mejlpåminnelse och slumpmässig ordning",
+                    MetaKeyWords = "Prov,skapa,tidtagning,mejlpåminnelse,tidtagning",
+                    Title = "Skapa prov"
+                },
+
+                new MetaTags
+                {
+                    PageUrl = "/Exam/ExamConfirmation",
+                    MetaDescription = "Bekräfta dina provinställningar",
+                    MetaKeyWords = "Prov,skapa,bekräfta,tidtagning,mejlpåminnelse,tidtagning",
+                    Title = "Bekräfta provinställningar"
+                },
+
+                new MetaTags
+                {
+                    PageUrl = "/Exam/DisplayExams",
+                    MetaDescription = "Visa alla dina prov och redigera dem",
+                    MetaKeyWords = "Prov,visa,redigera,tidtagning, sortera, mejlpåmminnelse, slumpmässig odning",
+                    Title = "Alla dina prov"
+                },
+
+                new MetaTags
+                {
+                    PageUrl = "/Exam/HandleExam",
+                    MetaDescription =
+                        "Hantera ditt prov genom att ändra inställningar eller lägga till eller ta bort frågor",
+                    MetaKeyWords =
+                        "Prov,visa,redigera,tidtagning, mejlpåmminnelse, slumpmässig odning, Ta bort, lägga till",
+                    Title = "Hantera ditt prov"
+
+                },
+                new MetaTags
+                {
+                    PageUrl = "/Exam/UpdateExam",
+                    MetaDescription = "Uppdatera dina provinställningar",
+                    MetaKeyWords = "Prov,Redigera,Tidtagning, Mejlpåmminnelse, slumpmässig odning,",
+                    Title = "Uppdatera ditt prov"
+                },
+                new MetaTags
+                {
+                    PageUrl = "/Exam/SearchForExam",
+                    MetaDescription = "Sök bland dina prov eller visa alla dina prov",
+                    MetaKeyWords = "Prov,sök,hitta,alla prov",
+                    Title = "Sök efter prov"
+                },
+                new MetaTags
+                {
+                    PageUrl = "/Question/AddQuestion",
+                    MetaDescription = "Lägg till en ny fråga till ett existerande prov",
+                    MetaKeyWords = "Prov,lägg till, redigera, ändra",
+                    Title = "Lägg till fråga"
+                },
+                new MetaTags
+                {
+                    PageUrl = "/Question/UpdateQuestionToExam",
+                    MetaDescription = "Uppdatera en fråga i ett existerande prov",
+                    MetaKeyWords = "Prov,uppdatera, redigera, ändra",
+                    Title = "Uppdatera fråga"
+                }
+            );
+
+        base.Seed(context);
 
             //  This method will be called after migrating to the latest version.
 

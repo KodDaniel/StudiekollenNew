@@ -24,20 +24,32 @@ namespace StudiekollenNew.Controllers
     [Authorize]
     public class ExamController : Controller
     {
+
         public ActionResult CreateExam(bool? regret)
         {
+            string controllerName = ControllerContext.RouteData.Values["controller"].ToString();
+            string actionName = ControllerContext.RouteData.Values["action"].ToString();
+
+            string metaDataUrl = "/" + controllerName + "/" + actionName;
+
+            var metaService = new MetaTagService(new RepositoryFactory());
+            var meta = metaService.GetPageMetaTags(metaDataUrl);
+
+            ViewBag.Title = meta.Title;
+            ViewBag.Description = meta.MetaDescription;
+            ViewBag.Keywords = meta.MetaKeyWords;
+
             if (regret == null)
             {
                 return View(new CreateAndUpdateExamViewModel());
             }
 
             // Om bool inte är null har användaren ångrat sig (från examconfirmation.csthml)
-            else
-            {
+           
                 var sessionModel = Session["examViewModel"] as CreateAndUpdateExamViewModel;
 
                 return View(sessionModel);
-            }
+            
         }
 
         [HttpPost]
@@ -46,7 +58,6 @@ namespace StudiekollenNew.Controllers
         {
             // Ser till att ett ett ifyllt formulär nollställs om tillhörande checkbox klickas ur
             viewExamModel.ExamTime = (!viewExamModel.ExamTimeBool) ? null : viewExamModel.ExamTime;
-            
             viewExamModel.SendReminderDate = (!viewExamModel.ReminderDateBool) ? null : viewExamModel.SendReminderDate;
 
             if (!ModelState.IsValid)
@@ -89,6 +100,17 @@ namespace StudiekollenNew.Controllers
 
         public ActionResult ExamConfirmation()
         {
+            string controllerName = ControllerContext.RouteData.Values["controller"].ToString();
+            string actionName = ControllerContext.RouteData.Values["action"].ToString();
+
+            string metaDataUrl = "/" + controllerName + "/" + actionName;
+
+            var metaService = new MetaTagService(new RepositoryFactory());
+            var meta = metaService.GetPageMetaTags(metaDataUrl);
+
+            ViewBag.Title = meta.Title;
+            ViewBag.Description = meta.MetaDescription;
+            ViewBag.Keywords = meta.MetaKeyWords;
 
             var sessionModel = Session["examViewModel"] as CreateAndUpdateExamViewModel;
 
@@ -114,7 +136,20 @@ namespace StudiekollenNew.Controllers
 
         public ViewResult DisplayExams(string sortOrder)
         {
-            var examService = new ExamService(new RepositoryFactory());
+            var repoFactory = new RepositoryFactory();
+
+            string controllerName = ControllerContext.RouteData.Values["controller"].ToString();
+            string actionName = ControllerContext.RouteData.Values["action"].ToString();
+            string metaDataUrl = "/" + controllerName + "/" + actionName;
+
+            var metaService = new MetaTagService(repoFactory);
+            var meta = metaService.GetPageMetaTags(metaDataUrl);
+
+            ViewBag.Title = meta.Title;
+            ViewBag.Description = meta.MetaDescription;
+            ViewBag.Keywords = meta.MetaKeyWords;
+
+            var examService = new ExamService(repoFactory);
 
             var allExams = examService.GetAllExamsForThisUserId(User.Identity.GetUserId());
 
@@ -204,7 +239,21 @@ namespace StudiekollenNew.Controllers
 
         public ViewResult HandleExam(int examId)
         {
+            string controllerName = ControllerContext.RouteData.Values["controller"].ToString();
+            string actionName = ControllerContext.RouteData.Values["action"].ToString();
+            string metaDataUrl = "/" + controllerName + "/" + actionName;
+
             var repoFactory = new RepositoryFactory();
+
+            var metaService = new MetaTagService(repoFactory);
+            var meta = metaService.GetPageMetaTags(metaDataUrl);
+
+            //string errorMsg = "Metadata gick inte att hämta";
+            //errorMsg = meta.Title ?? meta.MetaDescription ?? meta.MetaKeyWords;
+
+            ViewBag.Title = meta.Title;
+            ViewBag.Description = meta.MetaDescription;
+            ViewBag.Keywords = meta.MetaKeyWords;
 
             var questionService = new QuestionService(repoFactory);
 
@@ -227,7 +276,20 @@ namespace StudiekollenNew.Controllers
         
         public ViewResult UpdateExam(int examId)
         {
-            var examService = new ExamService(new RepositoryFactory());
+            var repoFactory = new RepositoryFactory();
+
+            string controllerName = ControllerContext.RouteData.Values["controller"].ToString();
+            string actionName = ControllerContext.RouteData.Values["action"].ToString();
+            string metaDataUrl = "/" + controllerName + "/" + actionName;
+
+            var metaService = new MetaTagService(repoFactory);
+            var meta = metaService.GetPageMetaTags(metaDataUrl);
+
+            ViewBag.Title = meta.Title;
+            ViewBag.Description = meta.MetaDescription;
+            ViewBag.Keywords = meta.MetaKeyWords;
+
+            var examService = new ExamService(repoFactory);
 
             var examToUpdate = examService.GetSingleExam(examId);
 
@@ -295,7 +357,20 @@ namespace StudiekollenNew.Controllers
 
         public ActionResult SearchForExam()
         {
-            var testService = new ExamService(new RepositoryFactory());
+            var repoFactory = new RepositoryFactory();
+
+            string controllerName = ControllerContext.RouteData.Values["controller"].ToString();
+            string actionName = ControllerContext.RouteData.Values["action"].ToString();
+            string metaDataUrl = "/" + controllerName + "/" + actionName;
+
+            var metaService = new MetaTagService(repoFactory);
+            var meta = metaService.GetPageMetaTags(metaDataUrl);
+
+            ViewBag.Title = meta.Title;
+            ViewBag.Description = meta.MetaDescription;
+            ViewBag.Keywords = meta.MetaKeyWords;
+
+            var testService = new ExamService(repoFactory);
 
             var allExamsForThisUser = testService.GetAllExamsForThisUserId(User.Identity.GetUserId());
 
@@ -316,6 +391,7 @@ namespace StudiekollenNew.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult SearchForExam(string id)
         {
+
             return RedirectToAction("HandleExam", new { examId = id });
         }
 

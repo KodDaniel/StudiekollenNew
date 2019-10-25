@@ -31,5 +31,11 @@ namespace StudiekollenNew.Repositories
             return new UserRepository(context);
         }
 
+        public MetaTagRepository GetMetaTagRepository()
+        {
+            return new MetaTagRepository(context);
+        }
+
+
     }
 }

@@ -1,4 +1,10 @@
 ﻿@model StudiekollenNew.ViewModels.ExamViewModels.SearchExamViewModel
+@section metatags
+{
+    <meta name="Title" content="@ViewBag.Title" />
+    <meta name="Description" content="@ViewBag.Description" />
+    <meta name="Keywords" content="@ViewBag.KeyWords" />
+}
 
 <h2>Sök efter prov</h2>
 
@@ -19,7 +25,7 @@
                 <input type="submit" value="Hämta" class="btn btn-default btn-block" /><br />
             </div>
         </div>
-        <h4>@Html.ActionLink("Visa alla prov", "DisplayExams", "Test", null)</h4> 
+        <h4>@Html.ActionLink("Visa alla prov", "DisplayExams", "Test", null)</h4>
     </div>
 }
 

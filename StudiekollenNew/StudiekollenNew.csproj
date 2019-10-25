@@ -247,7 +247,7 @@
     <Compile Include="DatabaseContext\ContextSingelton.cs" />
     <Compile Include="DomainModels\Exam.cs" />
     <Compile Include="DomainModels\ExamStats.cs" />
-    <Compile Include="DomainModels\MetaTagDetails.cs" />
+    <Compile Include="DomainModels\MetaTags.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -283,11 +283,21 @@
     <Compile Include="Migrations\201910250550195_K.Designer.cs">
       <DependentUpon>201910250550195_K.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201910250649065_s.cs" />
+    <Compile Include="Migrations\201910250649065_s.Designer.cs">
+      <DependentUpon>201910250649065_s.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201910250821065_ks.cs" />
+    <Compile Include="Migrations\201910250821065_ks.Designer.cs">
+      <DependentUpon>201910250821065_ks.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Repositories\MetaTagRepository.cs" />
     <Compile Include="Repositories\QuestionRepository.cs" />
     <Compile Include="Repositories\RepositoryFactory.cs" />
     <Compile Include="Repositories\ExamRepository.cs" />
     <Compile Include="Repositories\UserRepository.cs" />
+    <Compile Include="Services\MetaTagService.cs" />
     <Compile Include="Services\QuestionService.cs" />
     <Compile Include="Services\ExamService.cs" />
     <Compile Include="Services\UserService.cs" />
@@ -426,6 +436,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201910250550195_K.resx">
       <DependentUpon>201910250550195_K.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201910250649065_s.resx">
+      <DependentUpon>201910250649065_s.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201910250821065_ks.resx">
+      <DependentUpon>201910250821065_ks.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
