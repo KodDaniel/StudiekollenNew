@@ -30,6 +30,7 @@ namespace StudiekollenNew.Controllers
             {
                 return View(new CreateAndUpdateExamViewModel());
             }
+
             // Om bool inte är null har användaren ångrat sig (från examconfirmation.csthml)
             else
             {

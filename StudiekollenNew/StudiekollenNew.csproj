@@ -247,6 +247,7 @@
     <Compile Include="DatabaseContext\ContextSingelton.cs" />
     <Compile Include="DomainModels\Exam.cs" />
     <Compile Include="DomainModels\ExamStats.cs" />
+    <Compile Include="DomainModels\MetaTagDetails.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -265,6 +266,22 @@
     <Compile Include="Migrations\201910220846027_updateOfDatabase.cs" />
     <Compile Include="Migrations\201910220846027_updateOfDatabase.Designer.cs">
       <DependentUpon>201910220846027_updateOfDatabase.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201910250504123_Initial.cs" />
+    <Compile Include="Migrations\201910250504123_Initial.Designer.cs">
+      <DependentUpon>201910250504123_Initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201910250504401_updat.cs" />
+    <Compile Include="Migrations\201910250504401_updat.Designer.cs">
+      <DependentUpon>201910250504401_updat.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201910250547032_metaTag.cs" />
+    <Compile Include="Migrations\201910250547032_metaTag.Designer.cs">
+      <DependentUpon>201910250547032_metaTag.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201910250550195_K.cs" />
+    <Compile Include="Migrations\201910250550195_K.Designer.cs">
+      <DependentUpon>201910250550195_K.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Repositories\QuestionRepository.cs" />
@@ -397,6 +414,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201910220846027_updateOfDatabase.resx">
       <DependentUpon>201910220846027_updateOfDatabase.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201910250504123_Initial.resx">
+      <DependentUpon>201910250504123_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201910250504401_updat.resx">
+      <DependentUpon>201910250504401_updat.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201910250547032_metaTag.resx">
+      <DependentUpon>201910250547032_metaTag.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201910250550195_K.resx">
+      <DependentUpon>201910250550195_K.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

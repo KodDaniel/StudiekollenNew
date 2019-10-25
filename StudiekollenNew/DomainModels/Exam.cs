@@ -9,6 +9,7 @@ namespace StudiekollenNew.DomainModels
 {
     public class Exam
     {
+       
         public int ExamId { get; set; }
         public string ExamName { get; set; }
         public DateTime CreateDate { get; set; } = DateTime.Now;
@@ -19,5 +20,6 @@ namespace StudiekollenNew.DomainModels
         public ICollection<Question> Questions { get; set; }
         public string UserId { get; set; }
         public User User { get; set; }
+    
     }
 }
