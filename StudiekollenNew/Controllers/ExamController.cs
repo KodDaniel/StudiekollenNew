@@ -390,29 +390,47 @@ namespace StudiekollenNew.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult UpdateExam(CreateAndUpdateExamViewModel viewExamModel)
         {
-            // Ser till att ett ett ifyllt formulär nollställs om tillhörande checkbox klickas ur
             viewExamModel.ExamTime = (!viewExamModel.ExamTimeBool) ? null : viewExamModel.ExamTime;
             viewExamModel.SendReminderDate = (!viewExamModel.ReminderDateBool) ? null : viewExamModel.SendReminderDate;
-
-
-            if (viewExamModel.ExamTimeBool && viewExamModel.ExamTime == null)
-            {
-                ModelState.AddModelError("ExamTime", "Du måste fylla i en provtid");
-
-                return View(viewExamModel);
-            }
-
-            if (viewExamModel.ReminderDateBool && viewExamModel.SendReminderDate == null)
-            {
-                ModelState.AddModelError("SendReminderDate", "Du måste fylla i ett datum för mejlpåminnelse");
-                return View(viewExamModel);
-            }
 
             if (!ModelState.IsValid)
             {
                 return View(viewExamModel);
             }
 
+            if (viewExamModel.ExamTimeBool)
+            {
+                if (viewExamModel.ExamTime == null)
+                {
+                    ModelState.AddModelError("ExamTime", "Du måste fylla i en provtid");
+
+                    return View(viewExamModel);
+                }
+
+                if (viewExamModel.ExamTime < new TimeSpan(0, 0, 1, 0))
+                {
+                    ModelState.AddModelError("ExamTime", "Ett prov måste pågå under minst en minut");
+
+                    return View(viewExamModel);
+                }
+
+            }
+
+            if (viewExamModel.ReminderDateBool)
+            {
+                if (viewExamModel.SendReminderDate == null)
+                {
+                    ModelState.AddModelError("SendReminderDate", "Du måste fylla i ett datum för mejlpåminnelse");
+                    return View(viewExamModel);
+                }
+
+                if (viewExamModel.SendReminderDate <= DateTime.Now)
+                {
+                    ModelState.AddModelError("SendReminderDate", "Du måste ange ett datum som inte redan varit");
+                    return View(viewExamModel);
+                }
+
+            }
             var examService = new ExamService(new RepositoryFactory());
 
             int examId = (int)Session["examId"];

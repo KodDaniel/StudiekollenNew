@@ -10,31 +10,28 @@
 
 @using (Html.BeginForm("UpdateQuestion", "Question"))
 {
-    <div class="form-horizontal">
-        <hr />
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Query, htmlAttributes: new { @class = "control-label col-lg-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Query, new { htmlAttributes = new { @class = "form-control" } })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Answer, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.TextAreaFor(model => model.Answer, 7, 100, new { htmlAttributes = new { @class = "form-control"} })
-            </div>
-        </div>
-        <div class="form-group">
-            @Html.AntiForgeryToken()
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Uppdatera fråga" class="btn btn-default btn-block"/><br/>
-                @Html.ValidationMessageFor(model => model.Query)
-
-            </div>
+<div class="form-horizontal questionForm">
+    <hr />
+    <div class="form-group questionForm">
+        @Html.LabelFor(model => model.Query, htmlAttributes: new { @class = "control-label col-md-2" })<br />
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Query, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Query)
         </div>
     </div>
+    <div class="form-group questionForm">
+        @Html.LabelFor(model => model.Answer, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextAreaFor(model => model.Answer, 7, 100, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group questionForm">
+        @Html.AntiForgeryToken()
+        <div class="col-md-offset-2 btnDiv">
+            <input type="submit" value="Uppdatera fråga" class="btn btn-default btn-block" /><br />
+        </div>
+    </div>
+</div>
 }
 @*Klientvalidering*@
 @section Scripts {
