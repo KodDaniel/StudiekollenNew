@@ -22,6 +22,7 @@ namespace StudiekollenNew.ViewModels.ExamViewModels
         public DateTime? SendReminderDate { get; set; }
         [Display(Name = "Slumpmässig ordning")]
         public bool RandomOrder { get; set; }
+        public int ExamId { get; set; }
 
         //public ValidationResult CustomTimeValidation(bool examTimeBool,TimeSpan? examTime)
         // {

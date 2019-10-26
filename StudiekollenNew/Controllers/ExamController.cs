@@ -379,6 +379,7 @@ namespace StudiekollenNew.Controllers
                 ExamName = examToUpdate.ExamName,
                 ExamTime = examToUpdate.ExamTime,
                 SendReminderDate = examToUpdate.SendReminderDate,
+                ExamId = examId
             };
 
             Session["ExamId"] = examId;
