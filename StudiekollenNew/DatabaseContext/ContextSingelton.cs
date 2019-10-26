@@ -6,15 +6,15 @@ using StudiekollenNew.Models;
 
 namespace StudiekollenNew.DataBase
 {
-    // Class which handels the Life-cycle of DbContext (in this Application) 
+    // Klass som hanterar livscykeln för DBContext i denna applikation
     public class ContextSingelton
     {
         private static ApplicationDbContext _context;
 
-        // Testar Null operator (Om connection är null, returnera ny connection)
+        // Om connection är null, returnera ny connection
         public static ApplicationDbContext GetContext()
         {
-            return _context ?? (_context = new ApplicationDbContext());
+            return _context = _context ?? new ApplicationDbContext();
         }
     }
 }

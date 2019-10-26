@@ -1,4 +1,5 @@
 ﻿@model StudiekollenNew.ViewModels.ExamViewModels.CreateAndUpdateExamViewModel
+
 @section metatags
 {
     <meta name="Title" content="@ViewBag.Title" />
@@ -24,17 +25,17 @@
 
     function chBxTime() {
         if ($('input[name=ExamTimeBool]').is(':checked')) {
-            $("#ExamTime").show();
+            $("#TimeInputPartial").show();
         } else {
-            $("#ExamTime").hide();
+            $("#TimeInputPartial").hide();
         }
     }
 
     function chBxDate() {
         if ($('input[name=ReminderDateBool]').is(':checked')) {
-            $("#SendReminderDate").show();
+            $("#SendReminderDatePartial").show();
         } else {
-            $("#SendReminderDate").hide();
+            $("#SendReminderDatePartial").hide();
         }
     }
 
@@ -67,7 +68,7 @@
             </div>
         </div>
 
-        <div id="ExamTime">
+        <div id="TimeInputPartial">
             @Html.Partial("_TimeInput")
         </div>
 
@@ -81,7 +82,7 @@
             </div>
         </div>
 
-        <div id="SendReminderDate">
+        <div id="SendReminderDatePartial">
             @Html.Partial("_ReminderDateInput")
         </div>
 

@@ -12,7 +12,7 @@ namespace StudiekollenNew.Services
     public class QuestionService
     {
 
-        private QuestionRepository _questionRepository;
+        private readonly QuestionRepository _questionRepository;
 
         public QuestionService(RepositoryFactory repoFactory)
         {

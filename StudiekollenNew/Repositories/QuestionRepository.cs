@@ -9,7 +9,7 @@ namespace StudiekollenNew.Repositories
 {
     public class QuestionRepository
     {
-        private ApplicationDbContext _context;
+        private readonly ApplicationDbContext _context;
 
 
         public QuestionRepository(ApplicationDbContext context)

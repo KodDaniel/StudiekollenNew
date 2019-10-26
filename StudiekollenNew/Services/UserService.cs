@@ -9,7 +9,7 @@ namespace StudiekollenNew.Services
 {
     public class UserService
     {
-        private UserRepository _userRepository;
+        private readonly UserRepository _userRepository;
 
         public UserService(RepositoryFactory repoFactory)
         {

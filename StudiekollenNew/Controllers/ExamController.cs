@@ -14,7 +14,6 @@ using StudiekollenNew.Repositories;
 using StudiekollenNew.Services;
 using StudiekollenNew.ViewModels;
 using StudiekollenNew.ViewModels.ExamViewModels;
-using StudiekollenNew.ViewModels.TestViewModels;
 using CreateAndUpdateExamViewModel = StudiekollenNew.ViewModels.ExamViewModels.CreateAndUpdateExamViewModel;
 
 
@@ -76,19 +75,39 @@ namespace StudiekollenNew.Controllers
                 return View(viewExamModel);
             }
 
-            if (viewExamModel.ExamTimeBool && viewExamModel.ExamTime == null)
+            if (viewExamModel.ExamTimeBool)
             {
-                ModelState.AddModelError("ExamTime", "Du måste fylla i en provtid");
+                if (viewExamModel.ExamTime == null)
+                {
+                    ModelState.AddModelError("ExamTime", "Du måste fylla i en provtid");
 
-                return View(viewExamModel);
+                    return View(viewExamModel);
+                }
+
+                if (viewExamModel.ExamTime < new TimeSpan(0, 0, 1, 0))
+                {
+                    ModelState.AddModelError("ExamTime", "Ett prov måste pågå under minst en minut");
+
+                    return View(viewExamModel);
+                }
+
             }
 
-            if (viewExamModel.ReminderDateBool && viewExamModel.SendReminderDate == null)
+            if (viewExamModel.ReminderDateBool)
             {
-                ModelState.AddModelError("SendReminderDate", "Du måste fylla i ett datum för mejlpåminnelse");
-                return View(viewExamModel);
-            }
+                if (viewExamModel.SendReminderDate == null)
+                {
+                    ModelState.AddModelError("SendReminderDate", "Du måste fylla i ett datum för mejlpåminnelse");
+                    return View(viewExamModel);
+                }
 
+                if (viewExamModel.SendReminderDate <= DateTime.Now)
+                {
+                    ModelState.AddModelError("SendReminderDate", "Du måste ange ett datum som inte redan varit");
+                    return View(viewExamModel);
+                }
+
+            }
 
             Session["examViewModel"] = viewExamModel;
 
@@ -104,7 +123,6 @@ namespace StudiekollenNew.Controllers
 
         public ActionResult ReminderDateInput()
         {
-            
             return PartialView("_ReminderDateInput");
         }
 
@@ -202,6 +220,7 @@ namespace StudiekollenNew.Controllers
             ViewBag.NumberOfQuestionsSortParm = sortOrder == "NumberOfQuestions" ? "NumberOfQuestions_Desc" : "NumberOfQuestions";
 
 
+            // Förbättringspotential: Skicka LINQ-queries till service/repository och hämta in resultat
             switch (sortOrder)
             {
                 case "Name_Desc":

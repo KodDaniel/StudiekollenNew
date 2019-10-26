@@ -7,13 +7,11 @@ using StudiekollenNew.Migrations;
 using StudiekollenNew.Models;
 using StudiekollenNew.Repositories;
 using StudiekollenNew.ViewModels;
-using StudiekollenNew.ViewModels.TestViewModels;
-
 namespace StudiekollenNew.Services
 {
     public class ExamService
     {
-        private ExamRepository _examRepository;
+        private readonly ExamRepository _examRepository;
 
         public ExamService(RepositoryFactory repoFactory)
         {

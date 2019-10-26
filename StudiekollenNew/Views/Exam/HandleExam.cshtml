@@ -1,10 +1,12 @@
-﻿@model StudiekollenNew.ViewModels.TestViewModels.HandleExamViewModel
+﻿@model StudiekollenNew.ViewModels.ExamViewModels.HandleExamViewModel
+
 @section metatags
 {
     <meta name="Title" content="@ViewBag.Title" />
     <meta name="Description" content="@ViewBag.Description" />
     <meta name="Keywords" content="@ViewBag.KeyWords" />
 }
+
 @if (!Model.QuestionsModels.Any())
 {
     @Html.Partial("_NoQuestions")
@@ -51,7 +53,7 @@ else
     </table>
 }
 
-<h4>@Html.ActionLink("Tillbaka", "DisplayExams","", null)</h4>
+<h4>@Html.ActionLink("Visa alla prov", "DisplayExams","", null)</h4>
 
 
 @*Klientvalidering*@

@@ -15,8 +15,8 @@ namespace StudiekollenNew.Models
         public ApplicationDbContext()
             : base("StudieContext", throwIfV1Schema: false)
         {
-            //Disablar Lazy Loading eftersom det bör undvikas i webbapplikation
-            this.Configuration.LazyLoadingEnabled = false;
+            ////Disablar Lazy Loading eftersom det bör undvikas i webbapplikation
+            //this.Configuration.LazyLoadingEnabled = false;
         }
 
         public static ApplicationDbContext Create()

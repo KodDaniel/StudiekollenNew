@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using StudiekollenNew.Models;
 
-namespace StudiekollenNew.ViewModels.TestViewModels
+namespace StudiekollenNew.ViewModels.ExamViewModels
 {
     public class HandleExamViewModel
     {

@@ -13,7 +13,7 @@
     <div class="form-horizontal">
         <hr />
         <div class="form-group">
-            @Html.Label("Mina prov", htmlAttributes: new { @class = "control-label col-md-2" })
+            <label  class="control-label col-md-2">Mina prov</label>
             <div class="col-md-10">
                 @*@Html.DropDownListFor(model => model.Username, new SelectList(Model.Users, "Username", "UserExamExamExamName", "Välj användare"), "Välj användare", new { @class = "form-control" })*@
                 @Html.DropDownListFor(model => model.Id, new SelectList(Model.AllExams, "ExamId", "ExamName", null), null, new { @class = "form-control" })

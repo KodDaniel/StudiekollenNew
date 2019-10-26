@@ -5,7 +5,6 @@ using System.Linq;
 using System.Web;
 using StudiekollenNew.Models;
 using StudiekollenNew.ViewModels;
-using StudiekollenNew.ViewModels.TestViewModels;
 using Microsoft.AspNet.Identity;
 using System.Web.Mvc;
 using System.Security.Claims;
@@ -23,7 +22,7 @@ namespace StudiekollenNew.Repositories
 
     public class ExamRepository
     {
-        private ApplicationDbContext _context;
+        private readonly ApplicationDbContext _context;
 
         public ExamRepository(ApplicationDbContext context)
         {

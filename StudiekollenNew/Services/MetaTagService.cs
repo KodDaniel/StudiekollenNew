@@ -9,7 +9,7 @@ namespace StudiekollenNew.Services
 {
     public class MetaTagService
     {
-        private MetaTagRepository _metaTagRepository;
+        private readonly MetaTagRepository _metaTagRepository;
 
         public MetaTagService(RepositoryFactory repoFactory)
         {

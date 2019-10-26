@@ -9,7 +9,7 @@ namespace StudiekollenNew.Repositories
 {
     public class MetaTagRepository
     {
-        private ApplicationDbContext _context;
+        private readonly ApplicationDbContext _context;
 
         public MetaTagRepository(ApplicationDbContext context)
         {
