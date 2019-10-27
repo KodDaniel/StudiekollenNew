@@ -391,6 +391,7 @@ namespace StudiekollenNew.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult UpdateExam(CreateAndUpdateExamViewModel viewExamModel)
         {
+
             viewExamModel.ExamTime = (!viewExamModel.ExamTimeBool) ? null : viewExamModel.ExamTime;
             viewExamModel.SendReminderDate = (!viewExamModel.ReminderDateBool) ? null : viewExamModel.SendReminderDate;
 
@@ -445,10 +446,11 @@ namespace StudiekollenNew.Controllers
                 ExamId = examId
             };
 
-
             examService.UpdateExam(exam,examId);
 
-            return RedirectToAction("DisplayExams");
+            viewExamModel.ExamId = examId;
+
+            return View(viewExamModel);
         }
 
 
