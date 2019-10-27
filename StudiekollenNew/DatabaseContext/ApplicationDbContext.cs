@@ -59,6 +59,9 @@ namespace StudiekollenNew.Models
                 .HasForeignKey(c => c.ExamId)
                 .WillCascadeOnDelete(true);
 
+            
+
+
             base.OnModelCreating(modelBuilder);
 
         }

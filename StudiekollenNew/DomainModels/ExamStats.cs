@@ -12,7 +12,9 @@ namespace StudiekollenNew.DomainModels
         //public TimeSpan Duration { get; set; }
         //public int NumbeOfQuestions { get; set; }
         //public int AnsweredQuestions { get; set; }
-        
+        //public Exam Exam { get; set; }
+        //public int ExamId { get; set; }
+
 
     }
 }

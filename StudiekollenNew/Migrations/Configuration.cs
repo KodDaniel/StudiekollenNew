@@ -78,7 +78,7 @@ namespace StudiekollenNew.Migrations
                     ExamTime = new TimeSpan(0, 2, 30, 0),
                     SendReminderDate = DateTime.Now.Add(new TimeSpan(2, 3, 0, 0)),
                     RandomOrder = false,
-                    UserId = "1a73d7e9-138b-4704-9cee-e34138d24c00",
+                    UserId = "e183a8b1-3326-482f-b081-5908a23fc4d6",
                     Questions = economiQuestions
                 },
 
@@ -86,7 +86,7 @@ namespace StudiekollenNew.Migrations
                 {
                     ExamName = "Juridik",
                     RandomOrder = true,
-                    UserId = "1a73d7e9-138b-4704-9cee-e34138d24c00",
+                    UserId = "e183a8b1-3326-482f-b081-5908a23fc4d6",
                     Questions = lawQuestions
 
                 }

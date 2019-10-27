@@ -291,6 +291,10 @@
     <Compile Include="Migrations\201910250821065_ks.Designer.cs">
       <DependentUpon>201910250821065_ks.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201910271234574_project.cs" />
+    <Compile Include="Migrations\201910271234574_project.Designer.cs">
+      <DependentUpon>201910271234574_project.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Repositories\MetaTagRepository.cs" />
     <Compile Include="Repositories\QuestionRepository.cs" />
@@ -438,6 +442,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201910250821065_ks.resx">
       <DependentUpon>201910250821065_ks.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201910271234574_project.resx">
+      <DependentUpon>201910271234574_project.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

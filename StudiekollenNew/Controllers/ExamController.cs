@@ -84,6 +84,7 @@ namespace StudiekollenNew.Controllers
                     return View(viewExamModel);
                 }
 
+                // Kontrollerar giltig provtid
                 if (viewExamModel.ExamTime < new TimeSpan(0, 0, 1, 0))
                 {
                     ModelState.AddModelError("ExamTime", "Ett prov måste pågå under minst en minut");
@@ -452,7 +453,6 @@ namespace StudiekollenNew.Controllers
 
             return View(viewExamModel);
         }
-
 
         public ActionResult SearchForExam()
         {
